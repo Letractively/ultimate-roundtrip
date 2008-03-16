@@ -1,4 +1,4 @@
-package no.lau.web.page;
+package no.lau.ultimate.roundtrip.web.page;
 
 import org.junit.*;
 
