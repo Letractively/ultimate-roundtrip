@@ -57,8 +57,8 @@
 
     <!-- Subversion Configuration - Used by Continuum -->
     <scm>
-        <connection>scm:svn:https://java.bouvet.no/repos/maven/stig.lau/ultimate-roundtrip</connection>
-        <url>https://java.bouvet.no/repos/maven/stig.lau/ultimate-roundtrip</url>
+        <connection>scm:svn:http://ultimate-roundtrip.googlecode.com/svn/trunk</connection>
+        <url>http://ultimate-roundtrip.googlecode.com/svn/trunk</url>
     </scm>
 
     <build>
