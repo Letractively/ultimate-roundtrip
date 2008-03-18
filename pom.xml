@@ -4,6 +4,7 @@
     <artifactId>ultimate-roundtrip</artifactId>
     <packaging>war</packaging>
     <version>0.3-SNAPSHOT</version>
+    <name>Ultimate Roundtrip</name>
 
     <dependencies>
         <dependency>
