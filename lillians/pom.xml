@@ -6,13 +6,13 @@
     <packaging>jar</packaging>
     <version>2.2.0</version>
     <name>Examples of API usage</name>
-
+    <!--
     <parent>
         <groupId>owlapi</groupId>
         <artifactId>owlapi</artifactId>
         <version>2.2.0</version>
     </parent>
-
+    -->
 
     <dependencies>
 
@@ -33,18 +33,43 @@
             <artifactId>apibinding</artifactId>
             <version>2.2.0</version>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mindswap.pellet</groupId>
+            <artifactId>pellet-owlapi</artifactId>
+            <version>2.0-RC7</version>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
-
+    <!-- Local (SVN) Maven library repository for libraries that are not found in the sentral repo -->
+    <repositories>
+        <repository>
+            <id>local</id>
+            <url>file://${basedir}/lib</url>
+        </repository>
+        <repository>
+            <id>pellet</id>
+            <url>http://www.activemath.org/public-repository</url>
+        </repository>
+    </repositories>
 </project>
