@@ -142,8 +142,8 @@ public class RankingTest {
 
         //Sort list based on score
         Collections.sort(sortableJam);
-        for (EcoSortable ecoSortable : sortableJam) {
-            System.out.println("ecoSortable = " + ecoSortable.owlIndividual);
+        for (SimpleSortable ecoSortable : sortableJam) {
+            System.out.println("ecoSortable = " + ecoSortable.jam);
             System.out.println("ecoSortable.relevance = " + ecoSortable.relevance);
         }
     }
@@ -223,12 +223,12 @@ public class RankingTest {
 }
 
 class SimpleSortable implements Comparable {
-    private final OWLIndividual jam;
+    public final OWLIndividual jam;
     int relevance;
 
     public SimpleSortable(OWLIndividual jam, OWLConstant affinity, OWLConstant wop){
         this.jam = jam;
-        if(affinity != null) {
+        if(affinity == null) {
             relevance = 0;
         } else
             relevance = Integer.valueOf(affinity.getLiteral());
@@ -241,9 +241,9 @@ class SimpleSortable implements Comparable {
         if (o instanceof SimpleSortable) {
             SimpleSortable other = (SimpleSortable) o;
             if(this.relevance > other.relevance)
-                return 1;
-            else if(this.relevance < other.relevance)
                 return -1;
+            else if(this.relevance < other.relevance)
+                return 1;
         }
         return 0;
     }
