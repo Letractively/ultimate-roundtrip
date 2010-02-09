@@ -20,7 +20,7 @@ public class StigsTest {
 
     @Before
     public void setUp() throws OWLOntologyCreationException {
-        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
+        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:./src/main/resources/PersonalProfile.owl"));
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
     }
@@ -104,16 +104,25 @@ public class StigsTest {
         List<EcoSortable> sortableJam = new ArrayList<EcoSortable>();
         for (OWLIndividual jam : jams) {
             //WayOfProduction
+            OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
+
+            OWLDataProperty hasWOPValue = StigsTest.findDataType("#hasWOPValue");
+            OWLConstant jamWOPValue = reasoner.getRelatedValue(relatedWayOfProductionIndividual, hasWOPValue);
+            if (jamWOPValue != null)
+                System.out.println("ecoAffinityAndPerhapsSomethingElse = " + jamWOPValue.getLiteral());
+
+
             for (OWLIndividual affinity : allAffinities) {
                 //eksempel eco
                 //affinity = HighEcoAffinity
                 //Finn produktets WayOfProduction
                 //basert på at ecoAffinity har en relasjon til wayOfProduction
-                //Gang hasAffinityValue med wayOfProduction's value
+                //Gang hasWOPValue med wayOfProduction's value
                 //Legg alle verdiene du får til produktets "relevance" og så kan de sorteres basert på den.
 
 
-                OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
+
+                //OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
                 OWLClass wayOfProduction = reasoner.getType(relatedWayOfProductionIndividual);
                 //ProductPrice
                 System.out.println("jam = " + jam);
