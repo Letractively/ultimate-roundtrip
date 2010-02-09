@@ -1,0 +1,8 @@
+pellet-core
+pellet-query
+pellet-jena
+pellet-rules
+pellet-datatypes
+jena-2.6.2
+arq281
+aterm-java

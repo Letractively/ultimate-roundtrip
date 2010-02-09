@@ -27,7 +27,6 @@ public class IndividualRelatedTests {
     Reasoner reasoner;
     public static final String myURI = "http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl";
 
-
     //todo legge til reasoner i before også?  + factory?
 
     @Before
@@ -35,7 +34,7 @@ public class IndividualRelatedTests {
         manager = OWLManager.createOWLOntologyManager();
         // We load an ontology
         // read the ontology
-        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/OWLapi/lillian/src/main/resources/PersonalProfile.owl"));
+        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/ny-kodebase/src/main/resources/PersonalProfile.owl"));
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
     }
