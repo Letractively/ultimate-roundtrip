@@ -141,7 +141,38 @@ public class StigsTest {
             System.out.println("ecoSortable.relevance = " + ecoSortable.relevance);
         }
     }
+        @Test
+        public void testGetAllEcoProds(){
+            assertEquals(2, getAllEcoProducts().size());
+            assertEquals("HervikEcoStrawberryJam", getAllEcoProducts().get(0).toString());
+        }
+    
+        private List<OWLIndividual> getAllEcoProducts() {
+        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
+                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
+                "SELECT ?x " +
+                "WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Food." +
+                "?y rdf:type OntologyPersonalProfile:Ecological . "+
+                "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
+                "}";
 
+        //finner alle affinities til en person
+        SPARQLTests sparqlTest = new SPARQLTests();
+        try {
+            sparqlTest.setUp();
+        } catch (OWLOntologyCreationException e) {
+            throw new RuntimeException("Wooooops!");
+        }
+        List<String> ecosAsStrings = sparqlTest.jenaQuery(query, "x");
+        List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
+        for (String ecoAsString : ecosAsStrings) {
+            individuals.add(factory.getOWLIndividual(URI.create(ecoAsString)));
+        }
+        return individuals;
+    }
 
     private List<OWLIndividual> getAllAffinities() {
         String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
@@ -167,7 +198,6 @@ public class StigsTest {
             individuals.add(factory.getOWLIndividual(URI.create(affinityAsString)));
         }
         return individuals;
-
     }
 
     private static OWLObjectProperty findObjectProperty(String type) {
