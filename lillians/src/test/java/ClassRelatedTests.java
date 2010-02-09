@@ -34,7 +34,7 @@ public class ClassRelatedTests {
         manager = OWLManager.createOWLOntologyManager();
         // We load an ontology
         // read the ontology
-        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/ny-kodebase/src/main/resources/PersonalProfile.owl"));
+        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
     }
@@ -136,10 +136,10 @@ public class ClassRelatedTests {
             for (OWLClass owlClass : classesOfHSJSet) {
                 result.add(owlClass);
             }
-        }
-        // 0 0 HervikProducts
-        //  1 0 StrawberryJam
-        assertEquals("HervikProducts", result.get(0).toString());
+        }    // 0 0 RegProduced
+        // 1 0 HervikProducts
+        //  12 0 StrawberryJam
+        assertEquals("HervikProducts", result.get(1).toString());
     }
 
       @Test

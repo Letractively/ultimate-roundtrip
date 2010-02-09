@@ -20,7 +20,7 @@ public class StigsTest {
 
     @Before
     public void setUp() throws OWLOntologyCreationException {
-        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/ny-kodebase/src/main/resources/PersonalProfile.owl"));
+        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
     }
