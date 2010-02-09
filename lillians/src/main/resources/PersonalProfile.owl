@@ -628,19 +628,6 @@
     
 
 
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDFreeFood -->
-
-    <owl:Class rdf:about="#ADHDFreeFood">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:complementOf rdf:resource="#ADHDEffectProducts"/>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AcceptADHDAdditives -->
 
     <owl:Class rdf:about="#AcceptADHDAdditives">
@@ -714,25 +701,25 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:someValuesFrom rdf:resource="#Lamb"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
                 <owl:someValuesFrom rdf:resource="#Meat"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:someValuesFrom rdf:resource="#StrawberryJam"/>
+                <owl:hasValue rdf:resource="#HervikEcoStrawberryJam"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:hasValue rdf:resource="#HervikEcoStrawberryJam"/>
+                <owl:someValuesFrom rdf:resource="#Lamb"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
+                <owl:someValuesFrom rdf:resource="#StrawberryJam"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -1281,10 +1268,19 @@
     <owl:Class rdf:about="#Person">
         <owl:equivalentClass>
             <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Man"/>
-                    <rdf:Description rdf:about="#Woman"/>
-                </owl:unionOf>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Person"/>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="#Woman"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="#hasGender"/>
+                                <owl:onClass rdf:resource="#Man"/>
+                                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
@@ -1488,6 +1484,17 @@
                     <rdf:Description rdf:about="#Ecological"/>
                     <rdf:Description rdf:about="#Regular"/>
                 </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#WayOfProduction"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasWayOfProduction"/>
+                        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#FoodInformation"/>

@@ -101,7 +101,7 @@ public class StigsTest {
         }
 
         //WOP
-        List<EcoSortable> sorableJam = new ArrayList<EcoSortable>();
+        List<EcoSortable> sortableJam = new ArrayList<EcoSortable>();
         for (OWLIndividual jam : jams) {
             //WayOfProduction
             for (OWLIndividual affinity : allAffinities) {
@@ -121,7 +121,7 @@ public class StigsTest {
                 int price = Integer.valueOf(priceOfJam.getLiteral());
 
 
-                sorableJam.add(new EcoSortable(jam, billsEcoAffinity, wayOfProduction));
+                sortableJam.add(new EcoSortable(jam, billsEcoAffinity, wayOfProduction));
             }
 
 
@@ -135,8 +135,8 @@ public class StigsTest {
         //Score product
 
         //Sort list based on score
-        Collections.sort(sorableJam);
-        for (EcoSortable ecoSortable : sorableJam) {
+        Collections.sort(sortableJam);
+        for (EcoSortable ecoSortable : sortableJam) {
             System.out.println("ecoSortable = " + ecoSortable.owlIndividual);
             System.out.println("ecoSortable.relevance = " + ecoSortable.relevance);
         }
@@ -159,7 +159,6 @@ public class StigsTest {
                 "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
                 "}";
 
-        //finner alle affinities til en person
         SPARQLTests sparqlTest = new SPARQLTests();
         try {
             sparqlTest.setUp();
