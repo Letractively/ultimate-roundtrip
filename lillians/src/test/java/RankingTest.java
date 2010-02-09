@@ -9,7 +9,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class StigsTest {
+public class RankingTest {
 
     static OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     static OWLDataFactory factory = manager.getOWLDataFactory();
@@ -93,32 +93,29 @@ public class StigsTest {
 
         //Calculate Bills affinities
         List<OWLIndividual> allAffinities = getAllAffinities();
-        for (OWLIndividual affinity : allAffinities) {
-            OWLDataProperty hasAffinityValue = StigsTest.findDataType("#hasAffinityValue");
-            OWLConstant ecoAffinityAndPerhapsSomethingElse = reasoner.getRelatedValue(affinity, hasAffinityValue);
-            if (ecoAffinityAndPerhapsSomethingElse != null)
-                System.out.println("ecoAffinityAndPerhapsSomethingElse = " + ecoAffinityAndPerhapsSomethingElse.getLiteral());
-        }
 
         //WOP
-        List<EcoSortable> sortableJam = new ArrayList<EcoSortable>();
+        List<SimpleSortable> sortableJam = new ArrayList<SimpleSortable>();
         for (OWLIndividual jam : jams) {
             //WayOfProduction
             OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
 
-            OWLDataProperty hasWOPValue = StigsTest.findDataType("#hasWOPValue");
+            OWLDataProperty hasWOPValue = RankingTest.findDataType("#hasWOPValue");
             OWLConstant jamWOPValue = reasoner.getRelatedValue(relatedWayOfProductionIndividual, hasWOPValue);
             if (jamWOPValue != null)
                 System.out.println("ecoAffinityAndPerhapsSomethingElse = " + jamWOPValue.getLiteral());
 
 
             for (OWLIndividual affinity : allAffinities) {
-                //eksempel eco
-                //affinity = HighEcoAffinity
-                //Finn produktets WayOfProduction
-                //basert pŒ at ecoAffinity har en relasjon til wayOfProduction
-                //Gang hasWOPValue med wayOfProduction's value
-                //Legg alle verdiene du fŒr til produktets "relevance" og sŒ kan de sorteres basert pŒ den.
+
+                OWLDataProperty hasAffinityValue = RankingTest.findDataType("#hasAffinityValue");
+
+                OWLConstant affinityValue = reasoner.getRelatedValue(affinity, hasAffinityValue);
+
+                sortableJam.add(new SimpleSortable(jam, affinityValue, jamWOPValue));
+
+
+
 
 
 
@@ -130,7 +127,7 @@ public class StigsTest {
                 int price = Integer.valueOf(priceOfJam.getLiteral());
 
 
-                sortableJam.add(new EcoSortable(jam, billsEcoAffinity, wayOfProduction));
+                //sortableJam.add(new EcoSortable(jam, billsEcoAffinity, wayOfProduction));
             }
 
 
@@ -225,6 +222,33 @@ public class StigsTest {
     }
 }
 
+class SimpleSortable implements Comparable {
+    private final OWLIndividual jam;
+    int relevance;
+
+    public SimpleSortable(OWLIndividual jam, OWLConstant affinity, OWLConstant wop){
+        this.jam = jam;
+        if(affinity != null) {
+            relevance = 0;
+        } else
+            relevance = Integer.valueOf(affinity.getLiteral());
+        if(wop != null) {
+            relevance = relevance * Integer.valueOf(wop.getLiteral());
+        }
+    }
+
+    public int compareTo(Object o) {
+        if (o instanceof SimpleSortable) {
+            SimpleSortable other = (SimpleSortable) o;
+            if(this.relevance > other.relevance)
+                return 1;
+            else if(this.relevance < other.relevance)
+                return -1;
+        }
+        return 0;
+    }
+}
+
 
 class EcoSortable implements Comparable {
     final OWLIndividual owlIndividual;
@@ -241,9 +265,9 @@ class EcoSortable implements Comparable {
     private int whatIsConsumersEcoAffinity(OWLClass ecoAffinity) {
 
         
-        if (ecoAffinity == StigsTest.findClassByName("#HighEcoAffinity")) {
+        if (ecoAffinity == RankingTest.findClassByName("#HighEcoAffinity")) {
             return 2;
-        } else if (ecoAffinity == StigsTest.findClassByName("#MediumEcoAffinity")) {
+        } else if (ecoAffinity == RankingTest.findClassByName("#MediumEcoAffinity")) {
             return 1;
         } else {
             System.out.println("IKKE " + ecoAffinity);
@@ -252,9 +276,9 @@ class EcoSortable implements Comparable {
     }
 
     private int calculateEcoRelevance(OWLClass wop) {
-        if (wop == StigsTest.findClassByName("#Ecological")) {
+        if (wop == RankingTest.findClassByName("#Ecological")) {
             return 1;
-        } else if (wop == StigsTest.findClassByName("#Regular")) {
+        } else if (wop == RankingTest.findClassByName("#Regular")) {
             return -1;
         } else {
             return 0;
