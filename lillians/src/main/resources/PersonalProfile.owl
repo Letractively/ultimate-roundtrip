@@ -26,10 +26,10 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#">
     <owl:Ontology rdf:about=""/>
+    
 
 
-
-    <!--
+    <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Annotation properties
@@ -38,10 +38,10 @@
      -->
 
     <owl:AnnotationProperty rdf:about="&dc;source"/>
+    
 
 
-
-    <!--
+    <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Object Properties
@@ -49,7 +49,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#aDHDAffBelongsTo -->
@@ -57,7 +57,7 @@
     <owl:ObjectProperty rdf:about="#aDHDAffBelongsTo">
         <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#additiveUsedInProduct -->
@@ -65,7 +65,7 @@
     <owl:ObjectProperty rdf:about="#additiveUsedInProduct">
         <owl:inverseOf rdf:resource="#containsAdditive"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#belongsTo -->
@@ -73,7 +73,7 @@
     <owl:ObjectProperty rdf:about="#belongsTo">
         <owl:inverseOf rdf:resource="#hasAffinity"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#containsAdditive -->
@@ -82,7 +82,7 @@
         <rdfs:range rdf:resource="#Additive"/>
         <rdfs:domain rdf:resource="#ProcessedFood"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ecoAffBelongsTo -->
@@ -91,7 +91,7 @@
         <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
         <owl:inverseOf rdf:resource="#hasEcoAffinity"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#fairTradeAffBelongsTo -->
@@ -99,7 +99,7 @@
     <owl:ObjectProperty rdf:about="#fairTradeAffBelongsTo">
         <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasADHDAdditiveAffinity -->
@@ -109,7 +109,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAffinity -->
@@ -118,7 +118,7 @@
         <rdfs:range rdf:resource="#Modifiers"/>
         <rdfs:domain rdf:resource="#Person"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAvoidProducer -->
@@ -127,7 +127,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:range rdf:resource="#Producer"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasBerryIngredient -->
@@ -137,7 +137,7 @@
         <rdfs:domain rdf:resource="#Jam"/>
         <rdfs:subPropertyOf rdf:resource="#hasIngredient"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasChild -->
@@ -145,7 +145,7 @@
     <owl:ObjectProperty rdf:about="#hasChild">
         <rdfs:subPropertyOf rdf:resource="#hasFamilyRelations"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasDaughter -->
@@ -153,7 +153,7 @@
     <owl:ObjectProperty rdf:about="#hasDaughter">
         <rdfs:subPropertyOf rdf:resource="#hasChild"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEcoAffinity -->
@@ -163,7 +163,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEcoProductRelation -->
@@ -172,7 +172,7 @@
         <rdfs:domain rdf:resource="#EcoAffinity"/>
         <rdfs:range rdf:resource="#EcologicalFood"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEffect -->
@@ -181,7 +181,7 @@
         <rdfs:domain rdf:resource="#Additive"/>
         <rdfs:range rdf:resource="#AdditiveEffects"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFairTradeAffinity -->
@@ -191,7 +191,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFamilyRelations -->
@@ -200,7 +200,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:range rdf:resource="#Person"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFavouriteProducer -->
@@ -209,7 +209,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:range rdf:resource="#Producer"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFruitIngredient -->
@@ -218,7 +218,7 @@
         <rdfs:range rdf:resource="#Fruit"/>
         <rdfs:subPropertyOf rdf:resource="#hasIngredient"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasGender -->
@@ -227,7 +227,7 @@
         <rdfs:range rdf:resource="#Gender"/>
         <rdfs:domain rdf:resource="#Person"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasIngredient -->
@@ -236,7 +236,7 @@
         <rdfs:domain rdf:resource="#Food"/>
         <rdfs:range rdf:resource="#Food"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasOrigin -->
@@ -246,7 +246,7 @@
             >hvor et produkt eller vare kommer fra</rdfs:comment>
         <rdfs:domain rdf:resource="#Food"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPriceSensitivity -->
@@ -256,7 +256,7 @@
         <rdfs:range rdf:resource="#PriceSensitivity"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasProducer -->
@@ -267,7 +267,7 @@
         <rdfs:domain rdf:resource="#Food"/>
         <rdfs:range rdf:resource="#Producer"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedADHDProducts -->
@@ -277,7 +277,7 @@
         <rdfs:range rdf:resource="#ADHDEffectProducts"/>
         <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedEcoProducts -->
@@ -287,7 +287,7 @@
         <rdfs:range rdf:resource="#EcologicalFood"/>
         <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedFairTradeProducts -->
@@ -297,7 +297,7 @@
         <rdfs:range rdf:resource="#FairTradeFood"/>
         <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedPriceProducts -->
@@ -307,7 +307,7 @@
         <rdfs:domain rdf:resource="#PriceSensitivity"/>
         <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedProducts -->
@@ -316,7 +316,7 @@
         <rdfs:range rdf:resource="#Food"/>
         <rdfs:domain rdf:resource="#Modifiers"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasShoppingList -->
@@ -325,7 +325,7 @@
         <rdfs:range rdf:resource="#Food"/>
         <rdfs:domain rdf:resource="#Person"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasShoppingListItem -->
@@ -334,7 +334,7 @@
         <rdfs:range rdf:resource="#Food"/>
         <rdfs:domain rdf:resource="#ShoppingList"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasSon -->
@@ -342,7 +342,7 @@
     <owl:ObjectProperty rdf:about="#hasSon">
         <rdfs:subPropertyOf rdf:resource="#hasChild"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasWayOfProduction -->
@@ -351,7 +351,7 @@
         <rdfs:domain rdf:resource="#Food"/>
         <rdfs:range rdf:resource="#WayOfProduction"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#isMarriedTo -->
@@ -359,7 +359,7 @@
     <owl:ObjectProperty rdf:about="#isMarriedTo">
         <rdfs:subPropertyOf rdf:resource="#hasFamilyRelations"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#isProducing -->
@@ -367,7 +367,7 @@
     <owl:ObjectProperty rdf:about="#isProducing">
         <owl:inverseOf rdf:resource="#hasProducer"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#listBelongsTo -->
@@ -377,7 +377,7 @@
         <rdfs:domain rdf:resource="#ShoppingList"/>
         <owl:inverseOf rdf:resource="#hasShoppingList"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#priceSensAffBelongsTo -->
@@ -385,7 +385,7 @@
     <owl:ObjectProperty rdf:about="#priceSensAffBelongsTo">
         <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#wopConcern -->
@@ -394,10 +394,10 @@
         <rdfs:domain rdf:resource="#EcoAffinity"/>
         <rdfs:range rdf:resource="#WayOfProduction"/>
     </owl:ObjectProperty>
+    
 
 
-
-    <!--
+    <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Data properties
@@ -405,7 +405,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasADHDAffValue -->
@@ -414,7 +414,7 @@
         <rdfs:domain rdf:resource="#ADHDAdditiveAffinity"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAffinityValue -->
@@ -423,7 +423,7 @@
         <rdfs:domain rdf:resource="#Modifiers"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAge -->
@@ -432,7 +432,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasBirthdate -->
@@ -441,7 +441,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:range rdf:resource="&xsd;date"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEcoAffValue -->
@@ -450,7 +450,7 @@
         <rdfs:domain rdf:resource="#EcoAffinity"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFairTradeAffValue -->
@@ -459,7 +459,7 @@
         <rdfs:domain rdf:resource="#FairTradeAffinity"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFirstName -->
@@ -469,7 +469,7 @@
         <rdfs:subPropertyOf rdf:resource="#hasName"/>
         <rdfs:range rdf:resource="&xsd;string"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasName -->
@@ -478,7 +478,7 @@
         <rdfs:domain rdf:resource="#Person"/>
         <rdfs:range rdf:resource="&xsd;string"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPercentageOfBerries -->
@@ -487,7 +487,7 @@
         <rdfs:domain rdf:resource="#Jam"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPercentageOfSugar -->
@@ -496,7 +496,7 @@
         <rdfs:domain rdf:resource="#Food"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPrice -->
@@ -505,7 +505,7 @@
         <rdfs:domain rdf:resource="#Food"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPriceAffValue -->
@@ -514,7 +514,7 @@
         <rdfs:domain rdf:resource="#PriceSensitivity"/>
         <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPricePerKilo -->
@@ -523,7 +523,7 @@
         <rdfs:domain rdf:resource="#Food"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasProductWeight -->
@@ -532,7 +532,7 @@
         <rdfs:domain rdf:resource="#ProcessedFood"/>
         <rdfs:range rdf:resource="&xsd;decimal"/>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasSurname -->
@@ -542,10 +542,19 @@
         <rdfs:subPropertyOf rdf:resource="#hasName"/>
         <rdfs:range rdf:resource="&xsd;string"/>
     </owl:DatatypeProperty>
+    
 
 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasWOPValue -->
 
-    <!--
+    <owl:DatatypeProperty rdf:about="#hasWOPValue">
+        <rdfs:domain rdf:resource="#WayOfProduction"/>
+        <rdfs:range rdf:resource="&xsd;int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Classes
@@ -553,7 +562,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDAdditive -->
@@ -572,7 +581,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Additive"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDAdditiveAffinity -->
@@ -588,7 +597,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Modifiers"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDEffect -->
@@ -596,7 +605,7 @@
     <owl:Class rdf:about="#ADHDEffect">
         <rdfs:subClassOf rdf:resource="#AdditiveEffects"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDEffectProducts -->
@@ -616,7 +625,20 @@
         <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
         <owl:disjointWith rdf:resource="#NoneADHDEffectProducts"/>
     </owl:Class>
+    
 
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDFreeFood -->
+
+    <owl:Class rdf:about="#ADHDFreeFood">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:complementOf rdf:resource="#ADHDEffectProducts"/>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
+    </owl:Class>
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AcceptADHDAdditives -->
@@ -625,7 +647,7 @@
         <rdfs:subClassOf rdf:resource="#ADHDAdditiveAffinity"/>
         <owl:disjointWith rdf:resource="#AvoidADHDAdditives"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Additive -->
@@ -633,7 +655,7 @@
     <owl:Class rdf:about="#Additive">
         <rdfs:subClassOf rdf:resource="#NonFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AdditiveEffects -->
@@ -641,7 +663,7 @@
     <owl:Class rdf:about="#AdditiveEffects">
         <rdfs:subClassOf rdf:resource="#NonFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Adult -->
@@ -649,7 +671,7 @@
     <owl:Class rdf:about="#Adult">
         <rdfs:subClassOf rdf:resource="#Person"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AvoidADHDAdditives -->
@@ -668,7 +690,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#ADHDAdditiveAffinity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Berry -->
@@ -676,7 +698,7 @@
     <owl:Class rdf:about="#Berry">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsShoppingList -->
@@ -692,13 +714,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:someValuesFrom rdf:resource="#StrawberryJam"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:hasValue rdf:resource="#HervikEcoStrawberryJam"/>
+                <owl:someValuesFrom rdf:resource="#Lamb"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -710,11 +726,17 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:someValuesFrom rdf:resource="#Lamb"/>
+                <owl:someValuesFrom rdf:resource="#StrawberryJam"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
+                <owl:hasValue rdf:resource="#HervikEcoStrawberryJam"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Bread -->
@@ -722,7 +744,7 @@
     <owl:Class rdf:about="#Bread">
         <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#CancerCauseAdditive -->
@@ -741,7 +763,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Additive"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#CancerEffect -->
@@ -749,7 +771,7 @@
     <owl:Class rdf:about="#CancerEffect">
         <rdfs:subClassOf rdf:resource="#AdditiveEffects"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Cattle -->
@@ -757,7 +779,7 @@
     <owl:Class rdf:about="#Cattle">
         <rdfs:subClassOf rdf:resource="#Meat"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Cereals -->
@@ -765,7 +787,7 @@
     <owl:Class rdf:about="#Cereals">
         <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Commodity -->
@@ -773,7 +795,7 @@
     <owl:Class rdf:about="#Commodity">
         <rdfs:subClassOf rdf:resource="#Food"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcoAffinity -->
@@ -790,7 +812,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Modifiers"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcoConcernedPerson -->
@@ -809,16 +831,27 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Person"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Ecological -->
 
     <owl:Class rdf:about="#Ecological">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Ecological"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasWOPValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">2</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#WayOfProduction"/>
         <owl:disjointWith rdf:resource="#Regular"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcologicalFood -->
@@ -838,7 +871,7 @@
         <rdfs:comment
             >problem; hva om et product er b&#229;de &#248;kologisk og fair trade? da er det fortsatt &#248;kologisk!</rdfs:comment>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcologicalJam -->
@@ -857,7 +890,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Jam"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcologicalStrawberryJam -->
@@ -879,7 +912,7 @@
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Egg -->
@@ -887,7 +920,7 @@
     <owl:Class rdf:about="#Egg">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTradeAffinity -->
@@ -904,7 +937,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Modifiers"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTradeConcernedPerson -->
@@ -923,7 +956,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Person"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTradeFood -->
@@ -931,7 +964,7 @@
     <owl:Class rdf:about="#FairTradeFood">
         <rdfs:subClassOf rdf:resource="#Food"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Fish -->
@@ -939,19 +972,31 @@
     <owl:Class rdf:about="#Fish">
         <rdfs:subClassOf rdf:resource="#SeaFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Food -->
 
-    <owl:Class rdf:about="#Food"/>
-
+    <owl:Class rdf:about="#Food">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Food"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasProducer"/>
+                        <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minCardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FoodInformation -->
 
     <owl:Class rdf:about="#FoodInformation"/>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Fruit -->
@@ -961,7 +1006,7 @@
             >legg til at isMadeFrom Jam h&#239;&#191;&#189;rer til her</rdfs:label>
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Gender -->
@@ -976,7 +1021,7 @@
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikProducts -->
@@ -994,7 +1039,7 @@
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HighEcoAffinity -->
@@ -1015,7 +1060,7 @@
         <owl:disjointWith rdf:resource="#LowEcoAffinity"/>
         <owl:disjointWith rdf:resource="#MediumEcoAffinity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HighFairTradeAffinity -->
@@ -1036,7 +1081,7 @@
         <owl:disjointWith rdf:resource="#LowFairTradeAffinity"/>
         <owl:disjointWith rdf:resource="#MediumFairTradeAffinity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HighPriceSensitivity -->
@@ -1046,7 +1091,7 @@
         <owl:disjointWith rdf:resource="#LowPriceSensitivity"/>
         <owl:disjointWith rdf:resource="#MediumPriceSensitivity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Jam -->
@@ -1057,7 +1102,7 @@
             >definisjon for &#239;&#191;&#189; klassifisere jordb&#239;&#191;&#189;rsyltet&#239;&#191;&#189;y,
             bringerb&#239;&#191;&#189;r osv</rdfs:comment>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Lamb -->
@@ -1065,7 +1110,7 @@
     <owl:Class rdf:about="#Lamb">
         <rdfs:subClassOf rdf:resource="#Meat"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowEcoAffinity -->
@@ -1074,7 +1119,7 @@
         <rdfs:subClassOf rdf:resource="#EcoAffinity"/>
         <owl:disjointWith rdf:resource="#MediumEcoAffinity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowFairTradeAffinity -->
@@ -1083,7 +1128,7 @@
         <rdfs:subClassOf rdf:resource="#FairTradeAffinity"/>
         <owl:disjointWith rdf:resource="#MediumFairTradeAffinity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowPriceSensitivity -->
@@ -1092,7 +1137,7 @@
         <rdfs:subClassOf rdf:resource="#PriceSensitivity"/>
         <owl:disjointWith rdf:resource="#MediumPriceSensitivity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Man -->
@@ -1107,7 +1152,7 @@
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="#Woman"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Meat -->
@@ -1115,7 +1160,7 @@
     <owl:Class rdf:about="#Meat">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumEcoAffinity -->
@@ -1123,7 +1168,7 @@
     <owl:Class rdf:about="#MediumEcoAffinity">
         <rdfs:subClassOf rdf:resource="#EcoAffinity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumFairTradeAffinity -->
@@ -1131,7 +1176,7 @@
     <owl:Class rdf:about="#MediumFairTradeAffinity">
         <rdfs:subClassOf rdf:resource="#FairTradeAffinity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumPriceConcernedPerson -->
@@ -1150,7 +1195,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Person"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumPriceSensitivity -->
@@ -1169,7 +1214,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#PriceSensitivity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Milk -->
@@ -1177,7 +1222,7 @@
     <owl:Class rdf:about="#Milk">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MilkProduct -->
@@ -1185,19 +1230,19 @@
     <owl:Class rdf:about="#MilkProduct">
         <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Modifiers -->
 
     <owl:Class rdf:about="#Modifiers"/>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NonFood -->
 
     <owl:Class rdf:about="#NonFood"/>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoneADHDEffectProducts -->
@@ -1220,7 +1265,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Nuts -->
@@ -1228,7 +1273,7 @@
     <owl:Class rdf:about="#Nuts">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Person -->
@@ -1243,7 +1288,7 @@
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Pork -->
@@ -1251,7 +1296,7 @@
     <owl:Class rdf:about="#Pork">
         <rdfs:subClassOf rdf:resource="#Meat"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#PotatoProduct -->
@@ -1259,7 +1304,7 @@
     <owl:Class rdf:about="#PotatoProduct">
         <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Potatoe -->
@@ -1267,7 +1312,7 @@
     <owl:Class rdf:about="#Potatoe">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Poultry -->
@@ -1275,7 +1320,7 @@
     <owl:Class rdf:about="#Poultry">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#PriceConcernedPerson -->
@@ -1294,7 +1339,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Person"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#PriceSensitivity -->
@@ -1311,7 +1356,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Modifiers"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ProcessedFood -->
@@ -1319,7 +1364,7 @@
     <owl:Class rdf:about="#ProcessedFood">
         <rdfs:subClassOf rdf:resource="#Food"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ProcessedMeat -->
@@ -1327,7 +1372,7 @@
     <owl:Class rdf:about="#ProcessedMeat">
         <rdfs:subClassOf rdf:resource="#Meat"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Producer -->
@@ -1344,15 +1389,26 @@
             >Legg til definisjon -&gt; JamProducers klassen av de produsenter som produserer Jam
             kan finne ut hvilke produkter hver produsent lager</rdfs:comment>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Regular -->
 
     <owl:Class rdf:about="#Regular">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Regular"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasWOPValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#WayOfProduction"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#RegularProducedFood -->
@@ -1371,7 +1427,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Food"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#SeaFood -->
@@ -1379,7 +1435,7 @@
     <owl:Class rdf:about="#SeaFood">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Shellfish -->
@@ -1387,13 +1443,13 @@
     <owl:Class rdf:about="#Shellfish">
         <rdfs:subClassOf rdf:resource="#SeaFood"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ShoppingList -->
 
     <owl:Class rdf:about="#ShoppingList"/>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StrawberryJam -->
@@ -1412,7 +1468,7 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Jam"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Vegetable -->
@@ -1420,7 +1476,7 @@
     <owl:Class rdf:about="#Vegetable">
         <rdfs:subClassOf rdf:resource="#Commodity"/>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#WayOfProduction -->
@@ -1438,7 +1494,7 @@
         <dc:source
             >som instanser, eller som subklasser og value partition?</dc:source>
     </owl:Class>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Woman -->
@@ -1452,16 +1508,16 @@
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
-
+    
 
 
     <!-- http://www.w3.org/2002/07/owl#Thing -->
 
     <owl:Class rdf:about="&owl;Thing"/>
+    
 
 
-
-    <!--
+    <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Individuals
@@ -1469,7 +1525,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Alginat -->
@@ -1477,7 +1533,7 @@
     <owl:Thing rdf:about="#Alginat">
         <rdf:type rdf:resource="#Additive"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AppleAcid -->
@@ -1485,7 +1541,7 @@
     <owl:Thing rdf:about="#AppleAcid">
         <rdf:type rdf:resource="#Additive"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Bill -->
@@ -1505,7 +1561,7 @@
         <hasGender rdf:resource="#Male"/>
         <isMarriedTo rdf:resource="#WifeBill"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsADHDAdditiveAffinity -->
@@ -1513,7 +1569,7 @@
     <AvoidADHDAdditives rdf:about="#BillsADHDAdditiveAffinity">
         <rdf:type rdf:resource="&owl;Thing"/>
     </AvoidADHDAdditives>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsEcoAffinity -->
@@ -1521,7 +1577,7 @@
     <HighEcoAffinity rdf:about="#BillsEcoAffinity">
         <rdf:type rdf:resource="&owl;Thing"/>
     </HighEcoAffinity>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsFairTradeAffinity -->
@@ -1529,7 +1585,7 @@
     <HighFairTradeAffinity rdf:about="#BillsFairTradeAffinity">
         <rdf:type rdf:resource="&owl;Thing"/>
     </HighFairTradeAffinity>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsPriceSensitivity -->
@@ -1537,7 +1593,7 @@
     <MediumPriceSensitivity rdf:about="#BillsPriceSensitivity">
         <rdf:type rdf:resource="&owl;Thing"/>
     </MediumPriceSensitivity>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsShoppingListhmm -->
@@ -1546,7 +1602,7 @@
         <rdf:type rdf:resource="#BillsShoppingList"/>
         <hasShoppingListItem rdf:resource="#HervikEcoStrawberryJam"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Child1 -->
@@ -1554,7 +1610,7 @@
     <owl:Thing rdf:about="#Child1">
         <rdf:type rdf:resource="#Man"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Child2 -->
@@ -1562,7 +1618,7 @@
     <Man rdf:about="#Child2">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Man>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Child3 -->
@@ -1570,7 +1626,7 @@
     <Woman rdf:about="#Child3">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Woman>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Druekonsentrat -->
@@ -1578,7 +1634,7 @@
     <owl:Thing rdf:about="#Druekonsentrat">
         <rdf:type rdf:resource="#Additive"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E211 -->
@@ -1587,7 +1643,7 @@
         <rdf:type rdf:resource="#Additive"/>
         <owl:sameAs rdf:resource="#Natriumbenzoat"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Euroshopper -->
@@ -1596,7 +1652,7 @@
         <rdf:type rdf:resource="#Producer"/>
         <hasProducer rdf:resource="#Euroshopper"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJam -->
@@ -1614,7 +1670,7 @@
         <containsAdditive rdf:resource="#Natriumbenzoat"/>
         <containsAdditive rdf:resource="#Pectin"/>
     </StrawberryJam>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJamsWOP -->
@@ -1622,13 +1678,13 @@
     <Regular rdf:about="#EuroshopperStrawberryJamsWOP">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Regular>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Female -->
 
     <owl:Thing rdf:about="#Female"/>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FruitPectin -->
@@ -1637,7 +1693,7 @@
         <rdf:type rdf:resource="&owl;Thing"/>
         <owl:sameAs rdf:resource="#Pectin"/>
     </Additive>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Hervik -->
@@ -1645,7 +1701,7 @@
     <owl:Thing rdf:about="#Hervik">
         <rdf:type rdf:resource="#Producer"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam -->
@@ -1658,7 +1714,7 @@
         <hasWayOfProduction rdf:resource="#HervikEcoStrawberryJamWOP"/>
         <containsAdditive rdf:resource="#MilkAcid"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJamWOP -->
@@ -1666,7 +1722,7 @@
     <Ecological rdf:about="#HervikEcoStrawberryJamWOP">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Ecological>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam -->
@@ -1679,7 +1735,7 @@
         <hasWayOfProduction rdf:resource="#HervikStrawberryJamsWOP"/>
         <containsAdditive rdf:resource="#MilkAcid"/>
     </StrawberryJam>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJamsWOP -->
@@ -1687,7 +1743,7 @@
     <owl:Thing rdf:about="#HervikStrawberryJamsWOP">
         <rdf:type rdf:resource="#Regular"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICA -->
@@ -1695,7 +1751,7 @@
     <owl:Thing rdf:about="#ICA">
         <rdf:type rdf:resource="#Producer"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJam -->
@@ -1708,7 +1764,7 @@
         <containsAdditive rdf:resource="#LemonAcid"/>
         <containsAdditive rdf:resource="#Pectin"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJamsWOP -->
@@ -1716,7 +1772,7 @@
     <owl:Thing rdf:about="#ICAEcologicalStrawberryJamsWOP">
         <rdf:type rdf:resource="#Ecological"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Isomalt -->
@@ -1724,7 +1780,7 @@
     <Additive rdf:about="#Isomalt">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Additive>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Johannesbr&#248;dkjernemel -->
@@ -1732,7 +1788,7 @@
     <owl:Thing rdf:about="#Johannesbr&#248;dkjernemel">
         <rdf:type rdf:resource="#Additive"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#KaliumSorbat -->
@@ -1740,7 +1796,7 @@
     <Additive rdf:about="#KaliumSorbat">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Additive>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Kalsiumsitrat -->
@@ -1748,7 +1804,7 @@
     <owl:Thing rdf:about="#Kalsiumsitrat">
         <rdf:type rdf:resource="#Additive"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Karmin -->
@@ -1757,7 +1813,7 @@
         <rdf:type rdf:resource="#Additive"/>
         <hasEffect rdf:resource="#KarminEffect"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#KarminEffect -->
@@ -1765,7 +1821,7 @@
     <owl:Thing rdf:about="#KarminEffect">
         <rdf:type rdf:resource="#ADHDEffect"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LemonAcid -->
@@ -1773,13 +1829,13 @@
     <owl:Thing rdf:about="#LemonAcid">
         <rdf:type rdf:resource="#Additive"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Male -->
 
     <owl:Thing rdf:about="#Male"/>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MilkAcid -->
@@ -1787,7 +1843,7 @@
     <Additive rdf:about="#MilkAcid">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Additive>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Natriumbenzoat -->
@@ -1796,7 +1852,7 @@
         <rdf:type rdf:resource="#Additive"/>
         <hasEffect rdf:resource="#NatriumbenzoatEffect"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NatriumbenzoatEffect -->
@@ -1804,7 +1860,7 @@
     <owl:Thing rdf:about="#NatriumbenzoatEffect">
         <rdf:type rdf:resource="#ADHDEffect"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Nora -->
@@ -1812,7 +1868,7 @@
     <owl:Thing rdf:about="#Nora">
         <rdf:type rdf:resource="#Producer"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryAndWildJam -->
@@ -1828,7 +1884,7 @@
         <hasWayOfProduction rdf:resource="#NoraHomeMadeStrawberryAndWildJamsWOP"/>
         <containsAdditive rdf:resource="#Pectib"/>
     </StrawberryJam>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryAndWildJamsWOP -->
@@ -1836,7 +1892,7 @@
     <owl:Thing rdf:about="#NoraHomeMadeStrawberryAndWildJamsWOP">
         <rdf:type rdf:resource="#Regular"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJam -->
@@ -1850,7 +1906,7 @@
         <hasWayOfProduction rdf:resource="#NoraHomeMadeStrawberryJamsWOP"/>
         <containsAdditive rdf:resource="#Pectib"/>
     </StrawberryJam>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJamsWOP -->
@@ -1858,7 +1914,7 @@
     <owl:Thing rdf:about="#NoraHomeMadeStrawberryJamsWOP">
         <rdf:type rdf:resource="#Regular"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJam -->
@@ -1874,7 +1930,7 @@
         <hasWayOfProduction rdf:resource="#NoraLightStrawberryJamsWOP"/>
         <containsAdditive rdf:resource="#Pectin"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJamsWOP -->
@@ -1882,7 +1938,7 @@
     <Regular rdf:about="#NoraLightStrawberryJamsWOP">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Regular>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraNoSugar -->
@@ -1901,7 +1957,7 @@
         <containsAdditive rdf:resource="#Pectin"/>
         <containsAdditive rdf:resource="#Sukralose"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraNoSugarsWOP -->
@@ -1909,7 +1965,7 @@
     <owl:Thing rdf:about="#NoraNoSugarsWOP">
         <rdf:type rdf:resource="#Regular"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraOriginal -->
@@ -1923,7 +1979,7 @@
         <hasWayOfProduction rdf:resource="#NoraOriginalsWOP"/>
         <containsAdditive rdf:resource="#Pectin"/>
     </StrawberryJam>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraOriginalsWOP -->
@@ -1931,7 +1987,7 @@
     <owl:Thing rdf:about="#NoraOriginalsWOP">
         <rdf:type rdf:resource="#Regular"/>
     </owl:Thing>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraSqueezy -->
@@ -1944,7 +2000,7 @@
         <hasWayOfProduction rdf:resource="#NoraSqueezysWOP"/>
         <containsAdditive rdf:resource="#Pectin"/>
     </StrawberryJam>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraSqueezysWOP -->
@@ -1952,7 +2008,7 @@
     <Regular rdf:about="#NoraSqueezysWOP">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Regular>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Pectib -->
@@ -1960,7 +2016,7 @@
     <Additive rdf:about="#Pectib">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Additive>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Pectin -->
@@ -1968,13 +2024,13 @@
     <Additive rdf:about="#Pectin">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Additive>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Strawberry -->
 
     <owl:Thing rdf:about="#Strawberry"/>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Sukralose -->
@@ -1982,7 +2038,7 @@
     <Additive rdf:about="#Sukralose">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Additive>
-
+    
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#WifeBill -->
