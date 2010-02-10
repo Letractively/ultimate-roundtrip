@@ -105,7 +105,7 @@ public class RankingTest {
             OWLDataProperty hasWOPValue = RankingTest.findDataType("#hasWOPValue");
             OWLConstant jamWOPValue = reasoner.getRelatedValue(relatedWayOfProductionIndividual, hasWOPValue);
             if (jamWOPValue != null)
-                System.out.println("ecoAffinityAndPerhapsSomethingElse = " + jamWOPValue.getLiteral());
+                System.out.println("WOPValueAndPerhapsSomethingElse = " + jamWOPValue.getLiteral());
 
 
             for (OWLIndividual affinity : allAffinities) {
