@@ -60,9 +60,11 @@
     
 
 
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#additiveUsedInProduct -->
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#additiveUsedIn -->
 
-    <owl:ObjectProperty rdf:about="#additiveUsedInProduct">
+    <owl:ObjectProperty rdf:about="#additiveUsedIn">
+        <rdfs:domain rdf:resource="#Additive"/>
+        <rdfs:range rdf:resource="#ProcessedFood"/>
         <owl:inverseOf rdf:resource="#containsAdditive"/>
     </owl:ObjectProperty>
     
@@ -623,19 +625,7 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDEffectProducts -->
 
     <owl:Class rdf:about="#ADHDEffectProducts">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#ProcessedFood"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="#containsAdditive"/>
-                        <owl:someValuesFrom rdf:resource="#ADHDAdditive"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
-        <owl:disjointWith rdf:resource="#NoneADHDEffectProducts"/>
     </owl:Class>
     
 
@@ -679,7 +669,7 @@
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#ADHDAdditive"/>
+                    <rdf:Description rdf:about="#ADHDAdditiveAffinity"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="#hasADHDAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">3</owl:hasValue>
@@ -970,7 +960,19 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Food -->
 
-    <owl:Class rdf:about="#Food"/>
+    <owl:Class rdf:about="#Food">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Food"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasProducer"/>
+                        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
     
 
 
@@ -1226,29 +1228,6 @@
     
 
 
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoneADHDEffectProducts -->
-
-    <owl:Class rdf:about="#NoneADHDEffectProducts">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#ProcessedFood"/>
-                    <owl:Class>
-                        <owl:complementOf>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="#containsAdditive"/>
-                                <owl:someValuesFrom rdf:resource="#ADHDEffectProducts"/>
-                            </owl:Restriction>
-                        </owl:complementOf>
-                    </owl:Class>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Nuts -->
 
     <owl:Class rdf:about="#Nuts">
@@ -1262,19 +1241,10 @@
     <owl:Class rdf:about="#Person">
         <owl:equivalentClass>
             <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
+                <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="#Person"/>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="#Woman"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="#hasGender"/>
-                                <owl:onClass rdf:resource="#Man"/>
-                                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-                            </owl:Restriction>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:intersectionOf>
+                    <rdf:Description rdf:about="#Woman"/>
+                </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
@@ -2034,7 +2004,9 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Strawberry -->
 
-    <owl:Thing rdf:about="#Strawberry"/>
+    <owl:Thing rdf:about="#Strawberry">
+        <rdf:type rdf:resource="#Berry"/>
+    </owl:Thing>
     
 
 
@@ -2048,7 +2020,9 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#WifeBill -->
 
-    <owl:Thing rdf:about="#WifeBill"/>
+    <owl:Thing rdf:about="#WifeBill">
+        <rdf:type rdf:resource="#Woman"/>
+    </owl:Thing>
 </rdf:RDF>
 
 
