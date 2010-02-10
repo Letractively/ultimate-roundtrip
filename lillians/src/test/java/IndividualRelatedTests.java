@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.apibinding.OWLManager;
@@ -41,73 +42,87 @@ public class IndividualRelatedTests {
 
 
     @Test
-       public void lookUpNumberOfIndividualsTest() {
-           int individuals = ontology.getReferencedIndividuals().size();
-           //System.out.println("Number of individuals: " + individuals);
-           assertEquals(true, individuals > 10);
-       }
+    public void lookUpNumberOfIndividualsTest() {
+        int individuals = ontology.getReferencedIndividuals().size();
+        //System.out.println("Number of individuals: " + individuals);
+        assertEquals(true, individuals > 10);
+    }
 
-       @Test
-       public void classAndIndTest() throws OWLOntologyCreationException, OWLOntologyChangeException, OWLReasonerException {
-           OWLReasonerFactory reasonerFactory = new PelletReasonerFactory();
-           OWLReasoner reasoner = reasonerFactory.createReasoner(manager);
+    @Test
+    public void classAndIndTest() throws OWLOntologyCreationException, OWLOntologyChangeException, OWLReasonerException {
+        OWLReasonerFactory reasonerFactory = new PelletReasonerFactory();
+        OWLReasoner reasoner = reasonerFactory.createReasoner(manager);
 
-           Set<OWLOntology> importsClosure = manager.getImportsClosure(ontology);
-           reasoner.loadOntologies(importsClosure);
-           reasoner.classify();
+        Set<OWLOntology> importsClosure = manager.getImportsClosure(ontology);
+        reasoner.loadOntologies(importsClosure);
+        reasoner.classify();
 
-           OWLClass jam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#Jam"));
+        OWLClass jam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#Jam"));
 
-           Set<Set<OWLClass>> subClsSets = reasoner.getDescendantClasses(jam);
+        Set<Set<OWLClass>> subClsSets = reasoner.getDescendantClasses(jam);
 
-           Set<OWLClass> subClses = OWLReasonerAdapter.flattenSetOfSets(subClsSets);
+        Set<OWLClass> subClses = OWLReasonerAdapter.flattenSetOfSets(subClsSets);
 
-           OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
-           Set<OWLIndividual> ind = reasoner.getIndividuals(strawberryJam, true);
+        OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        Set<OWLIndividual> ind = reasoner.getIndividuals(strawberryJam, true);
 
-           assertEquals(4, subClses.size());
-           assertEquals(8, ind.size());
-       }
+        assertEquals(4, subClses.size());
+        assertEquals(8, ind.size());
+    }
 
 
-       @Test
-       public void getAllInstancesOfACLass() {
-           OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
-           Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
-           //todo skrive dem ut? trenger i alle fall navn på dem...
-           assertEquals(10, individuals.size());
-       } //todo kan bruke query for å hente dem lettere ut? hvordan leser man resultatet lettest?
+    @Test
+    public void getAllInstancesOfACLass() {
+        OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
+        //todo skrive dem ut? trenger i alle fall navn på dem...
+        assertEquals(10, individuals.size());
+    } //todo kan bruke query for å hente dem lettere ut? hvordan leser man resultatet lettest?
 
-       @Test
-       public void getInstanceOfAClass() {
-           OWLDataFactory factory = manager.getOWLDataFactory();
+    @Test
+    public void getInstanceOfAClass() {
+        OWLDataFactory factory = manager.getOWLDataFactory();
 
-           OWLClass strawberryJam = factory.getOWLClass(URI.create(myURI + "#StrawberryJam"));
-           Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
-           //todo trengs forløkke?
+        OWLClass strawberryJam = factory.getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
+        //todo trengs forløkke?
 
-           assertEquals("ICAEcologicalStrawberryJam", individuals.toArray()[0].toString());
-       }
+        assertEquals("ICAEcologicalStrawberryJam", individuals.toArray()[0].toString());
+    }
 
-        @Test
-       public void getAllInstancesOfAClass() {
-           OWLDataFactory factory = manager.getOWLDataFactory();
+    @Test
+    public void getAllInstancesOfAClass() {
+        OWLDataFactory factory = manager.getOWLDataFactory();
 
-           // create property and resources to query the reasoner
-           OWLClass person = factory.getOWLClass(URI.create(myURI + "#Person"));
-           OWLObjectProperty hasGender = factory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
-           OWLDataProperty hasAge = factory.getOWLDataProperty(URI.create(myURI + "#hasAge"));
+        // create property and resources to query the reasoner
+        OWLClass person = factory.getOWLClass(URI.create(myURI + "#Person"));
+        OWLObjectProperty hasGender = factory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
+        OWLDataProperty hasAge = factory.getOWLDataProperty(URI.create(myURI + "#hasAge"));
 
-           // get all instances of class
-           Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
-           OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-           String age = reasoner.getRelatedValue(ind[2], hasAge).getLiteral();
-           OWLIndividual gender = reasoner.getRelatedIndividual(ind[2], hasGender);
+        // get all instances of class
+        Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
+        OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
+        String age = reasoner.getRelatedValue(ind[2], hasAge).getLiteral();
+        OWLIndividual gender = reasoner.getRelatedIndividual(ind[2], hasGender);
 
-           assertEquals(5, individuals.size());
-           assertEquals("39", age);
-           assertEquals("Male", gender.toString());
-           assertEquals("Bill", individuals.toArray()[2].toString());
-       }
+        assertEquals(5, individuals.size());
+        assertEquals("39", age);
+        assertEquals("Male", gender.toString());
+        assertEquals("Bill", individuals.toArray()[2].toString());
+    }
+
     
+    @Test
+    @Ignore
+    public void testForCheckingType() {
+        OWLDataFactory factory = manager.getOWLDataFactory();
+        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "Bill"));
+        OWLDescription hm = new OWLDescription();
+               // isOwlClass
+        boolean hasType = reasoner.hasType(bill, hm, true);
+        System.out.println("hasType = " + hasType);
+
+    }
+
+
 }
