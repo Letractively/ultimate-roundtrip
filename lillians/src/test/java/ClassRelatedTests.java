@@ -216,6 +216,8 @@ public class ClassRelatedTests {
         assertEquals("HighFairTradeAffinity", typeOfFairTradeAffinity.toString());
     }
 
+    
+
     //blir n¿dt til Œ koble informasjonen vi har om produktet med en persons affinities
     //bruke EcoConcernedPerson, FairTradeConcerenedPerson, MediumPriceConcernedPerson osv
     //koble to og to sammen?

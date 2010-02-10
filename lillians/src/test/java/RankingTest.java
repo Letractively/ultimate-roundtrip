@@ -37,8 +37,8 @@ public class RankingTest {
             System.out.println("classesOfInd = " + classesOfInd);
         }
 
-        OWLClass strawberryJam = findClassByName("#StrawberryJam");
-        Set<OWLIndividual> jams = reasoner.getIndividuals(strawberryJam, false);
+        //OWLClass strawberryJam = findClassByName("#StrawberryJam");
+        //Set<OWLIndividual> jams = reasoner.getIndividuals(strawberryJam, false);
 
         OWLObjectProperty hasEcoProductRelation = findObjectProperty("#hasEcoProductRelation");
         System.out.println("hasEcoProductRelation = " + hasEcoProductRelation);
@@ -46,6 +46,7 @@ public class RankingTest {
         Set<Set<OWLDescription>> domainsOfRelation = reasoner.getDomains(hasEcoProductRelation);
         OWLDescription ecoAffinity = (OWLDescription) ((Set<OWLDescription>)domainsOfRelation.toArray()[1]).toArray()[0];
 
+        //todo men brukes denne til noe?
         Set<OWLDescription> rangeOfRelation = reasoner.getRanges(hasEcoProductRelation);
         OWLDescription ecoFood = rangeOfRelation.toArray(new OWLDescription[]{})[0];
         System.out.println("ecoFood = " + ecoFood);
@@ -69,14 +70,14 @@ public class RankingTest {
 
     @Test
     public void testRating() {
-        //Get Product list
+        //Get Product list - alle possible alternatives
         OWLClass strawberryJam = findClassByName("#StrawberryJam");
         Set<OWLIndividual> jams = reasoner.getIndividuals(strawberryJam, false);
 
         assertEquals("ICAEcologicalStrawberryJam", jams.toArray(new OWLIndividual[]{})[0].toString());
         assertEquals(10, jams.size());
 
-
+       /*
         //Profile with Bills Preferences
         OWLIndividual bill = findIndividual("#Bill");
         OWLObjectProperty hasEcoAffinity = findObjectProperty("#hasEcoAffinity");
@@ -90,6 +91,7 @@ public class RankingTest {
         OWLIndividual priceSensitivity = reasoner.getRelatedIndividual(bill, hasPriceSensitivity);
         OWLClass billsPriceSensitivity = reasoner.getType(priceSensitivity);
         assertEquals("MediumPriceSensitivity", billsPriceSensitivity.toString());
+**/
 
         //Calculate Bills affinities
         List<OWLIndividual> allAffinities = getAllAffinities();
@@ -114,15 +116,12 @@ public class RankingTest {
 
                 sortableJam.add(new SimpleSortable(jam, affinityValue, jamWOPValue));
 
-
-
-
-
-
                 //OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
-                OWLClass wayOfProduction = reasoner.getType(relatedWayOfProductionIndividual);
+               // OWLClass wayOfProduction = reasoner.getType(relatedWayOfProductionIndividual);
                 //ProductPrice
                 System.out.println("jam = " + jam);
+
+                //todo pris brukes ikke i sammenligningen
                 OWLConstant priceOfJam = reasoner.getRelatedValue(jam, findDataType("#hasPricePerKilo"));
                 int price = Integer.valueOf(priceOfJam.getLiteral());
 
@@ -143,7 +142,7 @@ public class RankingTest {
         //Sort list based on score
         Collections.sort(sortableJam);
         for (SimpleSortable ecoSortable : sortableJam) {
-            System.out.println("ecoSortable = " + ecoSortable.jam);
+            System.out.println("ecoSortable = " + ecoSortable.jam);  //todo hvorfor ecoSortable?
             System.out.println("ecoSortable.relevance = " + ecoSortable.relevance);
         }
     }
@@ -152,6 +151,7 @@ public class RankingTest {
             assertEquals(2, getAllEcoProducts().size());
             assertEquals("HervikEcoStrawberryJam", getAllEcoProducts().get(0).toString());
         }
+
     
         private List<OWLIndividual> getAllEcoProducts() {
         String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
@@ -190,7 +190,7 @@ public class RankingTest {
                 "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
                 "}";
 
-        //finner alle affinities til en person
+        //finner alle affinities til en person  - bill
         SPARQLTests sparqlTest = new SPARQLTests();
         try {
             sparqlTest.setUp();
