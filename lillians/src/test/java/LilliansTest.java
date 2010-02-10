@@ -53,7 +53,7 @@ public class LilliansTest {
     @Test
     public void loadOntologyTest() {
         OWLClass[] result = ontology.getReferencedClasses().toArray(new OWLClass[]{});
-        assertEquals("dette var feil", 69, ontology.getReferencedClasses().size());
+        assertEquals("dette var feil", 73, ontology.getReferencedClasses().size());
         assertEquals("HighPriceSensitivity", result[0].toString());
         assertEquals(false, result[0].isOWLThing());
     }

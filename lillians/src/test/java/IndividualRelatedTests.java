@@ -110,7 +110,7 @@ public class IndividualRelatedTests {
         assertEquals("Male", gender.toString());
         assertEquals("Bill", individuals.toArray()[2].toString());
     }
-
+    /*
     @Test
     public void domainTest (){
         OWLDataFactory factory = manager.getOWLDataFactory();
@@ -119,6 +119,7 @@ public class IndividualRelatedTests {
         OWLDescription hmmmm = 
         boolean hmm = reasoner.hasDomain(prop, );
     }
+    **/
 
     //funker ikke som forventet
     @Test
