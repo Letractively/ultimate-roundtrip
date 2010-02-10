@@ -111,9 +111,34 @@ public class IndividualRelatedTests {
         assertEquals("Bill", individuals.toArray()[2].toString());
     }
 
-    
     @Test
-    @Ignore
+    public void domainTest (){
+        OWLDataFactory factory = manager.getOWLDataFactory();
+        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "hasEcoAffinity"));
+        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "Bill"));
+        OWLDescription hmmmm = 
+        boolean hmm = reasoner.hasDomain(prop, );
+    }
+
+    //funker ikke som forventet
+    @Test
+    public void testHasProperty() {
+        OWLDataFactory factory = manager.getOWLDataFactory();
+        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "Bill"));
+        OWLIndividual billsEA = factory.getOWLIndividual(URI.create(myURI + "BillsEcoAffinity"));
+        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "hasEcoAffinity"));
+        boolean hasProperty = reasoner.hasObjectPropertyRelationship(bill, prop, billsEA);
+        OWLObjectProperty hasGender = factory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
+        boolean hasG = reasoner.hasObjectPropertyRelationship(bill, hasGender, billsEA);
+        System.out.println("hasProperty = " + hasProperty);
+        System.out.println("hasG = " + hasG);
+        
+    }
+
+    //hasdomain hasrange
+
+    /*
+    @Test
     public void testForCheckingType() {
         OWLDataFactory factory = manager.getOWLDataFactory();
         OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "Bill"));
@@ -123,6 +148,7 @@ public class IndividualRelatedTests {
         System.out.println("hasType = " + hasType);
 
     }
+    **/
 
 
 }
