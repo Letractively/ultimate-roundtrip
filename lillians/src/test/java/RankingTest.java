@@ -100,26 +100,31 @@ public class RankingTest {
         List<SimpleSortable> sortableJam = new ArrayList<SimpleSortable>();
         for (OWLIndividual jam : jams) {
             //WayOfProduction
+            System.out.println("jam = " + jam);
+            
             OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
+            System.out.println("relatedWayOfProductionIndividual = " + relatedWayOfProductionIndividual);
 
             OWLDataProperty hasWOPValue = RankingTest.findDataType("#hasWOPValue");
             OWLConstant jamWOPValue = reasoner.getRelatedValue(relatedWayOfProductionIndividual, hasWOPValue);
+
             if (jamWOPValue != null)
                 System.out.println("WOPValueAndPerhapsSomethingElse = " + jamWOPValue.getLiteral());
 
 
             for (OWLIndividual affinity : allAffinities) {
 
+                System.out.println("affinity = " + affinity);
                 OWLDataProperty hasAffinityValue = RankingTest.findDataType("#hasAffinityValue");
 
                 OWLConstant affinityValue = reasoner.getRelatedValue(affinity, hasAffinityValue);
+                System.out.println("affinityValue = " + affinityValue);
 
                 sortableJam.add(new SimpleSortable(jam, affinityValue, jamWOPValue));
 
                 //OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
                // OWLClass wayOfProduction = reasoner.getType(relatedWayOfProductionIndividual);
                 //ProductPrice
-                System.out.println("jam = " + jam);
 
                 //todo pris brukes ikke i sammenligningen
                 OWLConstant priceOfJam = reasoner.getRelatedValue(jam, findDataType("#hasPricePerKilo"));
@@ -141,6 +146,8 @@ public class RankingTest {
 
         //Sort list based on score
         Collections.sort(sortableJam);
+        int hmmmm = sortableJam.size();
+        System.out.println("size sortableJam = " + hmmmm);
         for (SimpleSortable ecoSortable : sortableJam) {
             System.out.println("ecoSortable = " + ecoSortable.jam);  //todo hvorfor ecoSortable?
             System.out.println("ecoSortable.relevance = " + ecoSortable.relevance);
@@ -240,65 +247,12 @@ class SimpleSortable implements Comparable {
     public int compareTo(Object o) {
         if (o instanceof SimpleSortable) {
             SimpleSortable other = (SimpleSortable) o;
-            if(this.relevance > other.relevance)
-                return -1;
-            else if(this.relevance < other.relevance)
+            if(this.relevance < other.relevance)
                 return 1;
+            else if(this.relevance > other.relevance)
+                return -1;
         }
         return 0;
-    }
-}
-
-
-class EcoSortable implements Comparable {
-    final OWLIndividual owlIndividual;
-    int relevance;
-
-    public EcoSortable(OWLIndividual owlIndividual, OWLClass billsEcoAffinity, OWLClass wop) {
-        this.owlIndividual = owlIndividual;
-        int thisProductHasEcoRelevance = calculateEcoRelevance(wop);
-        int consumersEcoAffinity = whatIsConsumersEcoAffinity(billsEcoAffinity);
-        relevance = consumersEcoAffinity * thisProductHasEcoRelevance;
-
-    }
-
-    private int whatIsConsumersEcoAffinity(OWLClass ecoAffinity) {
-
-        
-        if (ecoAffinity == RankingTest.findClassByName("#HighEcoAffinity")) {
-            return 2;
-        } else if (ecoAffinity == RankingTest.findClassByName("#MediumEcoAffinity")) {
-            return 1;
-        } else {
-            System.out.println("IKKE " + ecoAffinity);
-            return 0;
-        }
-    }
-
-    private int calculateEcoRelevance(OWLClass wop) {
-        if (wop == RankingTest.findClassByName("#Ecological")) {
-            return 1;
-        } else if (wop == RankingTest.findClassByName("#Regular")) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
-
-    public int compareTo(Object o) {
-        if (o instanceof EcoSortable) {
-            EcoSortable other = (EcoSortable) o;
-            if (this.relevance < other.relevance)
-                return 1;
-            else if (this.relevance == other.relevance)
-                return 0;
-            else
-                return -1;
-
-            // If this < o, return a negative value
-            // If this = o, return 0
-            // If this > o, return a positive value
-        } else return 0;
     }
 }
 
