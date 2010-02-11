@@ -336,8 +336,8 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasShoppingList -->
 
     <owl:ObjectProperty rdf:about="#hasShoppingList">
-        <rdfs:range rdf:resource="#Food"/>
         <rdfs:domain rdf:resource="#Person"/>
+        <rdfs:range rdf:resource="#ShoppingList"/>
     </owl:ObjectProperty>
     
 
@@ -690,38 +690,6 @@
     
 
 
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsShoppingList -->
-
-    <owl:Class rdf:about="#BillsShoppingList">
-        <rdfs:subClassOf rdf:resource="#ShoppingList"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:someValuesFrom rdf:resource="#Lamb"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:someValuesFrom rdf:resource="#Meat"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:someValuesFrom rdf:resource="#StrawberryJam"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasShoppingListItem"/>
-                <owl:hasValue rdf:resource="#HervikEcoStrawberryJam"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Bread -->
 
     <owl:Class rdf:about="#Bread">
@@ -1070,6 +1038,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HighPriceSensitivity -->
 
     <owl:Class rdf:about="#HighPriceSensitivity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#HighEcoAffinity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasPriceAffValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">3</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#PriceSensitivity"/>
         <owl:disjointWith rdf:resource="#LowPriceSensitivity"/>
         <owl:disjointWith rdf:resource="#MediumPriceSensitivity"/>
@@ -1099,6 +1078,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowEcoAffinity -->
 
     <owl:Class rdf:about="#LowEcoAffinity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#LowEcoAffinity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasEcoAffValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#EcoAffinity"/>
         <owl:disjointWith rdf:resource="#MediumEcoAffinity"/>
     </owl:Class>
@@ -1108,6 +1098,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowFairTradeAffinity -->
 
     <owl:Class rdf:about="#LowFairTradeAffinity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#LowEcoAffinity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasFairTradeAffValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#FairTradeAffinity"/>
         <owl:disjointWith rdf:resource="#MediumFairTradeAffinity"/>
     </owl:Class>
@@ -1117,6 +1118,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowPriceSensitivity -->
 
     <owl:Class rdf:about="#LowPriceSensitivity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#LowPriceSensitivity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasPriceAffValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#PriceSensitivity"/>
         <owl:disjointWith rdf:resource="#MediumPriceSensitivity"/>
     </owl:Class>
@@ -1149,6 +1161,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumEcoAffinity -->
 
     <owl:Class rdf:about="#MediumEcoAffinity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#MediumEcoAffinity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasEcoAffValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">2</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#EcoAffinity"/>
     </owl:Class>
     
@@ -1157,6 +1180,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumFairTradeAffinity -->
 
     <owl:Class rdf:about="#MediumFairTradeAffinity">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#MediumEcoAffinity"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasFairTradeAffValue"/>
+                        <owl:hasValue rdf:datatype="&xsd;integer">2</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#FairTradeAffinity"/>
     </owl:Class>
     
@@ -1522,7 +1556,7 @@
         <hasEcoAffinity rdf:resource="#BillsEcoAffinity"/>
         <hasFairTradeAffinity rdf:resource="#BillsFairTradeAffinity"/>
         <hasPriceSensitivity rdf:resource="#BillsPriceSensitivity"/>
-        <hasShoppingList rdf:resource="#BillsShoppingListhmm"/>
+        <hasShoppingList rdf:resource="#BillsShoppingList"/>
         <hasChild rdf:resource="#Child1"/>
         <hasChild rdf:resource="#Child2"/>
         <hasChild rdf:resource="#Child3"/>
@@ -1564,10 +1598,11 @@
     
 
 
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsShoppingListhmm -->
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsShoppingList -->
 
-    <owl:Thing rdf:about="#BillsShoppingListhmm">
-        <rdf:type rdf:resource="#BillsShoppingList"/>
+    <owl:Thing rdf:about="#BillsShoppingList">
+        <rdf:type rdf:resource="#ShoppingList"/>
+        <hasShoppingListItem rdf:resource="#HervikStrawberryJam"/>
     </owl:Thing>
     
 
@@ -1617,7 +1652,6 @@
 
     <owl:Thing rdf:about="#Euroshopper">
         <rdf:type rdf:resource="#Producer"/>
-        <hasProducer rdf:resource="#Euroshopper"/>
     </owl:Thing>
     
 
