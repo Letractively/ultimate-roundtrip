@@ -110,29 +110,56 @@ public class IndividualRelatedTests {
         assertEquals("Male", gender.toString());
         assertEquals("Bill", individuals.toArray()[2].toString());
     }
-    /*
-    @Test
-    public void domainTest (){
-        OWLDataFactory factory = manager.getOWLDataFactory();
-        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "hasEcoAffinity"));
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "Bill"));
-        OWLDescription hmmmm = 
-        boolean hmm = reasoner.hasDomain(prop, );
-    }
-    **/
 
-    //funker ikke som forventet
+    @Test
+    public void domainTest() {
+        OWLDataFactory factory = manager.getOWLDataFactory();
+        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "#hasEcoAffinity"));
+        OWLClass person = factory.getOWLClass(URI.create(myURI + "#Person"));
+        OWLClass ecoAffinity = factory.getOWLClass(URI.create(myURI + "#Person"));
+        OWLClass jam = factory.getOWLClass(URI.create(myURI + "#Jam"));
+        boolean hmm = reasoner.hasDomain(prop, person);
+        boolean hmm2 = reasoner.hasDomain(prop, jam);
+        boolean hmm3 = reasoner.hasDomain(prop, ecoAffinity);
+        System.out.println("hmm = " + hmm);
+        System.out.println("hmm2 = " + hmm2);
+        System.out.println("hmm3 = " + hmm3);
+        
+        assertEquals(true, hmm);
+        assertEquals(false, hmm2);
+        assertEquals(true, hmm3);
+    }
+
+
     @Test
     public void testHasProperty() {
         OWLDataFactory factory = manager.getOWLDataFactory();
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "Bill"));
-        OWLIndividual billsEA = factory.getOWLIndividual(URI.create(myURI + "BillsEcoAffinity"));
-        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "hasEcoAffinity"));
+        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
+        OWLIndividual billsEA = factory.getOWLIndividual(URI.create(myURI + "#BillsEcoAffinity"));
+        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "#hasEcoAffinity"));
         boolean hasProperty = reasoner.hasObjectPropertyRelationship(bill, prop, billsEA);
         OWLObjectProperty hasGender = factory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
         boolean hasG = reasoner.hasObjectPropertyRelationship(bill, hasGender, billsEA);
         System.out.println("hasProperty = " + hasProperty);
         System.out.println("hasG = " + hasG);
+
+        assertEquals(true, hasProperty);
+        assertEquals(false, hasG);
+
+    }
+
+    @Test
+    public void testIfProuctIsFairTrade(){
+        //er et product fairTrade?
+        OWLDataFactory factory = manager.getOWLDataFactory();
+        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
+        OWLObjectProperty hasQualityMark = factory.getOWLObjectProperty(URI.create(myURI + "#hasQualityMark"));
+        OWLIndividual fairTrade = factory.getOWLIndividual(URI.create(myURI + "#FairTrade"));
+
+        boolean isProductFairTrade = reasoner.hasObjectPropertyRelationship(hervikSJ, hasQualityMark, fairTrade);
+        System.out.println("isProductFairTrade = " + isProductFairTrade);
+
+        assertEquals(false, isProductFairTrade);
         
     }
 
