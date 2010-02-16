@@ -25,6 +25,7 @@ public class RankingTest {
         reasoner.loadOntology(ontology);
     }
 
+    //todo bytt ut med spørring? getallaffinities
     @Test
     public void testFindPreferenceProductRelation() {
         OWLClass modifiers = findClassByName("#Modifiers");
@@ -120,6 +121,9 @@ public class RankingTest {
                 OWLConstant affinityValue = reasoner.getRelatedValue(affinity, hasAffinityValue);
                 System.out.println("affinityValue = " + affinityValue);
 
+                //todo trenger disse å hardkodes? finnes det en måte hvor man kan summere alle aktuelle delrelevanser hvor det er en match mellom preferanse og et produkts egenskap?
+                //todo delrelevans = preferanseverdi x tilfreddstillelse av egenskapet hos produktet
+                //todo relevans = summen av alle delrelevanser
                 sortableJam.add(new SimpleSortable(jam, affinityValue, jamWOPValue));
 
                 //OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));

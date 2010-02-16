@@ -1542,6 +1542,7 @@
 
     <owl:Thing rdf:about="#AppleAcid">
         <rdf:type rdf:resource="#Additive"/>
+        <owl:sameAs rdf:resource="#E296"/>
     </owl:Thing>
     
 
@@ -1639,11 +1640,82 @@
     
 
 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E120 -->
+
+    <owl:Thing rdf:about="#E120"/>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E202 -->
+
+    <owl:Thing rdf:about="#E202"/>
+    
+
+
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E211 -->
 
     <owl:Thing rdf:about="#E211">
         <rdf:type rdf:resource="#Additive"/>
         <owl:sameAs rdf:resource="#Natriumbenzoat"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E270 -->
+
+    <owl:Thing rdf:about="#E270"/>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E296 -->
+
+    <owl:Thing rdf:about="#E296"/>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E330 -->
+
+    <owl:Thing rdf:about="#E330"/>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E333 -->
+
+    <owl:Thing rdf:about="#E333">
+        <owl:sameAs rdf:resource="#Kalsiumsitrat"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E410 -->
+
+    <owl:Thing rdf:about="#E410">
+        <owl:sameAs rdf:resource="#Johannesbr&#248;dkjernemel"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E440 -->
+
+    <owl:Thing rdf:about="#E440">
+        <owl:sameAs rdf:resource="#FruitPectin"/>
+        <owl:sameAs rdf:resource="#Pectin"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E953 -->
+
+    <owl:Thing rdf:about="#E953">
+        <owl:sameAs rdf:resource="#Isomalt"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E955 -->
+
+    <owl:Thing rdf:about="#E955">
+        <owl:sameAs rdf:resource="#Sukralose"/>
     </owl:Thing>
     
 
@@ -1804,6 +1876,7 @@
 
     <Additive rdf:about="#KaliumSorbat">
         <rdf:type rdf:resource="&owl;Thing"/>
+        <owl:sameAs rdf:resource="#E202"/>
     </Additive>
     
 
@@ -1820,6 +1893,7 @@
 
     <owl:Thing rdf:about="#Karmin">
         <rdf:type rdf:resource="#Additive"/>
+        <owl:sameAs rdf:resource="#E120"/>
         <hasEffect rdf:resource="#KarminEffect"/>
     </owl:Thing>
     
@@ -1837,6 +1911,7 @@
 
     <owl:Thing rdf:about="#LemonAcid">
         <rdf:type rdf:resource="#Additive"/>
+        <owl:sameAs rdf:resource="#E330"/>
     </owl:Thing>
     
 
@@ -1851,6 +1926,7 @@
 
     <Additive rdf:about="#MilkAcid">
         <rdf:type rdf:resource="&owl;Thing"/>
+        <owl:sameAs rdf:resource="#E270"/>
     </Additive>
     
 
