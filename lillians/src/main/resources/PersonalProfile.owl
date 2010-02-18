@@ -1794,6 +1794,7 @@
         <hasProducer rdf:resource="#Hervik"/>
         <hasWayOfProduction rdf:resource="#HervikEcoStrawberryJamWOP"/>
         <containsAdditive rdf:resource="#MilkAcid"/>
+        <hasQualityMark rdf:resource="#TESTEcological"/>
     </owl:Thing>
     
 
@@ -2125,6 +2126,14 @@
     <Additive rdf:about="#Sukralose">
         <rdf:type rdf:resource="&owl;Thing"/>
     </Additive>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#TESTEcological -->
+
+    <QualityMark rdf:about="#TESTEcological">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </QualityMark>
     
 
 
