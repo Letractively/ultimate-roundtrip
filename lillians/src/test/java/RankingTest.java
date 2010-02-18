@@ -2,12 +2,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.apibinding.OWLManager;
+import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.model.*;
 
 import java.net.URI;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RankingTest {
 
@@ -114,6 +116,14 @@ public class RankingTest {
 
 
             for (OWLIndividual affinity : allAffinities) {
+                //Sjekke om Affinitien har noe å gjøre med Way of production og sånt
+
+
+                boolean isRelated =  isAffinityRelatedToProductInformation(affinity, jam);
+                if(isRelated)
+                    System.out.println("Hooray, it is related!!!");
+
+
 
                 System.out.println("affinity = " + affinity);
                 OWLDataProperty hasAffinityValue = RankingTest.findDataType("#hasAffinityValue");
@@ -157,7 +167,34 @@ public class RankingTest {
             System.out.println("ecoSortable.relevance = " + ecoSortable.relevance);
         }
     }
-        @Test
+
+    @Test
+    public void testAffinityRelatedToProductInformation() {
+
+        OWLIndividual ica = findIndividual("#HervikEcoStrawberryJam");
+        OWLIndividual eco = findIndividual("#BillsEcoAffinity");
+        assertTrue(isAffinityRelatedToProductInformation(eco, ica));
+    }
+
+    private boolean isAffinityRelatedToProductInformation(OWLIndividual affinity, OWLIndividual product) {
+        OWLClass affinityClass = reasoner.getType(affinity);
+        Set<Set<OWLClass>> superclass = reasoner.getSuperClasses(affinityClass);
+        Set<OWLClass> superclassFlat = OWLReasonerAdapter.flattenSetOfSets(superclass);
+        for (OWLClass owlClass : superclassFlat) {
+            OWLObjectProperty hasQualityMark = findObjectProperty("#hasQualityMark");
+            OWLIndividual eco = findIndividual("#TESTEcological");
+
+            boolean productIsEco = reasoner.hasObjectPropertyRelationship(product, hasQualityMark, eco);
+            boolean hasEcoAffinity = owlClass.equals(findClassByName("#EcoAffinity"));
+            System.out.println("productIsEco = " + productIsEco);
+            System.out.println("hasEcoAffinity = " + hasEcoAffinity);
+            if (hasEcoAffinity && productIsEco)
+                return true;
+        }
+        return false;
+    }
+
+    @Test
         public void testGetAllEcoProds(){
             assertEquals(2, getAllEcoProducts().size());
             assertEquals("HervikEcoStrawberryJam", getAllEcoProducts().get(0).toString());
