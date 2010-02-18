@@ -124,7 +124,7 @@ public class IndividualRelatedTests {
         System.out.println("hmm = " + hmm);
         System.out.println("hmm2 = " + hmm2);
         System.out.println("hmm3 = " + hmm3);
-        
+
         assertEquals(true, hmm);
         assertEquals(false, hmm2);
         assertEquals(true, hmm3);
@@ -149,7 +149,7 @@ public class IndividualRelatedTests {
     }
 
     @Test
-    public void testIfProuctIsFairTrade(){
+    public void testIfProuctIsFairTrade() {
         //er et product fairTrade?
         OWLDataFactory factory = manager.getOWLDataFactory();
         OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
@@ -160,7 +160,33 @@ public class IndividualRelatedTests {
         System.out.println("isProductFairTrade = " + isProductFairTrade);
 
         assertEquals(false, isProductFairTrade);
+
+    }
+
+    //todo kan man lage metoder som sjekker disse egenskapene?
+    //todo hvordan hente ut aktuelle egenskaper?
+    //todo utgangspunktet er at man ha en individual -> trenger så alle egenskaper ved denne, eller kan man sjekke noen utvalgte?
+    //todo metode ala som returnerer boolean (1 for ja og 0 for nei), med input individual - for da vil man kunne sjekke mange produkter for en og samme egenskap
+    //todo 
+    //todo hvordan vet man hvilke egenskaper man skal sjekke?
+    @Test
+    public void testIfProductIsEco() {
+        OWLDataFactory factory = manager.getOWLDataFactory();
+        OWLIndividual HEcoSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikEcoStrawberryJam"));
+        OWLIndividual HSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
+
+        OWLObjectProperty hasQualityMark = factory.getOWLObjectProperty(URI.create(myURI + "#hasQualityMark"));
+        OWLIndividual eco = factory.getOWLIndividual(URI.create(myURI + "#TESTEcological"));
+
+        boolean isProductEco1 = reasoner.hasObjectPropertyRelationship(HSJ, hasQualityMark, eco);
+        boolean isProductEco2 = reasoner.hasObjectPropertyRelationship(HEcoSJ, hasQualityMark, eco);
+        System.out.println("isProductEco = " + isProductEco1);
+        System.out.println("isProductEco2 = " + isProductEco2);
         
+        assertEquals(false, isProductEco1);
+        assertEquals(true, isProductEco2);
+
+
     }
 
     //hasdomain hasrange
