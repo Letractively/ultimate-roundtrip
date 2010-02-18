@@ -104,7 +104,8 @@ public class RankingTest {
         for (OWLIndividual jam : jams) {
             //WayOfProduction
             System.out.println("jam = " + jam);
-            
+
+            //todo de 6 linjene skal bort
             OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
             System.out.println("relatedWayOfProductionIndividual = " + relatedWayOfProductionIndividual);
 
@@ -120,21 +121,18 @@ public class RankingTest {
 
 
                 boolean isRelated =  isAffinityRelatedToProductInformation(affinity, jam);
-                if(isRelated)
-                    System.out.println("Hooray, it is related!!!");
+                if(isRelated){
+                    System.out.println("affinity = " + affinity);
+                    OWLDataProperty hasAffinityValue = RankingTest.findDataType("#hasAffinityValue");
 
+                    OWLConstant affinityValue = reasoner.getRelatedValue(affinity, hasAffinityValue);
+                    System.out.println("!!!!!!!!!!!affinityValue = " + affinityValue);
 
-
-                System.out.println("affinity = " + affinity);
-                OWLDataProperty hasAffinityValue = RankingTest.findDataType("#hasAffinityValue");
-
-                OWLConstant affinityValue = reasoner.getRelatedValue(affinity, hasAffinityValue);
-                System.out.println("affinityValue = " + affinityValue);
-
-                //todo trenger disse å hardkodes? finnes det en måte hvor man kan summere alle aktuelle delrelevanser hvor det er en match mellom preferanse og et produkts egenskap?
-                //todo delrelevans = preferanseverdi x tilfreddstillelse av egenskapet hos produktet
-                //todo relevans = summen av alle delrelevanser
-                sortableJam.add(new SimpleSortable(jam, affinityValue, jamWOPValue));
+                    //todo trenger disse å hardkodes? finnes det en måte hvor man kan summere alle aktuelle delrelevanser hvor det er en match mellom preferanse og et produkts egenskap?
+                    //todo delrelevans = preferanseverdi x tilfreddstillelse av egenskapet hos produktet
+                    //todo relevans = summen av alle delrelevanser
+                    sortableJam.add(new SimpleSortable(jam, affinityValue, jamWOPValue));
+                }
 
                 //OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
                // OWLClass wayOfProduction = reasoner.getType(relatedWayOfProductionIndividual);

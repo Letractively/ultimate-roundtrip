@@ -913,6 +913,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTradeFood -->
 
     <owl:Class rdf:about="#FairTradeFood">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Food"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasQualityMark"/>
+                        <owl:hasValue rdf:resource="#FairTrade"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="#Food"/>
     </owl:Class>
     
@@ -1473,6 +1484,25 @@
     
 
 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#TestEcoFood -->
+
+    <owl:Class rdf:about="#TestEcoFood">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#Food"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#hasQualityMark"/>
+                        <owl:hasValue rdf:resource="#TESTEcological"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="#Food"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Vegetable -->
 
     <owl:Class rdf:about="#Vegetable">
@@ -1845,6 +1875,7 @@
         <hasWayOfProduction rdf:resource="#ICAEcologicalStrawberryJamsWOP"/>
         <containsAdditive rdf:resource="#LemonAcid"/>
         <containsAdditive rdf:resource="#Pectin"/>
+        <hasQualityMark rdf:resource="#TESTEcological"/>
     </owl:Thing>
     
 
