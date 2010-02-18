@@ -100,7 +100,12 @@ public class RankingTest {
         List<OWLIndividual> allAffinities = getAllAffinities();
 
         //WOP
-        List<SimpleSortable> sortableJam = new ArrayList<SimpleSortable>();
+        Map<OWLIndividual,  SimpleSortable> jamMap = new HashMap<OWLIndividual,SimpleSortable>();
+
+        for (OWLIndividual jam : jams) {
+            jamMap.put(jam, new SimpleSortable(jam));
+        }
+
         for (OWLIndividual jam : jams) {
             //WayOfProduction
             System.out.println("jam = " + jam);
@@ -131,7 +136,7 @@ public class RankingTest {
                     //todo trenger disse å hardkodes? finnes det en måte hvor man kan summere alle aktuelle delrelevanser hvor det er en match mellom preferanse og et produkts egenskap?
                     //todo delrelevans = preferanseverdi x tilfreddstillelse av egenskapet hos produktet
                     //todo relevans = summen av alle delrelevanser
-                    sortableJam.add(new SimpleSortable(jam, affinityValue, jamWOPValue));
+                    jamMap.get(jam).addRelevance(affinityValue, jamWOPValue);
                 }
 
                 //OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
@@ -143,9 +148,8 @@ public class RankingTest {
                 int price = Integer.valueOf(priceOfJam.getLiteral());
 
 
-                //sortableJam.add(new EcoSortable(jam, billsEcoAffinity, wayOfProduction));
+                //jamMap.add(new EcoSortable(jam, billsEcoAffinity, wayOfProduction));
             }
-
 
 
 
@@ -157,12 +161,13 @@ public class RankingTest {
         //Score product
 
         //Sort list based on score
-        Collections.sort(sortableJam);
-        int hmmmm = sortableJam.size();
-        System.out.println("size sortableJam = " + hmmmm);
-        for (SimpleSortable ecoSortable : sortableJam) {
+        List<SimpleSortable> sortables = new ArrayList(jamMap.values());
+        Collections.sort(sortables);
+        int hmmmm = sortables.size();
+        System.out.println("size jamMap = " + hmmmm);
+        for (SimpleSortable ecoSortable : sortables) {
             System.out.println("ecoSortable = " + ecoSortable.jam);  //todo hvorfor ecoSortable?
-            System.out.println("ecoSortable.relevance = " + ecoSortable.relevance);
+            System.out.println("ecoSortable.relevance = " + ecoSortable.relevance());
         }
     }
 
@@ -270,28 +275,46 @@ public class RankingTest {
 
 class SimpleSortable implements Comparable {
     public final OWLIndividual jam;
-    int relevance;
+    private List<OWLConstant> affinityValues = new ArrayList<OWLConstant>();
+    private List<OWLConstant> jamWOPValues = new ArrayList<OWLConstant>();
 
-    public SimpleSortable(OWLIndividual jam, OWLConstant affinity, OWLConstant wop){
+    public SimpleSortable(OWLIndividual jam){
         this.jam = jam;
-        if(affinity == null) {
-            relevance = 0;
-        } else
+    }
+
+    private int calculateRelevance(OWLConstant affinity, OWLConstant wop) {
+        int relevance = 0;
+        if (affinity != null) {
             relevance = Integer.valueOf(affinity.getLiteral());
-        if(wop != null) {
+        }
+        if (wop != null) {
             relevance = relevance * Integer.valueOf(wop.getLiteral());
         }
+        return relevance;
+    }
+
+    public int relevance() {
+        int relevance = 0;
+        for (int i = 0; i < affinityValues.size(); i++) {
+              relevance += calculateRelevance(affinityValues.get(i), jamWOPValues.get(i));
+        }
+        return relevance;
     }
 
     public int compareTo(Object o) {
         if (o instanceof SimpleSortable) {
             SimpleSortable other = (SimpleSortable) o;
-            if(this.relevance < other.relevance)
+            if(relevance() < other.relevance())
                 return 1;
-            else if(this.relevance > other.relevance)
+            else if(relevance() > other.relevance())
                 return -1;
         }
         return 0;
+    }
+
+    public void addRelevance(OWLConstant affinityValue, OWLConstant jamWOPValue) {
+        this.affinityValues.add(affinityValue);
+        this.jamWOPValues.add(jamWOPValue);
     }
 }
 
