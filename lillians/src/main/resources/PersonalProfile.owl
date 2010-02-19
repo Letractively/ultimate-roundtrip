@@ -2152,6 +2152,49 @@
     
 
 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Student -->
+
+    <owl:Thing rdf:about="#Student">
+        <rdf:type rdf:resource="#Man"/>
+        <hasAge rdf:datatype="&xsd;int">19</hasAge>
+        <hasADHDAdditiveAffinity rdf:resource="#StudentADHDAffinity"/>
+        <hasEcoAffinity rdf:resource="#StudentEcoAffinity"/>
+        <hasFairTradeAffinity rdf:resource="#StudentFairTradeAffinity"/>
+        <hasPriceSensitivity rdf:resource="#StudentPriceSensitivty"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentADHDAffinity -->
+
+    <owl:Thing rdf:about="#StudentADHDAffinity"/>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentEcoAffinity -->
+
+    <LowEcoAffinity rdf:about="#StudentEcoAffinity">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </LowEcoAffinity>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentFairTradeAffinity -->
+
+    <LowFairTradeAffinity rdf:about="#StudentFairTradeAffinity">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </LowFairTradeAffinity>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentPriceSensitivty -->
+
+    <HighPriceSensitivity rdf:about="#StudentPriceSensitivty">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </HighPriceSensitivity>
+    
+
+
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Sukralose -->
 
     <Additive rdf:about="#Sukralose">
