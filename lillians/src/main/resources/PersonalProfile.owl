@@ -78,6 +78,15 @@
     
 
 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#boosters -->
+
+    <owl:ObjectProperty rdf:about="#boosters">
+        <rdfs:range rdf:resource="#Food"/>
+        <rdfs:domain rdf:resource="#Person"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#containsAdditive -->
 
     <owl:ObjectProperty rdf:about="#containsAdditive">
@@ -402,10 +411,24 @@
     
 
 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#negatives -->
+
+    <owl:ObjectProperty rdf:about="#negatives"/>
+    
+
+
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#priceSensAffBelongsTo -->
 
     <owl:ObjectProperty rdf:about="#priceSensAffBelongsTo">
         <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#satisfiesEcoAffinity -->
+
+    <owl:ObjectProperty rdf:about="#satisfiesEcoAffinity">
+        <rdfs:subPropertyOf rdf:resource="#boosters"/>
     </owl:ObjectProperty>
     
 
@@ -2162,14 +2185,14 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Student -->
 
-    <owl:Thing rdf:about="#Student">
-        <rdf:type rdf:resource="#Man"/>
+    <Man rdf:about="#Student">
+        <rdf:type rdf:resource="&owl;Thing"/>
         <hasAge rdf:datatype="&xsd;int">19</hasAge>
         <hasADHDAdditiveAffinity rdf:resource="#StudentADHDAffinity"/>
         <hasEcoAffinity rdf:resource="#StudentEcoAffinity"/>
         <hasFairTradeAffinity rdf:resource="#StudentFairTradeAffinity"/>
         <hasPriceSensitivity rdf:resource="#StudentPriceSensitivty"/>
-    </owl:Thing>
+    </Man>
     
 
 
@@ -2235,8 +2258,76 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <swrl:Variable rdf:about="#b"/>
     <swrl:Variable rdf:about="#p"/>
+    <swrl:Variable rdf:about="#a"/>
     <swrl:Variable rdf:about="#age"/>
+    <swrl:Imp>
+        <swrl:body>
+            <swrl:AtomList>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="#Food"/>
+                        <swrl:argument1 rdf:resource="#b"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
+                <rdf:rest>
+                    <swrl:AtomList>
+                        <rdf:first>
+                            <swrl:ClassAtom>
+                                <swrl:classPredicate rdf:resource="#HighEcoAffinity"/>
+                                <swrl:argument1 rdf:resource="#a"/>
+                            </swrl:ClassAtom>
+                        </rdf:first>
+                        <rdf:rest>
+                            <swrl:AtomList>
+                                <rdf:rest>
+                                    <swrl:AtomList>
+                                        <rdf:first>
+                                            <swrl:ClassAtom>
+                                                <swrl:classPredicate rdf:resource="#TestEcoFood"/>
+                                                <swrl:argument1 rdf:resource="#b"/>
+                                            </swrl:ClassAtom>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <swrl:AtomList>
+                                                <rdf:rest rdf:resource="&rdf;nil"/>
+                                                <rdf:first>
+                                                    <swrl:IndividualPropertyAtom>
+                                                        <swrl:argument2 rdf:resource="#a"/>
+                                                        <swrl:propertyPredicate rdf:resource="#hasEcoAffinity"/>
+                                                        <swrl:argument1 rdf:resource="#p"/>
+                                                    </swrl:IndividualPropertyAtom>
+                                                </rdf:first>
+                                            </swrl:AtomList>
+                                        </rdf:rest>
+                                    </swrl:AtomList>
+                                </rdf:rest>
+                                <rdf:first>
+                                    <swrl:ClassAtom>
+                                        <swrl:classPredicate rdf:resource="#Person"/>
+                                        <swrl:argument1 rdf:resource="#p"/>
+                                    </swrl:ClassAtom>
+                                </rdf:first>
+                            </swrl:AtomList>
+                        </rdf:rest>
+                    </swrl:AtomList>
+                </rdf:rest>
+            </swrl:AtomList>
+        </swrl:body>
+        <swrl:head>
+            <swrl:AtomList>
+                <rdf:rest rdf:resource="&rdf;nil"/>
+                <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                        <swrl:argument2 rdf:resource="#b"/>
+                        <swrl:argument1 rdf:resource="#p"/>
+                        <swrl:propertyPredicate rdf:resource="#satisfiesEcoAffinity"/>
+                    </swrl:IndividualPropertyAtom>
+                </rdf:first>
+            </swrl:AtomList>
+        </swrl:head>
+    </swrl:Imp>
     <swrl:Imp>
         <swrl:body>
             <swrl:AtomList>
