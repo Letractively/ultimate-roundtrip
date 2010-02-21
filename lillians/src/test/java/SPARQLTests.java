@@ -362,43 +362,44 @@ public class SPARQLTests {
         assertEquals("NoraNoSugar", result.get(0).toString());
         assertEquals(1, result.size());
     }
+
     @Test
-        public void testFindAllJamsWithBenzoat() {
-            String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                    "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                    "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                    "SELECT ?x " +
-                    "WHERE { " +
-                    "?x rdf:type OntologyPersonalProfile:Jam . " +
-                    "?x OntologyPersonalProfile:containsAdditive OntologyPersonalProfile:Natriumbenzoat. " +
-                    //"?y OntologyPersonalProfile:hasEffect ?z . " +
-                    //"?z rdf:type OntologyPersonalProfile:Additive " +
-                    "}";
+    public void testFindAllJamsWithBenzoat() {
+        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
+                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
+                "SELECT ?x " +
+                "WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Jam . " +
+                "?x OntologyPersonalProfile:containsAdditive OntologyPersonalProfile:Natriumbenzoat. " +
+                //"?y OntologyPersonalProfile:hasEffect ?z . " +
+                //"?z rdf:type OntologyPersonalProfile:Additive " +
+                "}";
 
-            List<String> billsList = jenaQuery(query, "x");
+        List<String> billsList = jenaQuery(query, "x");
 
-            System.out.println("billsList.toString() = " + billsList.toString());
+        System.out.println("billsList.toString() = " + billsList.toString());
 
-            List<OWLIndividual> result = new ArrayList<OWLIndividual>();
+        List<OWLIndividual> result = new ArrayList<OWLIndividual>();
 
-            for (String list : billsList) {
-                OWLIndividual affinity = factory.getOWLIndividual(URI.create(list));
-                OWLClass typeOfAffinity = reasoner.getType(affinity);
+        for (String list : billsList) {
+            OWLIndividual affinity = factory.getOWLIndividual(URI.create(list));
+            OWLClass typeOfAffinity = reasoner.getType(affinity);
 
-                //System.out.println("affinityURL = " + list);
-                //System.out.println("typeOfAffinity = " + typeOfAffinity);
+            //System.out.println("affinityURL = " + list);
+            //System.out.println("typeOfAffinity = " + typeOfAffinity);
 
-                result.add(affinity);
-            }
-
-            System.out.println("result = " + result.toString());
-        assertEquals("EuroshopperStrawberryJam", result.get(0).toString());
-            assertEquals("NoraNoSugar", result.get(1).toString());
-            assertEquals(2, result.size());
+            result.add(affinity);
         }
 
-@Test
+        System.out.println("result = " + result.toString());
+        assertEquals("EuroshopperStrawberryJam", result.get(0).toString());
+        assertEquals("NoraNoSugar", result.get(1).toString());
+        assertEquals(2, result.size());
+    }
+
+    @Test
     public void testFindAllEcoPersons() {
         String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
@@ -426,31 +427,31 @@ public class SPARQLTests {
     }
 
     @Test
-        public void testFindAll() {
-            String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                    "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                    "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                    "SELECT ?x " +
-                    "WHERE { " +
-                    "?x  rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
-                    "}";
+    public void testFindAll() {
+        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
+                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
+                "SELECT ?x " +
+                "WHERE { " +
+                "?x  rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
+                "}";
 
-            List<String> billsList = jenaQuery(query, "x");
+        List<String> billsList = jenaQuery(query, "x");
 
-            System.out.println("billsList.toString() = " + billsList.toString());
+        System.out.println("billsList.toString() = " + billsList.toString());
 
-            List<OWLIndividual> result = new ArrayList<OWLIndividual>();
-            for (String list : billsList) {
-                OWLIndividual affinity = factory.getOWLIndividual(URI.create(list));
-                OWLClass typeOfAffinity = reasoner.getType(affinity);
-                System.out.println("affinityURL = " + list);
-                System.out.println("typeOfAffinity = " + typeOfAffinity);
-                result.add(affinity);
-            }
-
-            assertEquals("Bill", result.get(0).toString());
+        List<OWLIndividual> result = new ArrayList<OWLIndividual>();
+        for (String list : billsList) {
+            OWLIndividual affinity = factory.getOWLIndividual(URI.create(list));
+            OWLClass typeOfAffinity = reasoner.getType(affinity);
+            System.out.println("affinityURL = " + list);
+            System.out.println("typeOfAffinity = " + typeOfAffinity);
+            result.add(affinity);
         }
+
+        assertEquals("Bill", result.get(0).toString());
+    }
 
 
     @Test
@@ -599,6 +600,53 @@ public class SPARQLTests {
 
     private static OWLIndividual findIndividual(String name) {
         return factory.getOWLIndividual(URI.create(myURI + name));
+    }
+
+    @Test
+    public void findAllEcoPositives() {
+        KnowledgeBase kb = reasoner.getKB();
+        PelletReasoner jenaReasoner = new PelletReasoner();
+        PelletInfGraph graph = jenaReasoner.bind(kb);
+        InfModel model = ModelFactory.createInfModel(graph);
+
+        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
+                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
+                "SELECT ?x " +
+                "WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Food ." +
+                //"?y OntologyPersonalProfile:Person . " +
+                "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x ." +
+                "}";
+
+        Query queryQuery = QueryFactory.create(query);
+
+        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
+
+        ResultSet rs = qe.execSelect();
+
+        System.out.println("rs = " + rs.toString());
+
+        List<OWLClass> result = new ArrayList<OWLClass>();
+
+        while (rs.hasNext()) {
+            QuerySolution soln = rs.nextSolution();
+            RDFNode x = soln.get("x");       // Get a result variable by name.
+
+            String affinityURL = x.toString();
+          //  OWLIndividual affinity = factory.getOWLIndividual(URI.create(affinityURL));
+           // OWLClass typeOfAffinity = reasoner.getType(affinity);
+
+            System.out.println("affinityURL = " + affinityURL);
+            //System.out.println("typeOfAffinity = " + typeOfAffinity);
+
+            //result.add(typeOfAffinity);
+        }
+
+//        assertEquals("MediumPriceSensitivity", result.get(0).toString());
+        //      asser
+
     }
 
 
