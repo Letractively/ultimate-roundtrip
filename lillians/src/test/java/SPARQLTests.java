@@ -615,7 +615,7 @@ public class SPARQLTests {
                 "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
                 "SELECT ?x " +
                 "WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Food ." +
+                "?x rdf:type OntologyPersonalProfile:StrawberryJam ." +
                 //"?y OntologyPersonalProfile:Person . " +
                 "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x ." +
                 "}";
@@ -635,17 +635,11 @@ public class SPARQLTests {
             RDFNode x = soln.get("x");       // Get a result variable by name.
 
             String affinityURL = x.toString();
-          //  OWLIndividual affinity = factory.getOWLIndividual(URI.create(affinityURL));
-           // OWLClass typeOfAffinity = reasoner.getType(affinity);
 
             System.out.println("affinityURL = " + affinityURL);
-            //System.out.println("typeOfAffinity = " + typeOfAffinity);
-
-            //result.add(typeOfAffinity);
         }
 
-//        assertEquals("MediumPriceSensitivity", result.get(0).toString());
-        //      asser
+       assertEquals("MediumPriceSensitivity", result.get(0).toString());
 
     }
 
