@@ -113,19 +113,12 @@ public class RankingTest {
 
         for (OWLIndividual jam : jams) {
             //WayOfProduction
-            System.out.println("jam = " + jam);
 
             //todo de 6 linjene skal bort
             OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
-            System.out.println("relatedWayOfProductionIndividual = " + relatedWayOfProductionIndividual);
 
             OWLDataProperty hasWOPValue = RankingTest.findDataType("#hasWOPValue");
             OWLConstant jamWOPValue = reasoner.getRelatedValue(relatedWayOfProductionIndividual, hasWOPValue);
-
-
-            if (jamWOPValue != null)
-                System.out.println("WOPValueAndPerhapsSomethingElse = " + jamWOPValue.getLiteral());
-
 
             for (OWLIndividual affinity : allAffinities) {
                 //Sjekke om Affinitien har noe å gjøre med Way of production og sånt
@@ -144,20 +137,10 @@ public class RankingTest {
                     //todo relevans = summen av alle delrelevanser
                     jamMap.get(jam).addRelevance(affinityValue, jamWOPValue);
                 }
-
-                //OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
-                // OWLClass wayOfProduction = reasoner.getType(relatedWayOfProductionIndividual);
-                //ProductPrice
-
                 //todo pris brukes ikke i sammenligningen
-                OWLConstant priceOfJam = reasoner.getRelatedValue(jam, findDataType("#hasPricePerKilo"));
-                int price = Integer.valueOf(priceOfJam.getLiteral());
-
-
-                //jamMap.add(new EcoSortable(jam, billsEcoAffinity, wayOfProduction));
+                //OWLConstant priceOfJam = reasoner.getRelatedValue(jam, findDataType("#hasPricePerKilo"));
+                //int price = Integer.valueOf(priceOfJam.getLiteral());
             }
-
-
         }
 
 
@@ -166,14 +149,22 @@ public class RankingTest {
         //Score product
 
         //Sort list based on score
-        List<SimpleSortable> sortables = new ArrayList(jamMap.values());
+        List<SimpleSortable> sortables = new ArrayList<SimpleSortable>(jamMap.values());
         Collections.sort(sortables);
-        int hmmmm = sortables.size();
-        System.out.println("size jamMap = " + hmmmm);
-        for (SimpleSortable ecoSortable : sortables) {
-            System.out.println("ecoSortable = " + ecoSortable.jam);  //todo hvorfor ecoSortable?
-            System.out.println("ecoSortable.relevance = " + ecoSortable.relevance());
-        }
+        assertEquals(findIndividual("#ICAEcologicalStrawberryJam"), sortables.get(0).jam);
+        assertEquals(6, sortables.get(0).relevance());
+        assertEquals(findIndividual("#HervikEcoStrawberryJam"), sortables.get(1).jam);
+        assertEquals(6, sortables.get(1).relevance());
+        assertEquals(findIndividual("#NoraOriginal"), sortables.get(2).jam);
+        assertEquals(0, sortables.get(2).relevance());
+        assertEquals(findIndividual("#EuroshopperStrawberryJam"), sortables.get(3).jam);
+        assertEquals(findIndividual("#HervikStrawberryJam"), sortables.get(4).jam);
+        assertEquals(findIndividual("#NoraSqueezy"), sortables.get(5).jam);
+        assertEquals(findIndividual("#NoraLightStrawberryJam"), sortables.get(6).jam);
+        assertEquals(findIndividual("#NoraNoSugar"), sortables.get(7).jam);
+        assertEquals(findIndividual("#NoraHomeMadeStrawberryAndWildJam"), sortables.get(8).jam);
+        assertEquals(findIndividual("#NoraHomeMadeStrawberryJam"), sortables.get(9).jam);
+
     }
 
     //hva skal denne brukes til?
@@ -195,8 +186,6 @@ public class RankingTest {
 
             boolean productIsEco = reasoner.hasObjectPropertyRelationship(product, hasQualityMark, ecoQM);
             boolean instanceOfClassEcoAffinity = owlClass.equals(findClassByName("#EcoAffinity"));
-            System.out.println("productIsEco = " + productIsEco);
-            System.out.println("instanceOf = " + instanceOfClassEcoAffinity);
             if (instanceOfClassEcoAffinity && productIsEco)
                 return true;
         }
