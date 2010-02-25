@@ -112,9 +112,6 @@ public class RankingTest {
         }
 
         for (OWLIndividual jam : jams) {
-            //WayOfProduction
-
-            //todo de 6 linjene skal bort
             OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
 
             OWLDataProperty hasWOPValue = RankingTest.findDataType("#hasWOPValue");
@@ -122,10 +119,7 @@ public class RankingTest {
 
             for (OWLIndividual affinity : allAffinities) {
                 //Sjekke om Affinitien har noe å gjøre med Way of production og sånt
-
-
-                boolean isRelated = isAffinityRelatedToProductInformation(affinity, jam);
-                if (isRelated) {
+                if (isAffinityRelatedToProductInformation(affinity, jam)) {
                     System.out.println("affinity = " + affinity);
                     OWLDataProperty hasAffinityValue = RankingTest.findDataType("#hasAffinityValue");
 
@@ -137,13 +131,8 @@ public class RankingTest {
                     //todo relevans = summen av alle delrelevanser
                     jamMap.get(jam).addRelevance(affinityValue, jamWOPValue);
                 }
-                //todo pris brukes ikke i sammenligningen
-                //OWLConstant priceOfJam = reasoner.getRelatedValue(jam, findDataType("#hasPricePerKilo"));
-                //int price = Integer.valueOf(priceOfJam.getLiteral());
             }
         }
-
-
         //Weight scheme for Eco Affinity compared to product
 
         //Score product
