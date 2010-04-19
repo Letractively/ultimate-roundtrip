@@ -103,15 +103,30 @@ public class RankingTest {
 
         //Calculate Bills affinities - hentes ut via sp¿rring
         List<OWLIndividual> allAffinities = getAllAffinities();
+        Map<OWLIndividual, SimpleSortable> jamMap = createJamMap(jams);
 
-        //WOP
-        Map<OWLIndividual, SimpleSortable> jamMap = new HashMap<OWLIndividual, SimpleSortable>();
+        addBoosters(allAffinities, jamMap);
 
-        for (OWLIndividual jam : jams) {
-            jamMap.put(jam, new SimpleSortable(jam));
-        }
+        //Sort list based on score
+        List<SimpleSortable> sortables = new ArrayList<SimpleSortable>(jamMap.values());
+        Collections.sort(sortables);
+        assertEquals(findIndividual("#ICAEcologicalStrawberryJam"), sortables.get(0).jam);
+        assertEquals(6, sortables.get(0).relevance());
+        assertEquals(findIndividual("#HervikEcoStrawberryJam"), sortables.get(1).jam);
+        assertEquals(6, sortables.get(1).relevance());
+        assertEquals(findIndividual("#NoraOriginal"), sortables.get(2).jam);
+        assertEquals(0, sortables.get(2).relevance());
+        assertEquals(findIndividual("#EuroshopperStrawberryJam"), sortables.get(3).jam);
+        assertEquals(findIndividual("#HervikStrawberryJam"), sortables.get(4).jam);
+        assertEquals(findIndividual("#NoraSqueezy"), sortables.get(5).jam);
+        assertEquals(findIndividual("#NoraLightStrawberryJam"), sortables.get(6).jam);
+        assertEquals(findIndividual("#NoraNoSugar"), sortables.get(7).jam);
+        assertEquals(findIndividual("#NoraHomeMadeStrawberryAndWildJam"), sortables.get(8).jam);
+        assertEquals(findIndividual("#NoraHomeMadeStrawberryJam"), sortables.get(9).jam);
+    }
 
-        for (OWLIndividual jam : jams) {
+    private void addBoosters(List<OWLIndividual> allAffinities, Map<OWLIndividual, SimpleSortable> jamMap) {
+        for (OWLIndividual jam : jamMap.keySet()) {
             OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
 
             OWLDataProperty hasWOPValue = RankingTest.findDataType("#hasWOPValue");
@@ -133,28 +148,50 @@ public class RankingTest {
                 }
             }
         }
-        //Weight scheme for Eco Affinity compared to product
+    }
 
-        //Score product
+    @Test
+    public void testBoosterRelevance(){
+        OWLIndividual bill = findIndividual("#Bill");
 
-        //Sort list based on score
-        List<SimpleSortable> sortables = new ArrayList<SimpleSortable>(jamMap.values());
-        Collections.sort(sortables);
-        assertEquals(findIndividual("#ICAEcologicalStrawberryJam"), sortables.get(0).jam);
-        assertEquals(6, sortables.get(0).relevance());
-        assertEquals(findIndividual("#HervikEcoStrawberryJam"), sortables.get(1).jam);
-        assertEquals(6, sortables.get(1).relevance());
-        assertEquals(findIndividual("#NoraOriginal"), sortables.get(2).jam);
-        assertEquals(0, sortables.get(2).relevance());
-        assertEquals(findIndividual("#EuroshopperStrawberryJam"), sortables.get(3).jam);
-        assertEquals(findIndividual("#HervikStrawberryJam"), sortables.get(4).jam);
-        assertEquals(findIndividual("#NoraSqueezy"), sortables.get(5).jam);
-        assertEquals(findIndividual("#NoraLightStrawberryJam"), sortables.get(6).jam);
-        assertEquals(findIndividual("#NoraNoSugar"), sortables.get(7).jam);
-        assertEquals(findIndividual("#NoraHomeMadeStrawberryAndWildJam"), sortables.get(8).jam);
-        assertEquals(findIndividual("#NoraHomeMadeStrawberryJam"), sortables.get(9).jam);
+         List<OWLIndividual> boosters = getAllHighBoosters("Bill");
+
+         assertEquals(2, boosters.size());
+        assertEquals("HervikEcoStrawberryJam", boosters.get(1).toString());
+        assertEquals("ICAEcologicalStrawberryJam", boosters.get(0).toString());
+
+
+         //Get Product list - alle possible alternatives
+        OWLClass strawberryJam = findClassByName("#StrawberryJam");
+
+
+        //List<OWLIndividual> allAffinities = getAllAffinities();
+        Map<OWLIndividual, Integer> jamMap = new HashMap<OWLIndividual, Integer>();
+        for (OWLIndividual jam : reasoner.getIndividuals(strawberryJam, false)) {
+            jamMap.put(jam, 0);
+        }
+        //Add boosters
+        for (OWLIndividual booster : boosters) {
+            jamMap.put(booster, jamMap.get(booster) + 1);
+        }
+        for (OWLIndividual jam : jamMap.keySet()) {
+            System.out.println(jam.toString() + " " + jamMap.get(jam));
+        }
+
 
     }
+
+    private Map<OWLIndividual, SimpleSortable> createJamMap(Set<OWLIndividual> jams) {
+        Map<OWLIndividual, SimpleSortable> jamMap = new HashMap<OWLIndividual, SimpleSortable>();
+
+        for (OWLIndividual jam : jams) {
+            jamMap.put(jam, new SimpleSortable(jam));
+        }
+        return jamMap;
+    }
+
+
+
 
     //hva skal denne brukes til?
     @Test
@@ -210,6 +247,32 @@ public class RankingTest {
         List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
         for (String ecoAsString : ecosAsStrings) {
             individuals.add(factory.getOWLIndividual(URI.create(ecoAsString)));
+        }
+        return individuals;
+    }
+
+     private List<OWLIndividual> getAllHighBoosters(String person) {
+
+        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
+                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
+                "SELECT ?x " +
+                "WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Food . " +
+                "OntologyPersonalProfile:"+ person + " OntologyPersonalProfile:boostersHigh ?x." +
+                "}";
+
+        SPARQLTests sparqlTest = new SPARQLTests();
+        try {
+            sparqlTest.setUp();
+        } catch (OWLOntologyCreationException e) {
+            throw new RuntimeException("Wooooops!");
+        }
+        List<String> affinitiesAsStrings = sparqlTest.jenaQuery(query, "x");
+        List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
+        for (String affinityAsString : affinitiesAsStrings) {
+            individuals.add(factory.getOWLIndividual(URI.create(affinityAsString)));
         }
         return individuals;
     }
