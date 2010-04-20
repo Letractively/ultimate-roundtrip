@@ -151,15 +151,6 @@
     
 
 
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAvoidProducer -->
-
-    <owl:ObjectProperty rdf:about="#hasAvoidProducer">
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:range rdf:resource="#Producer"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasBerryIngredient -->
 
     <owl:ObjectProperty rdf:about="#hasBerryIngredient">
@@ -238,15 +229,6 @@
 
     <owl:ObjectProperty rdf:about="#hasFather">
         <rdfs:subPropertyOf rdf:resource="#hasFamilyRelations"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFavouriteProducer -->
-
-    <owl:ObjectProperty rdf:about="#hasFavouriteProducer">
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:range rdf:resource="#Producer"/>
     </owl:ObjectProperty>
     
 
@@ -2317,35 +2299,23 @@
                 <rdf:rest rdf:resource="&rdf;nil"/>
                 <rdf:first>
                     <swrl:IndividualPropertyAtom>
-                        <swrl:propertyPredicate rdf:resource="#avoiderAdditiveProduct"/>
                         <swrl:argument2 rdf:resource="#b"/>
                         <swrl:argument1 rdf:resource="#p"/>
+                        <swrl:propertyPredicate rdf:resource="#satisfiesFairTradeAffinity"/>
                     </swrl:IndividualPropertyAtom>
                 </rdf:first>
             </swrl:AtomList>
         </swrl:head>
         <swrl:body>
             <swrl:AtomList>
-                <rdf:first>
-                    <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#ADHDAdditive"/>
-                        <swrl:argument1 rdf:resource="#c"/>
-                    </swrl:ClassAtom>
-                </rdf:first>
                 <rdf:rest>
                     <swrl:AtomList>
-                        <rdf:first>
-                            <swrl:ClassAtom>
-                                <swrl:classPredicate rdf:resource="#AvoidADHDAdditives"/>
-                                <swrl:argument1 rdf:resource="#a"/>
-                            </swrl:ClassAtom>
-                        </rdf:first>
                         <rdf:rest>
                             <swrl:AtomList>
                                 <rdf:first>
                                     <swrl:ClassAtom>
-                                        <swrl:classPredicate rdf:resource="#Food"/>
-                                        <swrl:argument1 rdf:resource="#b"/>
+                                        <swrl:classPredicate rdf:resource="#HighFairTradeAffinity"/>
+                                        <swrl:argument1 rdf:resource="#a"/>
                                     </swrl:ClassAtom>
                                 </rdf:first>
                                 <rdf:rest>
@@ -2356,6 +2326,60 @@
                                                 <swrl:argument1 rdf:resource="#p"/>
                                             </swrl:ClassAtom>
                                         </rdf:first>
+                                        <rdf:rest>
+                                            <swrl:AtomList>
+                                                <rdf:rest rdf:resource="&rdf;nil"/>
+                                                <rdf:first>
+                                                    <swrl:IndividualPropertyAtom>
+                                                        <swrl:argument2 rdf:resource="#a"/>
+                                                        <swrl:propertyPredicate rdf:resource="#hasFairTradeAffinity"/>
+                                                        <swrl:argument1 rdf:resource="#p"/>
+                                                    </swrl:IndividualPropertyAtom>
+                                                </rdf:first>
+                                            </swrl:AtomList>
+                                        </rdf:rest>
+                                    </swrl:AtomList>
+                                </rdf:rest>
+                            </swrl:AtomList>
+                        </rdf:rest>
+                        <rdf:first>
+                            <swrl:ClassAtom>
+                                <swrl:classPredicate rdf:resource="#Food"/>
+                                <swrl:argument1 rdf:resource="#b"/>
+                            </swrl:ClassAtom>
+                        </rdf:first>
+                    </swrl:AtomList>
+                </rdf:rest>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="#FairTradeFood"/>
+                        <swrl:argument1 rdf:resource="#b"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
+            </swrl:AtomList>
+        </swrl:body>
+    </swrl:Imp>
+    <swrl:Imp>
+        <swrl:body>
+            <swrl:AtomList>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="#ADHDAdditive"/>
+                        <swrl:argument1 rdf:resource="#c"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
+                <rdf:rest>
+                    <swrl:AtomList>
+                        <rdf:rest>
+                            <swrl:AtomList>
+                                <rdf:first>
+                                    <swrl:ClassAtom>
+                                        <swrl:classPredicate rdf:resource="#Food"/>
+                                        <swrl:argument1 rdf:resource="#b"/>
+                                    </swrl:ClassAtom>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <swrl:AtomList>
                                         <rdf:rest>
                                             <swrl:AtomList>
                                                 <rdf:first>
@@ -2379,6 +2403,84 @@
                                                 </rdf:rest>
                                             </swrl:AtomList>
                                         </rdf:rest>
+                                        <rdf:first>
+                                            <swrl:ClassAtom>
+                                                <swrl:classPredicate rdf:resource="#Person"/>
+                                                <swrl:argument1 rdf:resource="#p"/>
+                                            </swrl:ClassAtom>
+                                        </rdf:first>
+                                    </swrl:AtomList>
+                                </rdf:rest>
+                            </swrl:AtomList>
+                        </rdf:rest>
+                        <rdf:first>
+                            <swrl:ClassAtom>
+                                <swrl:classPredicate rdf:resource="#AvoidADHDAdditives"/>
+                                <swrl:argument1 rdf:resource="#a"/>
+                            </swrl:ClassAtom>
+                        </rdf:first>
+                    </swrl:AtomList>
+                </rdf:rest>
+            </swrl:AtomList>
+        </swrl:body>
+        <swrl:head>
+            <swrl:AtomList>
+                <rdf:rest rdf:resource="&rdf;nil"/>
+                <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                        <swrl:propertyPredicate rdf:resource="#avoiderAdditiveProduct"/>
+                        <swrl:argument2 rdf:resource="#b"/>
+                        <swrl:argument1 rdf:resource="#p"/>
+                    </swrl:IndividualPropertyAtom>
+                </rdf:first>
+            </swrl:AtomList>
+        </swrl:head>
+    </swrl:Imp>
+    <swrl:Imp>
+        <swrl:body>
+            <swrl:AtomList>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="#Food"/>
+                        <swrl:argument1 rdf:resource="#b"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
+                <rdf:rest>
+                    <swrl:AtomList>
+                        <rdf:first>
+                            <swrl:ClassAtom>
+                                <swrl:classPredicate rdf:resource="#HighEcoAffinity"/>
+                                <swrl:argument1 rdf:resource="#a"/>
+                            </swrl:ClassAtom>
+                        </rdf:first>
+                        <rdf:rest>
+                            <swrl:AtomList>
+                                <rdf:first>
+                                    <swrl:ClassAtom>
+                                        <swrl:classPredicate rdf:resource="#Person"/>
+                                        <swrl:argument1 rdf:resource="#p"/>
+                                    </swrl:ClassAtom>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <swrl:AtomList>
+                                        <rdf:first>
+                                            <swrl:ClassAtom>
+                                                <swrl:classPredicate rdf:resource="#TestEcoFood"/>
+                                                <swrl:argument1 rdf:resource="#b"/>
+                                            </swrl:ClassAtom>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <swrl:AtomList>
+                                                <rdf:rest rdf:resource="&rdf;nil"/>
+                                                <rdf:first>
+                                                    <swrl:IndividualPropertyAtom>
+                                                        <swrl:argument2 rdf:resource="#a"/>
+                                                        <swrl:propertyPredicate rdf:resource="#hasEcoAffinity"/>
+                                                        <swrl:argument1 rdf:resource="#p"/>
+                                                    </swrl:IndividualPropertyAtom>
+                                                </rdf:first>
+                                            </swrl:AtomList>
+                                        </rdf:rest>
                                     </swrl:AtomList>
                                 </rdf:rest>
                             </swrl:AtomList>
@@ -2387,12 +2489,37 @@
                 </rdf:rest>
             </swrl:AtomList>
         </swrl:body>
+        <swrl:head>
+            <swrl:AtomList>
+                <rdf:rest rdf:resource="&rdf;nil"/>
+                <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                        <swrl:argument2 rdf:resource="#b"/>
+                        <swrl:argument1 rdf:resource="#p"/>
+                        <swrl:propertyPredicate rdf:resource="#satisfiesHighEcoAffinity"/>
+                    </swrl:IndividualPropertyAtom>
+                </rdf:first>
+            </swrl:AtomList>
+        </swrl:head>
     </swrl:Imp>
     <swrl:Imp>
         <swrl:body>
             <swrl:AtomList>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="#Person"/>
+                        <swrl:argument1 rdf:resource="#p"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
                 <rdf:rest>
                     <swrl:AtomList>
+                        <rdf:first>
+                            <swrl:DatavaluedPropertyAtom>
+                                <swrl:argument2 rdf:resource="#age"/>
+                                <swrl:propertyPredicate rdf:resource="#hasAge"/>
+                                <swrl:argument1 rdf:resource="#p"/>
+                            </swrl:DatavaluedPropertyAtom>
+                        </rdf:first>
                         <rdf:rest>
                             <swrl:AtomList>
                                 <rdf:rest rdf:resource="&rdf;nil"/>
@@ -2416,21 +2543,8 @@
                                 </rdf:first>
                             </swrl:AtomList>
                         </rdf:rest>
-                        <rdf:first>
-                            <swrl:DatavaluedPropertyAtom>
-                                <swrl:argument2 rdf:resource="#age"/>
-                                <swrl:propertyPredicate rdf:resource="#hasAge"/>
-                                <swrl:argument1 rdf:resource="#p"/>
-                            </swrl:DatavaluedPropertyAtom>
-                        </rdf:first>
                     </swrl:AtomList>
                 </rdf:rest>
-                <rdf:first>
-                    <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#Person"/>
-                        <swrl:argument1 rdf:resource="#p"/>
-                    </swrl:ClassAtom>
-                </rdf:first>
             </swrl:AtomList>
         </swrl:body>
         <swrl:head>
@@ -2444,138 +2558,6 @@
                 </rdf:first>
             </swrl:AtomList>
         </swrl:head>
-    </swrl:Imp>
-    <swrl:Imp>
-        <swrl:body>
-            <swrl:AtomList>
-                <rdf:first>
-                    <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#FairTradeFood"/>
-                        <swrl:argument1 rdf:resource="#b"/>
-                    </swrl:ClassAtom>
-                </rdf:first>
-                <rdf:rest>
-                    <swrl:AtomList>
-                        <rdf:rest>
-                            <swrl:AtomList>
-                                <rdf:first>
-                                    <swrl:ClassAtom>
-                                        <swrl:classPredicate rdf:resource="#HighFairTradeAffinity"/>
-                                        <swrl:argument1 rdf:resource="#a"/>
-                                    </swrl:ClassAtom>
-                                </rdf:first>
-                                <rdf:rest>
-                                    <swrl:AtomList>
-                                        <rdf:rest>
-                                            <swrl:AtomList>
-                                                <rdf:rest rdf:resource="&rdf;nil"/>
-                                                <rdf:first>
-                                                    <swrl:IndividualPropertyAtom>
-                                                        <swrl:argument2 rdf:resource="#a"/>
-                                                        <swrl:propertyPredicate rdf:resource="#hasFairTradeAffinity"/>
-                                                        <swrl:argument1 rdf:resource="#p"/>
-                                                    </swrl:IndividualPropertyAtom>
-                                                </rdf:first>
-                                            </swrl:AtomList>
-                                        </rdf:rest>
-                                        <rdf:first>
-                                            <swrl:ClassAtom>
-                                                <swrl:classPredicate rdf:resource="#Person"/>
-                                                <swrl:argument1 rdf:resource="#p"/>
-                                            </swrl:ClassAtom>
-                                        </rdf:first>
-                                    </swrl:AtomList>
-                                </rdf:rest>
-                            </swrl:AtomList>
-                        </rdf:rest>
-                        <rdf:first>
-                            <swrl:ClassAtom>
-                                <swrl:classPredicate rdf:resource="#Food"/>
-                                <swrl:argument1 rdf:resource="#b"/>
-                            </swrl:ClassAtom>
-                        </rdf:first>
-                    </swrl:AtomList>
-                </rdf:rest>
-            </swrl:AtomList>
-        </swrl:body>
-        <swrl:head>
-            <swrl:AtomList>
-                <rdf:rest rdf:resource="&rdf;nil"/>
-                <rdf:first>
-                    <swrl:IndividualPropertyAtom>
-                        <swrl:argument2 rdf:resource="#b"/>
-                        <swrl:argument1 rdf:resource="#p"/>
-                        <swrl:propertyPredicate rdf:resource="#satisfiesFairTradeAffinity"/>
-                    </swrl:IndividualPropertyAtom>
-                </rdf:first>
-            </swrl:AtomList>
-        </swrl:head>
-    </swrl:Imp>
-    <swrl:Imp>
-        <swrl:head>
-            <swrl:AtomList>
-                <rdf:rest rdf:resource="&rdf;nil"/>
-                <rdf:first>
-                    <swrl:IndividualPropertyAtom>
-                        <swrl:argument2 rdf:resource="#b"/>
-                        <swrl:argument1 rdf:resource="#p"/>
-                        <swrl:propertyPredicate rdf:resource="#satisfiesHighEcoAffinity"/>
-                    </swrl:IndividualPropertyAtom>
-                </rdf:first>
-            </swrl:AtomList>
-        </swrl:head>
-        <swrl:body>
-            <swrl:AtomList>
-                <rdf:first>
-                    <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#Food"/>
-                        <swrl:argument1 rdf:resource="#b"/>
-                    </swrl:ClassAtom>
-                </rdf:first>
-                <rdf:rest>
-                    <swrl:AtomList>
-                        <rdf:rest>
-                            <swrl:AtomList>
-                                <rdf:first>
-                                    <swrl:ClassAtom>
-                                        <swrl:classPredicate rdf:resource="#Person"/>
-                                        <swrl:argument1 rdf:resource="#p"/>
-                                    </swrl:ClassAtom>
-                                </rdf:first>
-                                <rdf:rest>
-                                    <swrl:AtomList>
-                                        <rdf:rest>
-                                            <swrl:AtomList>
-                                                <rdf:rest rdf:resource="&rdf;nil"/>
-                                                <rdf:first>
-                                                    <swrl:IndividualPropertyAtom>
-                                                        <swrl:argument2 rdf:resource="#a"/>
-                                                        <swrl:propertyPredicate rdf:resource="#hasEcoAffinity"/>
-                                                        <swrl:argument1 rdf:resource="#p"/>
-                                                    </swrl:IndividualPropertyAtom>
-                                                </rdf:first>
-                                            </swrl:AtomList>
-                                        </rdf:rest>
-                                        <rdf:first>
-                                            <swrl:ClassAtom>
-                                                <swrl:classPredicate rdf:resource="#TestEcoFood"/>
-                                                <swrl:argument1 rdf:resource="#b"/>
-                                            </swrl:ClassAtom>
-                                        </rdf:first>
-                                    </swrl:AtomList>
-                                </rdf:rest>
-                            </swrl:AtomList>
-                        </rdf:rest>
-                        <rdf:first>
-                            <swrl:ClassAtom>
-                                <swrl:classPredicate rdf:resource="#HighEcoAffinity"/>
-                                <swrl:argument1 rdf:resource="#a"/>
-                            </swrl:ClassAtom>
-                        </rdf:first>
-                    </swrl:AtomList>
-                </rdf:rest>
-            </swrl:AtomList>
-        </swrl:body>
     </swrl:Imp>
 </rdf:RDF>
 
