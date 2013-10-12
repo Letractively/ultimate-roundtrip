@@ -24,11 +24,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by IntelliJ IDEA.
- * User: hella
- * Date: Jan 11, 2010
- * Time: 11:46:59 AM
- * To change this template use File | Settings | File Templates.
+ * @author Lillian Hella
  */
 public class LilliansTest {
     OWLOntologyManager manager;
@@ -44,8 +40,7 @@ public class LilliansTest {
         manager = OWLManager.createOWLOntologyManager();
         // We load an ontology
         // read the ontology
-        URI asURI = getClass().getResource("PersonalProfile.owl").toURI();
-        ontology = manager.loadOntologyFromPhysicalURI(asURI);
+        ontology = manager.loadOntologyFromPhysicalURI(getClass().getResource("PersonalProfile.owl").toURI());
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
 
@@ -223,7 +218,6 @@ public class LilliansTest {
         //OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
         //String age = reasoner.getRelatedValue(ind[2], hasProducer).getLiteral();
         OWLIndividual hervikStrawberryJam = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
-        //OWLClass classOfHSJ = hervikStrawberryJam.;
         List<OWLClass> result = new ArrayList<OWLClass>();
         Set<Set<OWLClass>> classesOfHSJSets = reasoner.getTypes(hervikStrawberryJam);
         Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gj�r ferdig!! trenger ikke like mye l�kker
@@ -233,9 +227,9 @@ public class LilliansTest {
                 result.add(owlClass);
             }
         }
-        // 0 0 HervikProducts
-        //  1 0 StrawberryJam
-        assertEquals("HervikProducts", result.get(0).toString());
+        assertEquals("RegularProducedFood", result.get(0).toString());
+        assertEquals("HervikProducts", result.get(1).toString());
+        assertEquals("StrawberryJam", result.get(2).toString());
     }
 
   //FOR PROPERTY INFORMATION

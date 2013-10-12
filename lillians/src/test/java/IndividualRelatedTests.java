@@ -105,7 +105,7 @@ public class IndividualRelatedTests {
         String age = reasoner.getRelatedValue(ind[2], hasAge).getLiteral();
         OWLIndividual gender = reasoner.getRelatedIndividual(ind[2], hasGender);
 
-        assertEquals(5, individuals.size());
+        assertEquals(6, individuals.size());
         assertEquals("39", age);
         assertEquals("Male", gender.toString());
         assertEquals("Bill", individuals.toArray()[2].toString());
