@@ -17,6 +17,7 @@ import org.semanticweb.owl.model.*;
 import org.semanticweb.reasonerfactory.pellet.PelletReasonerFactory;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -39,11 +40,12 @@ public class LilliansTest {
     //todo legge til reasoner i before ogs�?  + factory?
 
     @Before
-    public void setUp() throws OWLOntologyCreationException {
+    public void setUp() throws OWLOntologyCreationException, URISyntaxException {
         manager = OWLManager.createOWLOntologyManager();
         // We load an ontology
         // read the ontology
-        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
+        URI asURI = getClass().getResource("PersonalProfile.owl").toURI();
+        ontology = manager.loadOntologyFromPhysicalURI(asURI);
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
 
