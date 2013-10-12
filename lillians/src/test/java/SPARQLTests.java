@@ -628,8 +628,7 @@ public class SPARQLTests {
 
         System.out.println("rs = " + rs.toString());
 
-        List<OWLClass> result = new ArrayList<OWLClass>();
-
+        List<String> reults = new ArrayList<String>();
         while (rs.hasNext()) {
             QuerySolution soln = rs.nextSolution();
             RDFNode x = soln.get("x");       // Get a result variable by name.
@@ -637,10 +636,10 @@ public class SPARQLTests {
             String affinityURL = x.toString();
 
             System.out.println("affinityURL = " + affinityURL);
+            reults.add(affinityURL);
         }
 
-       assertEquals("MediumPriceSensitivity", result.get(0).toString());
-
+        assertEquals(2, reults.size());
     }
 
 

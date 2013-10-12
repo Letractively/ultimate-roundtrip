@@ -4,8 +4,8 @@
 <!DOCTYPE rdf:RDF [
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
     <!ENTITY swrl "http://www.w3.org/2003/11/swrl#" >
-    <!ENTITY swrlb "http://www.w3.org/2003/11/swrlb#" >
     <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY swrlb "http://www.w3.org/2003/11/swrlb#" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
@@ -16,16 +16,16 @@
 
 <rdf:RDF xmlns="http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#"
      xml:base="http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl"
-     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
      xmlns:OntologyPersonalProfile="http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:owl="http://www.w3.org/2002/07/owl#">
-    <owl:Ontology rdf:about=""/>
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl"/>
     
 
 
@@ -44,6 +44,23 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+    <rdfs:Datatype rdf:about="&xsd;date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Object Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -54,408 +71,406 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#aDHDAffBelongsTo -->
 
-    <owl:ObjectProperty rdf:about="#aDHDAffBelongsTo">
-        <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;aDHDAffBelongsTo">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;belongsTo"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#additiveUsedIn -->
 
-    <owl:ObjectProperty rdf:about="#additiveUsedIn">
-        <rdfs:domain rdf:resource="#Additive"/>
-        <rdfs:range rdf:resource="#ProcessedFood"/>
-        <owl:inverseOf rdf:resource="#containsAdditive"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;additiveUsedIn">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;containsAdditive"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#avoiderAdditiveProduct -->
 
-    <owl:ObjectProperty rdf:about="#avoiderAdditiveProduct">
-        <rdfs:subPropertyOf rdf:resource="#avoiders"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;avoiderAdditiveProduct">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;avoiders"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#avoiders -->
 
-    <owl:ObjectProperty rdf:about="#avoiders">
-        <rdfs:range rdf:resource="#Food"/>
-        <rdfs:domain rdf:resource="#Person"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;avoiders">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#belongsTo -->
 
-    <owl:ObjectProperty rdf:about="#belongsTo">
-        <owl:inverseOf rdf:resource="#hasAffinity"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;belongsTo">
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;hasAffinity"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#boostersHigh -->
 
-    <owl:ObjectProperty rdf:about="#boostersHigh">
-        <rdfs:range rdf:resource="#Food"/>
-        <rdfs:domain rdf:resource="#Person"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;boostersHigh">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#containsAdditive -->
 
-    <owl:ObjectProperty rdf:about="#containsAdditive">
-        <rdfs:range rdf:resource="#Additive"/>
-        <rdfs:domain rdf:resource="#ProcessedFood"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductProperties"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;containsAdditive">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductProperties"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ecoAffBelongsTo -->
 
-    <owl:ObjectProperty rdf:about="#ecoAffBelongsTo">
-        <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
-        <owl:inverseOf rdf:resource="#hasEcoAffinity"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;ecoAffBelongsTo">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;belongsTo"/>
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;hasEcoAffinity"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#fairTradeAffBelongsTo -->
 
-    <owl:ObjectProperty rdf:about="#fairTradeAffBelongsTo">
-        <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;fairTradeAffBelongsTo">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;belongsTo"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasADHDAdditiveAffinity -->
 
-    <owl:ObjectProperty rdf:about="#hasADHDAdditiveAffinity">
-        <rdfs:range rdf:resource="#ADHDAdditiveAffinity"/>
-        <rdfs:domain rdf:resource="#Person"/>
-        <owl:inverseOf rdf:resource="#aDHDAffBelongsTo"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasADHDAdditiveAffinity">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;ADHDAdditiveAffinity"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;aDHDAffBelongsTo"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinity"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAffinity -->
 
-    <owl:ObjectProperty rdf:about="#hasAffinity">
-        <rdfs:range rdf:resource="#Modifiers"/>
-        <rdfs:domain rdf:resource="#Person"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasAffinity">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Modifiers"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasBerryIngredient -->
 
-    <owl:ObjectProperty rdf:about="#hasBerryIngredient">
-        <rdfs:range rdf:resource="#Berry"/>
-        <rdfs:domain rdf:resource="#Jam"/>
-        <rdfs:subPropertyOf rdf:resource="#hasIngredient"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasBerryIngredient">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Berry"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Jam"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasIngredient"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasChild -->
 
-    <owl:ObjectProperty rdf:about="#hasChild">
-        <rdfs:subPropertyOf rdf:resource="#hasFamilyRelations"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasChild">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasFamilyRelations"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasDaughter -->
 
-    <owl:ObjectProperty rdf:about="#hasDaughter">
-        <rdfs:subPropertyOf rdf:resource="#hasChild"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasDaughter">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasChild"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEcoAffinity -->
 
-    <owl:ObjectProperty rdf:about="#hasEcoAffinity">
-        <rdfs:range rdf:resource="#EcoAffinity"/>
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasEcoAffinity">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinity"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEcoProductRelation -->
 
-    <owl:ObjectProperty rdf:about="#hasEcoProductRelation">
-        <rdfs:domain rdf:resource="#EcoAffinity"/>
-        <rdfs:range rdf:resource="#EcologicalFood"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasEcoProductRelation">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;EcologicalFood"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEffect -->
 
-    <owl:ObjectProperty rdf:about="#hasEffect">
-        <rdfs:domain rdf:resource="#Additive"/>
-        <rdfs:range rdf:resource="#AdditiveEffects"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasEffect">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;AdditiveEffects"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFairTradeAffinity -->
 
-    <owl:ObjectProperty rdf:about="#hasFairTradeAffinity">
-        <rdfs:range rdf:resource="#FairTradeAffinity"/>
-        <rdfs:domain rdf:resource="#Person"/>
-        <owl:inverseOf rdf:resource="#fairTradeAffBelongsTo"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasFairTradeAffinity">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;FairTradeAffinity"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;fairTradeAffBelongsTo"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinity"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFamilyRelations -->
 
-    <owl:ObjectProperty rdf:about="#hasFamilyRelations">
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:range rdf:resource="#Person"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasFamilyRelations">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFather -->
 
-    <owl:ObjectProperty rdf:about="#hasFather">
-        <rdfs:subPropertyOf rdf:resource="#hasFamilyRelations"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasFather">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasFamilyRelations"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFruitIngredient -->
 
-    <owl:ObjectProperty rdf:about="#hasFruitIngredient">
-        <rdfs:range rdf:resource="#Fruit"/>
-        <rdfs:subPropertyOf rdf:resource="#hasIngredient"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasFruitIngredient">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Fruit"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasIngredient"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasGender -->
 
-    <owl:ObjectProperty rdf:about="#hasGender">
-        <rdfs:range rdf:resource="#Gender"/>
-        <rdfs:domain rdf:resource="#Person"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasGender">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Gender"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasIngredient -->
 
-    <owl:ObjectProperty rdf:about="#hasIngredient">
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:range rdf:resource="#Food"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductProperties"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasIngredient">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductProperties"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasOrigin -->
 
-    <owl:ObjectProperty rdf:about="#hasOrigin">
-        <rdfs:comment
-            >hvor et produkt eller vare kommer fra</rdfs:comment>
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductProperties"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasOrigin">
+        <rdfs:comment>hvor et produkt eller vare kommer fra</rdfs:comment>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductProperties"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPriceSensitivity -->
 
-    <owl:ObjectProperty rdf:about="#hasPriceSensitivity">
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:range rdf:resource="#PriceSensitivity"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinity"/>
-        <owl:inverseOf rdf:resource="#priceSensAffBelongsTo"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasPriceSensitivity">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;PriceSensitivity"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinity"/>
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;priceSensAffBelongsTo"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasProducer -->
 
-    <owl:ObjectProperty rdf:about="#hasProducer">
-        <rdfs:comment
-            >men det er ikke alle som har producer? bare de --ferdige-- produktene?</rdfs:comment>
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:range rdf:resource="#Producer"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductProperties"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasProducer">
+        <rdfs:comment>men det er ikke alle som har producer? bare de --ferdige-- produktene?</rdfs:comment>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Producer"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductProperties"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasProductProperties -->
 
-    <owl:ObjectProperty rdf:about="#hasProductProperties"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasProductProperties"/>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasQualityMark -->
 
-    <owl:ObjectProperty rdf:about="#hasQualityMark">
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:range rdf:resource="#QualityMark"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductProperties"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasQualityMark">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;QualityMark"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductProperties"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedADHDProducts -->
 
-    <owl:ObjectProperty rdf:about="#hasRelatedADHDProducts">
-        <rdfs:domain rdf:resource="#ADHDAdditiveAffinity"/>
-        <rdfs:range rdf:resource="#ADHDEffectProducts"/>
-        <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasRelatedADHDProducts">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;ADHDAdditiveAffinity"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;ADHDEffectProducts"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasRelatedProducts"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedEcoProducts -->
 
-    <owl:ObjectProperty rdf:about="#hasRelatedEcoProducts">
-        <rdfs:domain rdf:resource="#EcoAffinity"/>
-        <rdfs:range rdf:resource="#EcologicalFood"/>
-        <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasRelatedEcoProducts">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;EcologicalFood"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasRelatedProducts"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedFairTradeProducts -->
 
-    <owl:ObjectProperty rdf:about="#hasRelatedFairTradeProducts">
-        <rdfs:domain rdf:resource="#FairTradeAffinity"/>
-        <rdfs:range rdf:resource="#FairTradeFood"/>
-        <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasRelatedFairTradeProducts">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;FairTradeAffinity"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;FairTradeFood"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasRelatedProducts"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedPriceProducts -->
 
-    <owl:ObjectProperty rdf:about="#hasRelatedPriceProducts">
-        <rdfs:range rdf:resource="#Food"/>
-        <rdfs:domain rdf:resource="#PriceSensitivity"/>
-        <rdfs:subPropertyOf rdf:resource="#hasRelatedProducts"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasRelatedPriceProducts">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;PriceSensitivity"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasRelatedProducts"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasRelatedProducts -->
 
-    <owl:ObjectProperty rdf:about="#hasRelatedProducts">
-        <rdfs:range rdf:resource="#Food"/>
-        <rdfs:domain rdf:resource="#Modifiers"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasRelatedProducts">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Modifiers"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasShoppingList -->
 
-    <owl:ObjectProperty rdf:about="#hasShoppingList">
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:range rdf:resource="#ShoppingList"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasShoppingList">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;ShoppingList"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasShoppingListItem -->
 
-    <owl:ObjectProperty rdf:about="#hasShoppingListItem">
-        <rdfs:range rdf:resource="#Food"/>
-        <rdfs:domain rdf:resource="#ShoppingList"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasShoppingListItem">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;ShoppingList"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasSon -->
 
-    <owl:ObjectProperty rdf:about="#hasSon">
-        <rdfs:subPropertyOf rdf:resource="#hasChild"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasSon">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasChild"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasWayOfProduction -->
 
-    <owl:ObjectProperty rdf:about="#hasWayOfProduction">
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:range rdf:resource="#WayOfProduction"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasWayOfProduction">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;WayOfProduction"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#isMarriedTo -->
 
-    <owl:ObjectProperty rdf:about="#isMarriedTo">
-        <rdfs:subPropertyOf rdf:resource="#hasFamilyRelations"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;isMarriedTo">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasFamilyRelations"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#isProducing -->
 
-    <owl:ObjectProperty rdf:about="#isProducing">
-        <owl:inverseOf rdf:resource="#hasProducer"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;isProducing">
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;hasProducer"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#listBelongsTo -->
 
-    <owl:ObjectProperty rdf:about="#listBelongsTo">
-        <rdfs:range rdf:resource="#Person"/>
-        <rdfs:domain rdf:resource="#ShoppingList"/>
-        <owl:inverseOf rdf:resource="#hasShoppingList"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;listBelongsTo">
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;ShoppingList"/>
+        <owl:inverseOf rdf:resource="&OntologyPersonalProfile;hasShoppingList"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#negatives -->
 
-    <owl:ObjectProperty rdf:about="#negatives"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;negatives"/>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#priceSensAffBelongsTo -->
 
-    <owl:ObjectProperty rdf:about="#priceSensAffBelongsTo">
-        <rdfs:subPropertyOf rdf:resource="#belongsTo"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;priceSensAffBelongsTo">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;belongsTo"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#satisfiesFairTradeAffinity -->
 
-    <owl:ObjectProperty rdf:about="#satisfiesFairTradeAffinity">
-        <rdfs:subPropertyOf rdf:resource="#boostersHigh"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;satisfiesFairTradeAffinity">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;boostersHigh"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#satisfiesHighEcoAffinity -->
 
-    <owl:ObjectProperty rdf:about="#satisfiesHighEcoAffinity">
-        <rdfs:subPropertyOf rdf:resource="#boostersHigh"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;satisfiesHighEcoAffinity">
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;boostersHigh"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#wopConcern -->
 
-    <owl:ObjectProperty rdf:about="#wopConcern">
-        <rdfs:domain rdf:resource="#EcoAffinity"/>
-        <rdfs:range rdf:resource="#WayOfProduction"/>
+    <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;wopConcern">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;WayOfProduction"/>
     </owl:ObjectProperty>
     
 
@@ -473,17 +488,17 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasADHDAffValue -->
 
-    <owl:DatatypeProperty rdf:about="#hasADHDAffValue">
-        <rdfs:domain rdf:resource="#ADHDAdditiveAffinity"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasADHDAffValue">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;ADHDAdditiveAffinity"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinityValue"/>
     </owl:DatatypeProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAffinityValue -->
 
-    <owl:DatatypeProperty rdf:about="#hasAffinityValue">
-        <rdfs:domain rdf:resource="#Modifiers"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasAffinityValue">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Modifiers"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -491,8 +506,8 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasAge -->
 
-    <owl:DatatypeProperty rdf:about="#hasAge">
-        <rdfs:domain rdf:resource="#Person"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasAge">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -500,8 +515,8 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasBirthdate -->
 
-    <owl:DatatypeProperty rdf:about="#hasBirthdate">
-        <rdfs:domain rdf:resource="#Person"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasBirthdate">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
         <rdfs:range rdf:resource="&xsd;date"/>
     </owl:DatatypeProperty>
     
@@ -509,27 +524,27 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasEcoAffValue -->
 
-    <owl:DatatypeProperty rdf:about="#hasEcoAffValue">
-        <rdfs:domain rdf:resource="#EcoAffinity"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasEcoAffValue">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinityValue"/>
     </owl:DatatypeProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFairTradeAffValue -->
 
-    <owl:DatatypeProperty rdf:about="#hasFairTradeAffValue">
-        <rdfs:domain rdf:resource="#FairTradeAffinity"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasFairTradeAffValue">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;FairTradeAffinity"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinityValue"/>
     </owl:DatatypeProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFirstName -->
 
-    <owl:DatatypeProperty rdf:about="#hasFirstName">
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:subPropertyOf rdf:resource="#hasName"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasFirstName">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasName"/>
         <rdfs:range rdf:resource="&xsd;string"/>
     </owl:DatatypeProperty>
     
@@ -537,8 +552,8 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasName -->
 
-    <owl:DatatypeProperty rdf:about="#hasName">
-        <rdfs:domain rdf:resource="#Person"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasName">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
         <rdfs:range rdf:resource="&xsd;string"/>
     </owl:DatatypeProperty>
     
@@ -546,9 +561,9 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPercentageOfBerries -->
 
-    <owl:DatatypeProperty rdf:about="#hasPercentageOfBerries">
-        <rdfs:domain rdf:resource="#Jam"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductDataProperties"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasPercentageOfBerries">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Jam"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductDataProperties"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -556,9 +571,9 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPercentageOfSugar -->
 
-    <owl:DatatypeProperty rdf:about="#hasPercentageOfSugar">
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductDataProperties"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasPercentageOfSugar">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductDataProperties"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -566,9 +581,9 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPrice -->
 
-    <owl:DatatypeProperty rdf:about="#hasPrice">
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductDataProperties"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasPrice">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductDataProperties"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -576,18 +591,18 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPriceAffValue -->
 
-    <owl:DatatypeProperty rdf:about="#hasPriceAffValue">
-        <rdfs:domain rdf:resource="#PriceSensitivity"/>
-        <rdfs:subPropertyOf rdf:resource="#hasAffinityValue"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasPriceAffValue">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;PriceSensitivity"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasAffinityValue"/>
     </owl:DatatypeProperty>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasPricePerKilo -->
 
-    <owl:DatatypeProperty rdf:about="#hasPricePerKilo">
-        <rdfs:domain rdf:resource="#Food"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductDataProperties"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasPricePerKilo">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductDataProperties"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -595,15 +610,15 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasProductDataProperties -->
 
-    <owl:DatatypeProperty rdf:about="#hasProductDataProperties"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasProductDataProperties"/>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasProductWeight -->
 
-    <owl:DatatypeProperty rdf:about="#hasProductWeight">
-        <rdfs:domain rdf:resource="#ProcessedFood"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductDataProperties"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasProductWeight">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductDataProperties"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -611,9 +626,9 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasSurname -->
 
-    <owl:DatatypeProperty rdf:about="#hasSurname">
-        <rdfs:domain rdf:resource="#Person"/>
-        <rdfs:subPropertyOf rdf:resource="#hasName"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasSurname">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasName"/>
         <rdfs:range rdf:resource="&xsd;string"/>
     </owl:DatatypeProperty>
     
@@ -621,9 +636,9 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasWOPValue -->
 
-    <owl:DatatypeProperty rdf:about="#hasWOPValue">
-        <rdfs:domain rdf:resource="#WayOfProduction"/>
-        <rdfs:subPropertyOf rdf:resource="#hasProductDataProperties"/>
+    <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasWOPValue">
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;WayOfProduction"/>
+        <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductDataProperties"/>
         <rdfs:range rdf:resource="&xsd;int"/>
     </owl:DatatypeProperty>
     
@@ -642,283 +657,282 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDAdditive -->
 
-    <owl:Class rdf:about="#ADHDAdditive">
+    <owl:Class rdf:about="&OntologyPersonalProfile;ADHDAdditive">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Additive"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Additive"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasEffect"/>
-                        <owl:someValuesFrom rdf:resource="#ADHDEffect"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasEffect"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;ADHDEffect"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Additive"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Additive"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDAdditiveAffinity -->
 
-    <owl:Class rdf:about="#ADHDAdditiveAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;ADHDAdditiveAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#AcceptADHDAdditives"/>
-                    <rdf:Description rdf:about="#AvoidADHDAdditives"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;AcceptADHDAdditives"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;AvoidADHDAdditives"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Modifiers"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Modifiers"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDEffect -->
 
-    <owl:Class rdf:about="#ADHDEffect">
-        <rdfs:subClassOf rdf:resource="#AdditiveEffects"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;ADHDEffect">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;AdditiveEffects"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDEffectProducts -->
 
-    <owl:Class rdf:about="#ADHDEffectProducts">
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;ADHDEffectProducts">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AcceptADHDAdditives -->
 
-    <owl:Class rdf:about="#AcceptADHDAdditives">
-        <rdfs:subClassOf rdf:resource="#ADHDAdditiveAffinity"/>
-        <owl:disjointWith rdf:resource="#AvoidADHDAdditives"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;AcceptADHDAdditives">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ADHDAdditiveAffinity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;AvoidADHDAdditives"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Additive -->
 
-    <owl:Class rdf:about="#Additive">
-        <rdfs:subClassOf rdf:resource="#NonFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Additive">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;NonFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AdditiveEffects -->
 
-    <owl:Class rdf:about="#AdditiveEffects">
-        <rdfs:subClassOf rdf:resource="#NonFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;AdditiveEffects">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;NonFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Adult -->
 
-    <owl:Class rdf:about="#Adult">
-        <rdfs:subClassOf rdf:resource="#Person"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Adult">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AvoidADHDAdditives -->
 
-    <owl:Class rdf:about="#AvoidADHDAdditives">
+    <owl:Class rdf:about="&OntologyPersonalProfile;AvoidADHDAdditives">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#ADHDAdditiveAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;ADHDAdditiveAffinity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasADHDAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasADHDAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">3</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#ADHDAdditiveAffinity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ADHDAdditiveAffinity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Berry -->
 
-    <owl:Class rdf:about="#Berry">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Berry">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Bread -->
 
-    <owl:Class rdf:about="#Bread">
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Bread">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#CancerCauseAdditive -->
 
-    <owl:Class rdf:about="#CancerCauseAdditive">
+    <owl:Class rdf:about="&OntologyPersonalProfile;CancerCauseAdditive">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Additive"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Additive"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasEffect"/>
-                        <owl:someValuesFrom rdf:resource="#CancerEffect"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasEffect"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;CancerEffect"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Additive"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Additive"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#CancerEffect -->
 
-    <owl:Class rdf:about="#CancerEffect">
-        <rdfs:subClassOf rdf:resource="#AdditiveEffects"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;CancerEffect">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;AdditiveEffects"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Cattle -->
 
-    <owl:Class rdf:about="#Cattle">
-        <rdfs:subClassOf rdf:resource="#Meat"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Cattle">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Meat"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Cereals -->
 
-    <owl:Class rdf:about="#Cereals">
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Cereals">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Commodity -->
 
-    <owl:Class rdf:about="#Commodity">
-        <rdfs:subClassOf rdf:resource="#Food"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Commodity">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Food"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcoAffinity -->
 
-    <owl:Class rdf:about="#EcoAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;EcoAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#HighEcoAffinity"/>
-                    <rdf:Description rdf:about="#LowEcoAffinity"/>
-                    <rdf:Description rdf:about="#MediumEcoAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;HighEcoAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;LowEcoAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;MediumEcoAffinity"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Modifiers"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Modifiers"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcoConcernedPerson -->
 
-    <owl:Class rdf:about="#EcoConcernedPerson">
+    <owl:Class rdf:about="&OntologyPersonalProfile;EcoConcernedPerson">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Person"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Person"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasEcoAffinity"/>
-                        <owl:someValuesFrom rdf:resource="#HighEcoAffinity"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasEcoAffinity"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;HighEcoAffinity"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Person"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Ecological -->
 
-    <owl:Class rdf:about="#Ecological">
+    <owl:Class rdf:about="&OntologyPersonalProfile;Ecological">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Ecological"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Ecological"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasWOPValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasWOPValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">2</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#WayOfProduction"/>
-        <owl:disjointWith rdf:resource="#Regular"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;WayOfProduction"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;Regular"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcologicalFood -->
 
-    <owl:Class rdf:about="#EcologicalFood">
+    <owl:Class rdf:about="&OntologyPersonalProfile;EcologicalFood">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Food"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Food"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasWayOfProduction"/>
-                        <owl:someValuesFrom rdf:resource="#Ecological"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasWayOfProduction"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;Ecological"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:comment
-            >problem; hva om et product er b&#229;de &#248;kologisk og fair trade? da er det fortsatt &#248;kologisk!</rdfs:comment>
+        <rdfs:comment>problem; hva om et product er både økologisk og fair trade? da er det fortsatt økologisk!</rdfs:comment>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcologicalJam -->
 
-    <owl:Class rdf:about="#EcologicalJam">
+    <owl:Class rdf:about="&OntologyPersonalProfile;EcologicalJam">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Jam"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Jam"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasWayOfProduction"/>
-                        <owl:someValuesFrom rdf:resource="#Ecological"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasWayOfProduction"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;Ecological"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Jam"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Jam"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcologicalStrawberryJam -->
 
-    <owl:Class rdf:about="#EcologicalStrawberryJam">
+    <owl:Class rdf:about="&OntologyPersonalProfile;EcologicalStrawberryJam">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Jam"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Jam"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasWayOfProduction"/>
-                        <owl:someValuesFrom rdf:resource="#Ecological"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasWayOfProduction"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;Ecological"/>
                     </owl:Restriction>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasBerryIngredient"/>
-                        <owl:hasValue rdf:resource="#Strawberry"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasBerryIngredient"/>
+                        <owl:hasValue rdf:resource="&OntologyPersonalProfile;Strawberry"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -929,84 +943,84 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Egg -->
 
-    <owl:Class rdf:about="#Egg">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Egg">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTradeAffinity -->
 
-    <owl:Class rdf:about="#FairTradeAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;FairTradeAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#HighFairTradeAffinity"/>
-                    <rdf:Description rdf:about="#LowFairTradeAffinity"/>
-                    <rdf:Description rdf:about="#MediumFairTradeAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;HighFairTradeAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;LowFairTradeAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;MediumFairTradeAffinity"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Modifiers"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Modifiers"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTradeConcernedPerson -->
 
-    <owl:Class rdf:about="#FairTradeConcernedPerson">
+    <owl:Class rdf:about="&OntologyPersonalProfile;FairTradeConcernedPerson">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Person"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Person"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasFairTradeAffinity"/>
-                        <owl:someValuesFrom rdf:resource="#HighFairTradeAffinity"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasFairTradeAffinity"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;HighFairTradeAffinity"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Person"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTradeFood -->
 
-    <owl:Class rdf:about="#FairTradeFood">
+    <owl:Class rdf:about="&OntologyPersonalProfile;FairTradeFood">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Food"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Food"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasQualityMark"/>
-                        <owl:hasValue rdf:resource="#FairTrade"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasQualityMark"/>
+                        <owl:hasValue rdf:resource="&OntologyPersonalProfile;FairTrade"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Food"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Food"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Fish -->
 
-    <owl:Class rdf:about="#Fish">
-        <rdfs:subClassOf rdf:resource="#SeaFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Fish">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;SeaFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Food -->
 
-    <owl:Class rdf:about="#Food">
+    <owl:Class rdf:about="&OntologyPersonalProfile;Food">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Food"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Food"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasProducer"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasProducer"/>
                         <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
                     </owl:Restriction>
                 </owl:intersectionOf>
@@ -1018,28 +1032,27 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FoodInformation -->
 
-    <owl:Class rdf:about="#FoodInformation"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;FoodInformation"/>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Fruit -->
 
-    <owl:Class rdf:about="#Fruit">
-        <rdfs:label
-            >legg til at isMadeFrom Jam h&#239;&#191;&#189;rer til her</rdfs:label>
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Fruit">
+        <rdfs:label>legg til at isMadeFrom Jam hï¿½rer til her</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Gender -->
 
-    <owl:Class rdf:about="#Gender">
+    <owl:Class rdf:about="&OntologyPersonalProfile;Gender">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:oneOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Female"/>
-                    <rdf:Description rdf:about="#Male"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Female"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Male"/>
                 </owl:oneOf>
             </owl:Class>
         </owl:equivalentClass>
@@ -1049,14 +1062,14 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikProducts -->
 
-    <owl:Class rdf:about="#HervikProducts">
+    <owl:Class rdf:about="&OntologyPersonalProfile;HervikProducts">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Food"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Food"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasProducer"/>
-                        <owl:hasValue rdf:resource="#Hervik"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasProducer"/>
+                        <owl:hasValue rdf:resource="&OntologyPersonalProfile;Hervik"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1067,289 +1080,288 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HighEcoAffinity -->
 
-    <owl:Class rdf:about="#HighEcoAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;HighEcoAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#HighEcoAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;HighEcoAffinity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasEcoAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasEcoAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">3</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#EcoAffinity"/>
-        <owl:disjointWith rdf:resource="#LowEcoAffinity"/>
-        <owl:disjointWith rdf:resource="#MediumEcoAffinity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;LowEcoAffinity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;MediumEcoAffinity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HighFairTradeAffinity -->
 
-    <owl:Class rdf:about="#HighFairTradeAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;HighFairTradeAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#HighFairTradeAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;HighFairTradeAffinity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasFairTradeAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasFairTradeAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">3</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#FairTradeAffinity"/>
-        <owl:disjointWith rdf:resource="#LowFairTradeAffinity"/>
-        <owl:disjointWith rdf:resource="#MediumFairTradeAffinity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;FairTradeAffinity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;LowFairTradeAffinity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;MediumFairTradeAffinity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HighPriceSensitivity -->
 
-    <owl:Class rdf:about="#HighPriceSensitivity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;HighPriceSensitivity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#HighPriceSensitivity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;HighPriceSensitivity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasPriceAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasPriceAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">3</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#PriceSensitivity"/>
-        <owl:disjointWith rdf:resource="#LowPriceSensitivity"/>
-        <owl:disjointWith rdf:resource="#MediumPriceSensitivity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;PriceSensitivity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;LowPriceSensitivity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;MediumPriceSensitivity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Jam -->
 
-    <owl:Class rdf:about="#Jam">
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
-        <rdfs:comment
-            >definisjon for &#239;&#191;&#189; klassifisere jordb&#239;&#191;&#189;rsyltet&#239;&#191;&#189;y,
-            bringerb&#239;&#191;&#189;r osv</rdfs:comment>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Jam">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
+        <rdfs:comment>definisjon for ï¿½ klassifisere jordbï¿½rsyltetï¿½y,
+            bringerbï¿½r osv</rdfs:comment>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Lamb -->
 
-    <owl:Class rdf:about="#Lamb">
-        <rdfs:subClassOf rdf:resource="#Meat"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Lamb">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Meat"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowEcoAffinity -->
 
-    <owl:Class rdf:about="#LowEcoAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;LowEcoAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#LowEcoAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;LowEcoAffinity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasEcoAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasEcoAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#EcoAffinity"/>
-        <owl:disjointWith rdf:resource="#MediumEcoAffinity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;MediumEcoAffinity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowFairTradeAffinity -->
 
-    <owl:Class rdf:about="#LowFairTradeAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;LowFairTradeAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#LowFairTradeAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;LowFairTradeAffinity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasFairTradeAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasFairTradeAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#FairTradeAffinity"/>
-        <owl:disjointWith rdf:resource="#MediumFairTradeAffinity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;FairTradeAffinity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;MediumFairTradeAffinity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LowPriceSensitivity -->
 
-    <owl:Class rdf:about="#LowPriceSensitivity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;LowPriceSensitivity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#LowPriceSensitivity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;LowPriceSensitivity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasPriceAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasPriceAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#PriceSensitivity"/>
-        <owl:disjointWith rdf:resource="#MediumPriceSensitivity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;PriceSensitivity"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;MediumPriceSensitivity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Man -->
 
-    <owl:Class rdf:about="#Man">
-        <rdfs:subClassOf rdf:resource="#Person"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Man">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Person"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasGender"/>
-                <owl:hasValue rdf:resource="#Male"/>
+                <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasGender"/>
+                <owl:hasValue rdf:resource="&OntologyPersonalProfile;Male"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="#Woman"/>
+        <owl:disjointWith rdf:resource="&OntologyPersonalProfile;Woman"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Meat -->
 
-    <owl:Class rdf:about="#Meat">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Meat">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumEcoAffinity -->
 
-    <owl:Class rdf:about="#MediumEcoAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;MediumEcoAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#MediumEcoAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;MediumEcoAffinity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasEcoAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasEcoAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">2</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#EcoAffinity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;EcoAffinity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumFairTradeAffinity -->
 
-    <owl:Class rdf:about="#MediumFairTradeAffinity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;MediumFairTradeAffinity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#MediumFairTradeAffinity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;MediumFairTradeAffinity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasFairTradeAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasFairTradeAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">2</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#FairTradeAffinity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;FairTradeAffinity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumPriceConcernedPerson -->
 
-    <owl:Class rdf:about="#MediumPriceConcernedPerson">
+    <owl:Class rdf:about="&OntologyPersonalProfile;MediumPriceConcernedPerson">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Person"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Person"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasPriceSensitivity"/>
-                        <owl:someValuesFrom rdf:resource="#MediumPriceSensitivity"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasPriceSensitivity"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;MediumPriceSensitivity"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Person"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MediumPriceSensitivity -->
 
-    <owl:Class rdf:about="#MediumPriceSensitivity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;MediumPriceSensitivity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#MediumPriceSensitivity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;MediumPriceSensitivity"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasPriceAffValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasPriceAffValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">2</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#PriceSensitivity"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;PriceSensitivity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Milk -->
 
-    <owl:Class rdf:about="#Milk">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Milk">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MilkProduct -->
 
-    <owl:Class rdf:about="#MilkProduct">
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;MilkProduct">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Modifiers -->
 
-    <owl:Class rdf:about="#Modifiers"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Modifiers"/>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NonFood -->
 
-    <owl:Class rdf:about="#NonFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;NonFood"/>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Nuts -->
 
-    <owl:Class rdf:about="#Nuts">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Nuts">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Person -->
 
-    <owl:Class rdf:about="#Person">
+    <owl:Class rdf:about="&OntologyPersonalProfile;Person">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Person"/>
-                    <rdf:Description rdf:about="#Woman"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Person"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Woman"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
@@ -1359,100 +1371,99 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Pork -->
 
-    <owl:Class rdf:about="#Pork">
-        <rdfs:subClassOf rdf:resource="#Meat"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Pork">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Meat"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#PotatoProduct -->
 
-    <owl:Class rdf:about="#PotatoProduct">
-        <rdfs:subClassOf rdf:resource="#ProcessedFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;PotatoProduct">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Potatoe -->
 
-    <owl:Class rdf:about="#Potatoe">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Potatoe">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Poultry -->
 
-    <owl:Class rdf:about="#Poultry">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Poultry">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#PriceConcernedPerson -->
 
-    <owl:Class rdf:about="#PriceConcernedPerson">
+    <owl:Class rdf:about="&OntologyPersonalProfile;PriceConcernedPerson">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Person"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Person"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasPriceSensitivity"/>
-                        <owl:someValuesFrom rdf:resource="#HighPriceSensitivity"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasPriceSensitivity"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;HighPriceSensitivity"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Person"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#PriceSensitivity -->
 
-    <owl:Class rdf:about="#PriceSensitivity">
+    <owl:Class rdf:about="&OntologyPersonalProfile;PriceSensitivity">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#HighPriceSensitivity"/>
-                    <rdf:Description rdf:about="#LowPriceSensitivity"/>
-                    <rdf:Description rdf:about="#MediumPriceSensitivity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;HighPriceSensitivity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;LowPriceSensitivity"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;MediumPriceSensitivity"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Modifiers"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Modifiers"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ProcessedFood -->
 
-    <owl:Class rdf:about="#ProcessedFood">
-        <rdfs:subClassOf rdf:resource="#Food"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;ProcessedFood">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Food"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ProcessedMeat -->
 
-    <owl:Class rdf:about="#ProcessedMeat">
-        <rdfs:subClassOf rdf:resource="#Meat"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;ProcessedMeat">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Meat"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Producer -->
 
-    <owl:Class rdf:about="#Producer">
-        <rdfs:subClassOf rdf:resource="#FoodInformation"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Producer">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;FoodInformation"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="#isProducing"/>
-                <owl:someValuesFrom rdf:resource="#Food"/>
+                <owl:onProperty rdf:resource="&OntologyPersonalProfile;isProducing"/>
+                <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;Food"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment
-            >Legg til definisjon -&gt; JamProducers klassen av de produsenter som produserer Jam
+        <rdfs:comment>Legg til definisjon -&gt; JamProducers klassen av de produsenter som produserer Jam
             kan finne ut hvilke produkter hver produsent lager</rdfs:comment>
     </owl:Class>
     
@@ -1460,144 +1471,143 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#QualityMark -->
 
-    <owl:Class rdf:about="#QualityMark">
-        <rdfs:subClassOf rdf:resource="#FoodInformation"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;QualityMark">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;FoodInformation"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Regular -->
 
-    <owl:Class rdf:about="#Regular">
+    <owl:Class rdf:about="&OntologyPersonalProfile;Regular">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Regular"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Regular"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasWOPValue"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasWOPValue"/>
                         <owl:hasValue rdf:datatype="&xsd;integer">1</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#WayOfProduction"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;WayOfProduction"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#RegularProducedFood -->
 
-    <owl:Class rdf:about="#RegularProducedFood">
+    <owl:Class rdf:about="&OntologyPersonalProfile;RegularProducedFood">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Food"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Food"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasWayOfProduction"/>
-                        <owl:someValuesFrom rdf:resource="#Regular"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasWayOfProduction"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;Regular"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Food"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Food"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#SeaFood -->
 
-    <owl:Class rdf:about="#SeaFood">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;SeaFood">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Shellfish -->
 
-    <owl:Class rdf:about="#Shellfish">
-        <rdfs:subClassOf rdf:resource="#SeaFood"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Shellfish">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;SeaFood"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ShoppingList -->
 
-    <owl:Class rdf:about="#ShoppingList"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;ShoppingList"/>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StrawberryJam -->
 
-    <owl:Class rdf:about="#StrawberryJam">
+    <owl:Class rdf:about="&OntologyPersonalProfile;StrawberryJam">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Jam"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Jam"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasBerryIngredient"/>
-                        <owl:hasValue rdf:resource="#Strawberry"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasBerryIngredient"/>
+                        <owl:hasValue rdf:resource="&OntologyPersonalProfile;Strawberry"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Jam"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Jam"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#TestEcoFood -->
 
-    <owl:Class rdf:about="#TestEcoFood">
+    <owl:Class rdf:about="&OntologyPersonalProfile;TestEcoFood">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Food"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Food"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#hasQualityMark"/>
-                        <owl:hasValue rdf:resource="#TESTEcological"/>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasQualityMark"/>
+                        <owl:hasValue rdf:resource="&OntologyPersonalProfile;TESTEcological"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#Food"/>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Food"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Vegetable -->
 
-    <owl:Class rdf:about="#Vegetable">
-        <rdfs:subClassOf rdf:resource="#Commodity"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Vegetable">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Commodity"/>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#WayOfProduction -->
 
-    <owl:Class rdf:about="#WayOfProduction">
+    <owl:Class rdf:about="&OntologyPersonalProfile;WayOfProduction">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Ecological"/>
-                    <rdf:Description rdf:about="#Regular"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Ecological"/>
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;Regular"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="#FoodInformation"/>
-        <dc:source
-            >som instanser, eller som subklasser og value partition?</dc:source>
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;FoodInformation"/>
+        <dc:source>som instanser, eller som subklasser og value partition?</dc:source>
     </owl:Class>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Woman -->
 
-    <owl:Class rdf:about="#Woman">
-        <rdfs:subClassOf rdf:resource="#Person"/>
+    <owl:Class rdf:about="&OntologyPersonalProfile;Woman">
+        <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;Person"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="#hasGender"/>
-                <owl:hasValue rdf:resource="#Female"/>
+                <owl:onProperty rdf:resource="&OntologyPersonalProfile;hasGender"/>
+                <owl:hasValue rdf:resource="&OntologyPersonalProfile;Female"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -1623,659 +1633,739 @@
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Alginat -->
 
-    <owl:Thing rdf:about="#Alginat">
-        <rdf:type rdf:resource="#Additive"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Alginat">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AppleAcid -->
 
-    <owl:Thing rdf:about="#AppleAcid">
-        <rdf:type rdf:resource="#Additive"/>
-        <owl:sameAs rdf:resource="#E296"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;AppleAcid">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;E296"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Bill -->
 
-    <owl:Thing rdf:about="#Bill">
-        <rdf:type rdf:resource="#Man"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Bill">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Man"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasAge rdf:datatype="&xsd;int">39</hasAge>
         <hasFirstName rdf:datatype="&xsd;string">Bill</hasFirstName>
-        <hasADHDAdditiveAffinity rdf:resource="#BillsADHDAdditiveAffinity"/>
-        <hasEcoAffinity rdf:resource="#BillsEcoAffinity"/>
-        <hasFairTradeAffinity rdf:resource="#BillsFairTradeAffinity"/>
-        <hasPriceSensitivity rdf:resource="#BillsPriceSensitivity"/>
-        <hasShoppingList rdf:resource="#BillsShoppingList"/>
-        <hasChild rdf:resource="#Child1"/>
-        <hasChild rdf:resource="#Child2"/>
-        <hasChild rdf:resource="#Child3"/>
-        <hasGender rdf:resource="#Male"/>
-        <isMarriedTo rdf:resource="#WifeBill"/>
+        <hasADHDAdditiveAffinity rdf:resource="&OntologyPersonalProfile;BillsADHDAdditiveAffinity"/>
+        <hasEcoAffinity rdf:resource="&OntologyPersonalProfile;BillsEcoAffinity"/>
+        <hasFairTradeAffinity rdf:resource="&OntologyPersonalProfile;BillsFairTradeAffinity"/>
+        <hasPriceSensitivity rdf:resource="&OntologyPersonalProfile;BillsPriceSensitivity"/>
+        <hasShoppingList rdf:resource="&OntologyPersonalProfile;BillsShoppingList"/>
+        <hasChild rdf:resource="&OntologyPersonalProfile;Child1"/>
+        <hasChild rdf:resource="&OntologyPersonalProfile;Child2"/>
+        <hasChild rdf:resource="&OntologyPersonalProfile;Child3"/>
+        <hasGender rdf:resource="&OntologyPersonalProfile;Male"/>
+        <isMarriedTo rdf:resource="&OntologyPersonalProfile;WifeBill"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsADHDAdditiveAffinity -->
 
-    <AvoidADHDAdditives rdf:about="#BillsADHDAdditiveAffinity">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </AvoidADHDAdditives>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;BillsADHDAdditiveAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;AvoidADHDAdditives"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsEcoAffinity -->
 
-    <HighEcoAffinity rdf:about="#BillsEcoAffinity">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </HighEcoAffinity>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;BillsEcoAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;HighEcoAffinity"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsFairTradeAffinity -->
 
-    <HighFairTradeAffinity rdf:about="#BillsFairTradeAffinity">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </HighFairTradeAffinity>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;BillsFairTradeAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;HighFairTradeAffinity"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsPriceSensitivity -->
 
-    <MediumPriceSensitivity rdf:about="#BillsPriceSensitivity">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </MediumPriceSensitivity>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;BillsPriceSensitivity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;MediumPriceSensitivity"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#BillsShoppingList -->
 
-    <owl:Thing rdf:about="#BillsShoppingList">
-        <rdf:type rdf:resource="#ShoppingList"/>
-        <hasShoppingListItem rdf:resource="#HervikStrawberryJam"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;BillsShoppingList">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;ShoppingList"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <hasShoppingListItem rdf:resource="&OntologyPersonalProfile;HervikStrawberryJam"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Child1 -->
 
-    <owl:Thing rdf:about="#Child1">
-        <rdf:type rdf:resource="#Man"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Child1">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Man"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Child2 -->
 
-    <Man rdf:about="#Child2">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Man>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Child2">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Man"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Child3 -->
 
-    <Woman rdf:about="#Child3">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Woman>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Child3">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Woman"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Druekonsentrat -->
 
-    <owl:Thing rdf:about="#Druekonsentrat">
-        <rdf:type rdf:resource="#Additive"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Druekonsentrat">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E120 -->
 
-    <owl:Thing rdf:about="#E120"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E120">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Karmin"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E202 -->
 
-    <owl:Thing rdf:about="#E202"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E202">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E211 -->
 
-    <owl:Thing rdf:about="#E211">
-        <rdf:type rdf:resource="#Additive"/>
-        <owl:sameAs rdf:resource="#Natriumbenzoat"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E211">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Natriumbenzoat"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E270 -->
 
-    <owl:Thing rdf:about="#E270"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E270">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;MilkAcid"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E296 -->
 
-    <owl:Thing rdf:about="#E296"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E296">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E330 -->
 
-    <owl:Thing rdf:about="#E330"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E330">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;LemonAcid"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E333 -->
 
-    <owl:Thing rdf:about="#E333">
-        <owl:sameAs rdf:resource="#Kalsiumsitrat"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E333">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Kalsiumsitrat"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E410 -->
 
-    <owl:Thing rdf:about="#E410">
-        <owl:sameAs rdf:resource="#Johannesbr&#248;dkjernemel"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E410">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Johannesbrødkjernemel"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E440 -->
 
-    <owl:Thing rdf:about="#E440">
-        <owl:sameAs rdf:resource="#FruitPectin"/>
-        <owl:sameAs rdf:resource="#Pectin"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E440">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;FruitPectin"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Pectin"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E953 -->
 
-    <owl:Thing rdf:about="#E953">
-        <owl:sameAs rdf:resource="#Isomalt"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E953">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Isomalt"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#E955 -->
 
-    <owl:Thing rdf:about="#E955">
-        <owl:sameAs rdf:resource="#Sukralose"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;E955">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Sukralose"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Euroshopper -->
 
-    <owl:Thing rdf:about="#Euroshopper">
-        <rdf:type rdf:resource="#Producer"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Euroshopper">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Producer"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJam -->
 
-    <StrawberryJam rdf:about="#EuroshopperStrawberryJam">
-        <rdf:type rdf:resource="&owl;Thing"/>
-        <hasProductWeight rdf:datatype="&xsd;int">0.4</hasProductWeight>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;EuroshopperStrawberryJam">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">14</hasPricePerKilo>
-        <containsAdditive rdf:resource="#Alginat"/>
-        <hasProducer rdf:resource="#Euroshopper"/>
-        <hasWayOfProduction rdf:resource="#EuroshopperStrawberryJamsWOP"/>
-        <containsAdditive rdf:resource="#Johannesbr&#248;dkjernemel"/>
-        <containsAdditive rdf:resource="#KaliumSorbat"/>
-        <containsAdditive rdf:resource="#LemonAcid"/>
-        <containsAdditive rdf:resource="#Natriumbenzoat"/>
-        <containsAdditive rdf:resource="#Pectin"/>
-    </StrawberryJam>
+        <hasProductWeight rdf:datatype="&xsd;int">400</hasProductWeight>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Alginat"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Euroshopper"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;EuroshopperStrawberryJamsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Johannesbrødkjernemel"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;LemonAcid"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Natriumbenzoat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectin"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJamsWOP -->
 
-    <Regular rdf:about="#EuroshopperStrawberryJamsWOP">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Regular>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;EuroshopperStrawberryJamsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FairTrade -->
 
-    <QualityMark rdf:about="#FairTrade">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </QualityMark>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;FairTrade">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;QualityMark"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Female -->
 
-    <owl:Thing rdf:about="#Female"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Female">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#FruitPectin -->
 
-    <Additive rdf:about="#FruitPectin">
-        <rdf:type rdf:resource="&owl;Thing"/>
-        <owl:sameAs rdf:resource="#Pectin"/>
-    </Additive>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;FruitPectin">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <owl:sameAs rdf:resource="&OntologyPersonalProfile;Pectin"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Hervik -->
 
-    <owl:Thing rdf:about="#Hervik">
-        <rdf:type rdf:resource="#Producer"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Hervik">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Producer"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam -->
 
-    <owl:Thing rdf:about="#HervikEcoStrawberryJam">
-        <rdf:type rdf:resource="#StrawberryJam"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;HervikEcoStrawberryJam">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">100</hasPricePerKilo>
-        <containsAdditive rdf:resource="#FruitPectin"/>
-        <hasProducer rdf:resource="#Hervik"/>
-        <hasWayOfProduction rdf:resource="#HervikEcoStrawberryJamWOP"/>
-        <containsAdditive rdf:resource="#MilkAcid"/>
-        <hasQualityMark rdf:resource="#TESTEcological"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;FruitPectin"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Hervik"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;HervikEcoStrawberryJamWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;MilkAcid"/>
+        <hasQualityMark rdf:resource="&OntologyPersonalProfile;TESTEcological"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJamWOP -->
 
-    <Ecological rdf:about="#HervikEcoStrawberryJamWOP">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Ecological>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;HervikEcoStrawberryJamWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Ecological"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam -->
 
-    <StrawberryJam rdf:about="#HervikStrawberryJam">
-        <rdf:type rdf:resource="&owl;Thing"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;HervikStrawberryJam">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">78</hasPricePerKilo>
-        <containsAdditive rdf:resource="#FruitPectin"/>
-        <hasProducer rdf:resource="#Hervik"/>
-        <hasWayOfProduction rdf:resource="#HervikStrawberryJamsWOP"/>
-        <containsAdditive rdf:resource="#MilkAcid"/>
-    </StrawberryJam>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;FruitPectin"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Hervik"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;HervikStrawberryJamsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;MilkAcid"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJamsWOP -->
 
-    <owl:Thing rdf:about="#HervikStrawberryJamsWOP">
-        <rdf:type rdf:resource="#Regular"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;HervikStrawberryJamsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICA -->
 
-    <owl:Thing rdf:about="#ICA">
-        <rdf:type rdf:resource="#Producer"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;ICA">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Producer"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJam -->
 
-    <owl:Thing rdf:about="#ICAEcologicalStrawberryJam">
-        <rdf:type rdf:resource="#StrawberryJam"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;ICAEcologicalStrawberryJam">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">64</hasPricePerKilo>
-        <hasProducer rdf:resource="#ICA"/>
-        <hasWayOfProduction rdf:resource="#ICAEcologicalStrawberryJamsWOP"/>
-        <containsAdditive rdf:resource="#LemonAcid"/>
-        <containsAdditive rdf:resource="#Pectin"/>
-        <hasQualityMark rdf:resource="#TESTEcological"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;ICA"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;ICAEcologicalStrawberryJamsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;LemonAcid"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectin"/>
+        <hasQualityMark rdf:resource="&OntologyPersonalProfile;TESTEcological"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJamsWOP -->
 
-    <owl:Thing rdf:about="#ICAEcologicalStrawberryJamsWOP">
-        <rdf:type rdf:resource="#Ecological"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;ICAEcologicalStrawberryJamsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Ecological"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Isomalt -->
 
-    <Additive rdf:about="#Isomalt">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Additive>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Isomalt">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
-    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Johannesbr&#248;dkjernemel -->
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Johannesbrødkjernemel -->
 
-    <owl:Thing rdf:about="#Johannesbr&#248;dkjernemel">
-        <rdf:type rdf:resource="#Additive"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Johannesbrødkjernemel">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#KaliumSorbat -->
 
-    <Additive rdf:about="#KaliumSorbat">
-        <rdf:type rdf:resource="&owl;Thing"/>
-        <owl:sameAs rdf:resource="#E202"/>
-    </Additive>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;KaliumSorbat">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Kalsiumsitrat -->
 
-    <owl:Thing rdf:about="#Kalsiumsitrat">
-        <rdf:type rdf:resource="#Additive"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Kalsiumsitrat">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Karmin -->
 
-    <owl:Thing rdf:about="#Karmin">
-        <rdf:type rdf:resource="#Additive"/>
-        <owl:sameAs rdf:resource="#E120"/>
-        <hasEffect rdf:resource="#KarminEffect"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Karmin">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <hasEffect rdf:resource="&OntologyPersonalProfile;KarminEffect"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#KarminEffect -->
 
-    <owl:Thing rdf:about="#KarminEffect">
-        <rdf:type rdf:resource="#ADHDEffect"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;KarminEffect">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;ADHDEffect"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#LemonAcid -->
 
-    <owl:Thing rdf:about="#LemonAcid">
-        <rdf:type rdf:resource="#Additive"/>
-        <owl:sameAs rdf:resource="#E330"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;LemonAcid">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Male -->
 
-    <owl:Thing rdf:about="#Male"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Male">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#MilkAcid -->
 
-    <Additive rdf:about="#MilkAcid">
-        <rdf:type rdf:resource="&owl;Thing"/>
-        <owl:sameAs rdf:resource="#E270"/>
-    </Additive>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;MilkAcid">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Natriumbenzoat -->
 
-    <owl:Thing rdf:about="#Natriumbenzoat">
-        <rdf:type rdf:resource="#Additive"/>
-        <hasEffect rdf:resource="#NatriumbenzoatEffect"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Natriumbenzoat">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <hasEffect rdf:resource="&OntologyPersonalProfile;NatriumbenzoatEffect"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NatriumbenzoatEffect -->
 
-    <owl:Thing rdf:about="#NatriumbenzoatEffect">
-        <rdf:type rdf:resource="#ADHDEffect"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NatriumbenzoatEffect">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;ADHDEffect"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Nora -->
 
-    <owl:Thing rdf:about="#Nora">
-        <rdf:type rdf:resource="#Producer"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Nora">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Producer"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryAndWildJam -->
 
-    <StrawberryJam rdf:about="#NoraHomeMadeStrawberryAndWildJam">
-        <rdf:type rdf:resource="&owl;Thing"/>
-        <hasProductWeight rdf:datatype="&xsd;decimal">0.4</hasProductWeight>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraHomeMadeStrawberryAndWildJam">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+        <hasProductWeight rdf:datatype="&xsd;decimal">400</hasProductWeight>
         <hasPricePerKilo rdf:datatype="&xsd;int">98</hasPricePerKilo>
-        <containsAdditive rdf:resource="#AppleAcid"/>
-        <containsAdditive rdf:resource="#KaliumSorbat"/>
-        <containsAdditive rdf:resource="#Karmin"/>
-        <hasProducer rdf:resource="#Nora"/>
-        <hasWayOfProduction rdf:resource="#NoraHomeMadeStrawberryAndWildJamsWOP"/>
-        <containsAdditive rdf:resource="#Pectib"/>
-    </StrawberryJam>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;AppleAcid"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Karmin"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Nora"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;NoraHomeMadeStrawberryAndWildJamsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectib"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryAndWildJamsWOP -->
 
-    <owl:Thing rdf:about="#NoraHomeMadeStrawberryAndWildJamsWOP">
-        <rdf:type rdf:resource="#Regular"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraHomeMadeStrawberryAndWildJamsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJam -->
 
-    <StrawberryJam rdf:about="#NoraHomeMadeStrawberryJam">
-        <rdf:type rdf:resource="&owl;Thing"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraHomeMadeStrawberryJam">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">57</hasPricePerKilo>
-        <containsAdditive rdf:resource="#AppleAcid"/>
-        <containsAdditive rdf:resource="#KaliumSorbat"/>
-        <hasProducer rdf:resource="#Nora"/>
-        <hasWayOfProduction rdf:resource="#NoraHomeMadeStrawberryJamsWOP"/>
-        <containsAdditive rdf:resource="#Pectib"/>
-    </StrawberryJam>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;AppleAcid"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Nora"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;NoraHomeMadeStrawberryJamsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectib"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJamsWOP -->
 
-    <owl:Thing rdf:about="#NoraHomeMadeStrawberryJamsWOP">
-        <rdf:type rdf:resource="#Regular"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraHomeMadeStrawberryJamsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJam -->
 
-    <owl:Thing rdf:about="#NoraLightStrawberryJam">
-        <rdf:type rdf:resource="#StrawberryJam"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraLightStrawberryJam">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">47</hasPricePerKilo>
-        <containsAdditive rdf:resource="#AppleAcid"/>
-        <containsAdditive rdf:resource="#KaliumSorbat"/>
-        <containsAdditive rdf:resource="#Kalsiumsitrat"/>
-        <containsAdditive rdf:resource="#Karmin"/>
-        <hasProducer rdf:resource="#Nora"/>
-        <hasWayOfProduction rdf:resource="#NoraLightStrawberryJamsWOP"/>
-        <containsAdditive rdf:resource="#Pectin"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;AppleAcid"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Kalsiumsitrat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Karmin"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Nora"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;NoraLightStrawberryJamsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectin"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJamsWOP -->
 
-    <Regular rdf:about="#NoraLightStrawberryJamsWOP">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Regular>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraLightStrawberryJamsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraNoSugar -->
 
-    <owl:Thing rdf:about="#NoraNoSugar">
-        <rdf:type rdf:resource="#StrawberryJam"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraNoSugar">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">42</hasPricePerKilo>
-        <containsAdditive rdf:resource="#Druekonsentrat"/>
-        <containsAdditive rdf:resource="#Isomalt"/>
-        <containsAdditive rdf:resource="#KaliumSorbat"/>
-        <containsAdditive rdf:resource="#Karmin"/>
-        <containsAdditive rdf:resource="#LemonAcid"/>
-        <containsAdditive rdf:resource="#Natriumbenzoat"/>
-        <hasProducer rdf:resource="#Nora"/>
-        <hasWayOfProduction rdf:resource="#NoraNoSugarsWOP"/>
-        <containsAdditive rdf:resource="#Pectin"/>
-        <containsAdditive rdf:resource="#Sukralose"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Druekonsentrat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Isomalt"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Karmin"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;LemonAcid"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Natriumbenzoat"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Nora"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;NoraNoSugarsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectin"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Sukralose"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraNoSugarsWOP -->
 
-    <owl:Thing rdf:about="#NoraNoSugarsWOP">
-        <rdf:type rdf:resource="#Regular"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraNoSugarsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraOriginal -->
 
-    <StrawberryJam rdf:about="#NoraOriginal">
-        <rdf:type rdf:resource="&owl;Thing"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraOriginal">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">42</hasPricePerKilo>
-        <containsAdditive rdf:resource="#KaliumSorbat"/>
-        <containsAdditive rdf:resource="#LemonAcid"/>
-        <hasProducer rdf:resource="#Nora"/>
-        <hasWayOfProduction rdf:resource="#NoraOriginalsWOP"/>
-        <containsAdditive rdf:resource="#Pectin"/>
-    </StrawberryJam>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;LemonAcid"/>
+        <hasProducer rdf:resource="&OntologyPersonalProfile;Nora"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;NoraOriginalsWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectin"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraOriginalsWOP -->
 
-    <owl:Thing rdf:about="#NoraOriginalsWOP">
-        <rdf:type rdf:resource="#Regular"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraOriginalsWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraSqueezy -->
 
-    <StrawberryJam rdf:about="#NoraSqueezy">
-        <rdf:type rdf:resource="&owl;Thing"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraSqueezy">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;StrawberryJam"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasPricePerKilo rdf:datatype="&xsd;int">52</hasPricePerKilo>
-        <containsAdditive rdf:resource="#KaliumSorbat"/>
-        <containsAdditive rdf:resource="#LemonAcid"/>
-        <hasWayOfProduction rdf:resource="#NoraSqueezysWOP"/>
-        <containsAdditive rdf:resource="#Pectin"/>
-    </StrawberryJam>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;KaliumSorbat"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;LemonAcid"/>
+        <hasWayOfProduction rdf:resource="&OntologyPersonalProfile;NoraSqueezysWOP"/>
+        <containsAdditive rdf:resource="&OntologyPersonalProfile;Pectin"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraSqueezysWOP -->
 
-    <Regular rdf:about="#NoraSqueezysWOP">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Regular>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;NoraSqueezysWOP">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Regular"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Pectib -->
 
-    <Additive rdf:about="#Pectib">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Additive>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Pectib">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Pectin -->
 
-    <Additive rdf:about="#Pectin">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Additive>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Pectin">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Strawberry -->
 
-    <owl:Thing rdf:about="#Strawberry">
-        <rdf:type rdf:resource="#Berry"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Strawberry">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Berry"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Student -->
 
-    <Man rdf:about="#Student">
-        <rdf:type rdf:resource="&owl;Thing"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Student">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Man"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <hasAge rdf:datatype="&xsd;int">19</hasAge>
-        <hasADHDAdditiveAffinity rdf:resource="#StudentADHDAffinity"/>
-        <hasEcoAffinity rdf:resource="#StudentEcoAffinity"/>
-        <hasFairTradeAffinity rdf:resource="#StudentFairTradeAffinity"/>
-        <hasPriceSensitivity rdf:resource="#StudentPriceSensitivity"/>
-    </Man>
+        <hasADHDAdditiveAffinity rdf:resource="&OntologyPersonalProfile;StudentADHDAffinity"/>
+        <hasEcoAffinity rdf:resource="&OntologyPersonalProfile;StudentEcoAffinity"/>
+        <hasFairTradeAffinity rdf:resource="&OntologyPersonalProfile;StudentFairTradeAffinity"/>
+        <hasPriceSensitivity rdf:resource="&OntologyPersonalProfile;StudentPriceSensitivity"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentADHDAffinity -->
 
-    <owl:Thing rdf:about="#StudentADHDAffinity"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;StudentADHDAffinity">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentEcoAffinity -->
 
-    <LowEcoAffinity rdf:about="#StudentEcoAffinity">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </LowEcoAffinity>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;StudentEcoAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;LowEcoAffinity"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentFairTradeAffinity -->
 
-    <LowFairTradeAffinity rdf:about="#StudentFairTradeAffinity">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </LowFairTradeAffinity>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;StudentFairTradeAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;LowFairTradeAffinity"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#StudentPriceSensitivity -->
 
-    <owl:Thing rdf:about="#StudentPriceSensitivity">
-        <rdf:type rdf:resource="#HighPriceSensitivity"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;StudentPriceSensitivity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;HighPriceSensitivity"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Sukralose -->
 
-    <Additive rdf:about="#Sukralose">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </Additive>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;Sukralose">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Additive"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#TESTEcological -->
 
-    <QualityMark rdf:about="#TESTEcological">
-        <rdf:type rdf:resource="&owl;Thing"/>
-    </QualityMark>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;TESTEcological">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;QualityMark"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
     
 
 
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#WifeBill -->
 
-    <owl:Thing rdf:about="#WifeBill">
-        <rdf:type rdf:resource="#Woman"/>
+    <owl:Thing rdf:about="&OntologyPersonalProfile;WifeBill">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Woman"/>
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
     </owl:Thing>
     
 
@@ -2288,20 +2378,20 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <swrl:Variable rdf:about="#b"/>
-    <swrl:Variable rdf:about="#p"/>
-    <swrl:Variable rdf:about="#a"/>
-    <swrl:Variable rdf:about="#c"/>
-    <swrl:Variable rdf:about="#age"/>
+    <swrl:Variable rdf:about="&OntologyPersonalProfile;p"/>
+    <swrl:Variable rdf:about="&OntologyPersonalProfile;age"/>
+    <swrl:Variable rdf:about="&OntologyPersonalProfile;b"/>
+    <swrl:Variable rdf:about="&OntologyPersonalProfile;a"/>
+    <swrl:Variable rdf:about="&OntologyPersonalProfile;c"/>
     <swrl:Imp>
         <swrl:head>
             <swrl:AtomList>
                 <rdf:rest rdf:resource="&rdf;nil"/>
                 <rdf:first>
                     <swrl:IndividualPropertyAtom>
-                        <swrl:argument2 rdf:resource="#b"/>
-                        <swrl:argument1 rdf:resource="#p"/>
-                        <swrl:propertyPredicate rdf:resource="#satisfiesFairTradeAffinity"/>
+                        <swrl:argument2 rdf:resource="&OntologyPersonalProfile;b"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                        <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;satisfiesFairTradeAffinity"/>
                     </swrl:IndividualPropertyAtom>
                 </rdf:first>
             </swrl:AtomList>
@@ -2310,8 +2400,8 @@
             <swrl:AtomList>
                 <rdf:first>
                     <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#FairTradeFood"/>
-                        <swrl:argument1 rdf:resource="#b"/>
+                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;FairTradeFood"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;b"/>
                     </swrl:ClassAtom>
                 </rdf:first>
                 <rdf:rest>
@@ -2320,153 +2410,16 @@
                             <swrl:AtomList>
                                 <rdf:first>
                                     <swrl:ClassAtom>
-                                        <swrl:classPredicate rdf:resource="#HighFairTradeAffinity"/>
-                                        <swrl:argument1 rdf:resource="#a"/>
-                                    </swrl:ClassAtom>
-                                </rdf:first>
-                                <rdf:rest>
-                                    <swrl:AtomList>
-                                        <rdf:rest>
-                                            <swrl:AtomList>
-                                                <rdf:rest rdf:resource="&rdf;nil"/>
-                                                <rdf:first>
-                                                    <swrl:IndividualPropertyAtom>
-                                                        <swrl:argument2 rdf:resource="#a"/>
-                                                        <swrl:propertyPredicate rdf:resource="#hasFairTradeAffinity"/>
-                                                        <swrl:argument1 rdf:resource="#p"/>
-                                                    </swrl:IndividualPropertyAtom>
-                                                </rdf:first>
-                                            </swrl:AtomList>
-                                        </rdf:rest>
-                                        <rdf:first>
-                                            <swrl:ClassAtom>
-                                                <swrl:classPredicate rdf:resource="#Person"/>
-                                                <swrl:argument1 rdf:resource="#p"/>
-                                            </swrl:ClassAtom>
-                                        </rdf:first>
-                                    </swrl:AtomList>
-                                </rdf:rest>
-                            </swrl:AtomList>
-                        </rdf:rest>
-                        <rdf:first>
-                            <swrl:ClassAtom>
-                                <swrl:classPredicate rdf:resource="#Food"/>
-                                <swrl:argument1 rdf:resource="#b"/>
-                            </swrl:ClassAtom>
-                        </rdf:first>
-                    </swrl:AtomList>
-                </rdf:rest>
-            </swrl:AtomList>
-        </swrl:body>
-    </swrl:Imp>
-    <swrl:Imp>
-        <swrl:head>
-            <swrl:AtomList>
-                <rdf:rest rdf:resource="&rdf;nil"/>
-                <rdf:first>
-                    <swrl:IndividualPropertyAtom>
-                        <swrl:propertyPredicate rdf:resource="#avoiderAdditiveProduct"/>
-                        <swrl:argument2 rdf:resource="#b"/>
-                        <swrl:argument1 rdf:resource="#p"/>
-                    </swrl:IndividualPropertyAtom>
-                </rdf:first>
-            </swrl:AtomList>
-        </swrl:head>
-        <swrl:body>
-            <swrl:AtomList>
-                <rdf:first>
-                    <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#ADHDAdditive"/>
-                        <swrl:argument1 rdf:resource="#c"/>
-                    </swrl:ClassAtom>
-                </rdf:first>
-                <rdf:rest>
-                    <swrl:AtomList>
-                        <rdf:first>
-                            <swrl:ClassAtom>
-                                <swrl:classPredicate rdf:resource="#AvoidADHDAdditives"/>
-                                <swrl:argument1 rdf:resource="#a"/>
-                            </swrl:ClassAtom>
-                        </rdf:first>
-                        <rdf:rest>
-                            <swrl:AtomList>
-                                <rdf:first>
-                                    <swrl:ClassAtom>
-                                        <swrl:classPredicate rdf:resource="#Food"/>
-                                        <swrl:argument1 rdf:resource="#b"/>
+                                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;HighFairTradeAffinity"/>
+                                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;a"/>
                                     </swrl:ClassAtom>
                                 </rdf:first>
                                 <rdf:rest>
                                     <swrl:AtomList>
                                         <rdf:first>
                                             <swrl:ClassAtom>
-                                                <swrl:classPredicate rdf:resource="#Person"/>
-                                                <swrl:argument1 rdf:resource="#p"/>
-                                            </swrl:ClassAtom>
-                                        </rdf:first>
-                                        <rdf:rest>
-                                            <swrl:AtomList>
-                                                <rdf:rest>
-                                                    <swrl:AtomList>
-                                                        <rdf:rest rdf:resource="&rdf;nil"/>
-                                                        <rdf:first>
-                                                            <swrl:IndividualPropertyAtom>
-                                                                <swrl:argument2 rdf:resource="#a"/>
-                                                                <swrl:propertyPredicate rdf:resource="#hasADHDAdditiveAffinity"/>
-                                                                <swrl:argument1 rdf:resource="#p"/>
-                                                            </swrl:IndividualPropertyAtom>
-                                                        </rdf:first>
-                                                    </swrl:AtomList>
-                                                </rdf:rest>
-                                                <rdf:first>
-                                                    <swrl:IndividualPropertyAtom>
-                                                        <swrl:argument1 rdf:resource="#b"/>
-                                                        <swrl:argument2 rdf:resource="#c"/>
-                                                        <swrl:propertyPredicate rdf:resource="#containsAdditive"/>
-                                                    </swrl:IndividualPropertyAtom>
-                                                </rdf:first>
-                                            </swrl:AtomList>
-                                        </rdf:rest>
-                                    </swrl:AtomList>
-                                </rdf:rest>
-                            </swrl:AtomList>
-                        </rdf:rest>
-                    </swrl:AtomList>
-                </rdf:rest>
-            </swrl:AtomList>
-        </swrl:body>
-    </swrl:Imp>
-    <swrl:Imp>
-        <swrl:head>
-            <swrl:AtomList>
-                <rdf:rest rdf:resource="&rdf;nil"/>
-                <rdf:first>
-                    <swrl:IndividualPropertyAtom>
-                        <swrl:argument2 rdf:resource="#b"/>
-                        <swrl:argument1 rdf:resource="#p"/>
-                        <swrl:propertyPredicate rdf:resource="#satisfiesHighEcoAffinity"/>
-                    </swrl:IndividualPropertyAtom>
-                </rdf:first>
-            </swrl:AtomList>
-        </swrl:head>
-        <swrl:body>
-            <swrl:AtomList>
-                <rdf:rest>
-                    <swrl:AtomList>
-                        <rdf:first>
-                            <swrl:ClassAtom>
-                                <swrl:classPredicate rdf:resource="#HighEcoAffinity"/>
-                                <swrl:argument1 rdf:resource="#a"/>
-                            </swrl:ClassAtom>
-                        </rdf:first>
-                        <rdf:rest>
-                            <swrl:AtomList>
-                                <rdf:rest>
-                                    <swrl:AtomList>
-                                        <rdf:first>
-                                            <swrl:ClassAtom>
-                                                <swrl:classPredicate rdf:resource="#TestEcoFood"/>
-                                                <swrl:argument1 rdf:resource="#b"/>
+                                                <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Person"/>
+                                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
                                             </swrl:ClassAtom>
                                         </rdf:first>
                                         <rdf:rest>
@@ -2474,46 +2427,50 @@
                                                 <rdf:rest rdf:resource="&rdf;nil"/>
                                                 <rdf:first>
                                                     <swrl:IndividualPropertyAtom>
-                                                        <swrl:argument2 rdf:resource="#a"/>
-                                                        <swrl:propertyPredicate rdf:resource="#hasEcoAffinity"/>
-                                                        <swrl:argument1 rdf:resource="#p"/>
+                                                        <swrl:argument2 rdf:resource="&OntologyPersonalProfile;a"/>
+                                                        <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;hasFairTradeAffinity"/>
+                                                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
                                                     </swrl:IndividualPropertyAtom>
                                                 </rdf:first>
                                             </swrl:AtomList>
                                         </rdf:rest>
                                     </swrl:AtomList>
                                 </rdf:rest>
-                                <rdf:first>
-                                    <swrl:ClassAtom>
-                                        <swrl:classPredicate rdf:resource="#Person"/>
-                                        <swrl:argument1 rdf:resource="#p"/>
-                                    </swrl:ClassAtom>
-                                </rdf:first>
                             </swrl:AtomList>
                         </rdf:rest>
+                        <rdf:first>
+                            <swrl:ClassAtom>
+                                <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Food"/>
+                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;b"/>
+                            </swrl:ClassAtom>
+                        </rdf:first>
                     </swrl:AtomList>
                 </rdf:rest>
-                <rdf:first>
-                    <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#Food"/>
-                        <swrl:argument1 rdf:resource="#b"/>
-                    </swrl:ClassAtom>
-                </rdf:first>
             </swrl:AtomList>
         </swrl:body>
     </swrl:Imp>
     <swrl:Imp>
+        <swrl:head>
+            <swrl:AtomList>
+                <rdf:rest rdf:resource="&rdf;nil"/>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Adult"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
+            </swrl:AtomList>
+        </swrl:head>
         <swrl:body>
             <swrl:AtomList>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Person"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
                 <rdf:rest>
                     <swrl:AtomList>
-                        <rdf:first>
-                            <swrl:DatavaluedPropertyAtom>
-                                <swrl:argument2 rdf:resource="#age"/>
-                                <swrl:propertyPredicate rdf:resource="#hasAge"/>
-                                <swrl:argument1 rdf:resource="#p"/>
-                            </swrl:DatavaluedPropertyAtom>
-                        </rdf:first>
                         <rdf:rest>
                             <swrl:AtomList>
                                 <rdf:rest rdf:resource="&rdf;nil"/>
@@ -2523,7 +2480,7 @@
                                         <swrl:arguments>
                                             <rdf:Description>
                                                 <rdf:type rdf:resource="&rdf;List"/>
-                                                <rdf:first rdf:resource="#age"/>
+                                                <rdf:first rdf:resource="&OntologyPersonalProfile;age"/>
                                                 <rdf:rest>
                                                     <rdf:Description>
                                                         <rdf:type rdf:resource="&rdf;List"/>
@@ -2537,12 +2494,78 @@
                                 </rdf:first>
                             </swrl:AtomList>
                         </rdf:rest>
+                        <rdf:first>
+                            <swrl:DatavaluedPropertyAtom>
+                                <swrl:argument2 rdf:resource="&OntologyPersonalProfile;age"/>
+                                <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;hasAge"/>
+                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                            </swrl:DatavaluedPropertyAtom>
+                        </rdf:first>
+                    </swrl:AtomList>
+                </rdf:rest>
+            </swrl:AtomList>
+        </swrl:body>
+    </swrl:Imp>
+    <swrl:Imp>
+        <swrl:body>
+            <swrl:AtomList>
+                <rdf:rest>
+                    <swrl:AtomList>
+                        <rdf:first>
+                            <swrl:ClassAtom>
+                                <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;AvoidADHDAdditives"/>
+                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;a"/>
+                            </swrl:ClassAtom>
+                        </rdf:first>
+                        <rdf:rest>
+                            <swrl:AtomList>
+                                <rdf:rest>
+                                    <swrl:AtomList>
+                                        <rdf:first>
+                                            <swrl:ClassAtom>
+                                                <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Person"/>
+                                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                                            </swrl:ClassAtom>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <swrl:AtomList>
+                                                <rdf:rest>
+                                                    <swrl:AtomList>
+                                                        <rdf:rest rdf:resource="&rdf;nil"/>
+                                                        <rdf:first>
+                                                            <swrl:IndividualPropertyAtom>
+                                                                <swrl:argument2 rdf:resource="&OntologyPersonalProfile;a"/>
+                                                                <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;hasADHDAdditiveAffinity"/>
+                                                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                                                            </swrl:IndividualPropertyAtom>
+                                                        </rdf:first>
+                                                    </swrl:AtomList>
+                                                </rdf:rest>
+                                                <rdf:first>
+                                                    <swrl:IndividualPropertyAtom>
+                                                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;b"/>
+                                                        <swrl:argument2 rdf:resource="&OntologyPersonalProfile;c"/>
+                                                        <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;containsAdditive"/>
+                                                    </swrl:IndividualPropertyAtom>
+                                                </rdf:first>
+                                            </swrl:AtomList>
+                                        </rdf:rest>
+                                    </swrl:AtomList>
+                                </rdf:rest>
+                                <rdf:first>
+                                    <swrl:ClassAtom>
+                                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Food"/>
+                                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;b"/>
+                                    </swrl:ClassAtom>
+                                </rdf:first>
+                            </swrl:AtomList>
+                        </rdf:rest>
                     </swrl:AtomList>
                 </rdf:rest>
                 <rdf:first>
                     <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#Person"/>
-                        <swrl:argument1 rdf:resource="#p"/>
+                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;ADHDAdditive"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;c"/>
                     </swrl:ClassAtom>
                 </rdf:first>
             </swrl:AtomList>
@@ -2551,17 +2574,84 @@
             <swrl:AtomList>
                 <rdf:rest rdf:resource="&rdf;nil"/>
                 <rdf:first>
-                    <swrl:ClassAtom>
-                        <swrl:classPredicate rdf:resource="#Adult"/>
-                        <swrl:argument1 rdf:resource="#p"/>
-                    </swrl:ClassAtom>
+                    <swrl:IndividualPropertyAtom>
+                        <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;avoiderAdditiveProduct"/>
+                        <swrl:argument2 rdf:resource="&OntologyPersonalProfile;b"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                    </swrl:IndividualPropertyAtom>
                 </rdf:first>
             </swrl:AtomList>
         </swrl:head>
+    </swrl:Imp>
+    <swrl:Imp>
+        <swrl:head>
+            <swrl:AtomList>
+                <rdf:rest rdf:resource="&rdf;nil"/>
+                <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                        <swrl:argument2 rdf:resource="&OntologyPersonalProfile;b"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                        <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;satisfiesHighEcoAffinity"/>
+                    </swrl:IndividualPropertyAtom>
+                </rdf:first>
+            </swrl:AtomList>
+        </swrl:head>
+        <swrl:body>
+            <swrl:AtomList>
+                <rdf:rest>
+                    <swrl:AtomList>
+                        <rdf:first>
+                            <swrl:ClassAtom>
+                                <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;HighEcoAffinity"/>
+                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;a"/>
+                            </swrl:ClassAtom>
+                        </rdf:first>
+                        <rdf:rest>
+                            <swrl:AtomList>
+                                <rdf:rest>
+                                    <swrl:AtomList>
+                                        <rdf:first>
+                                            <swrl:ClassAtom>
+                                                <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;TestEcoFood"/>
+                                                <swrl:argument1 rdf:resource="&OntologyPersonalProfile;b"/>
+                                            </swrl:ClassAtom>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <swrl:AtomList>
+                                                <rdf:rest rdf:resource="&rdf;nil"/>
+                                                <rdf:first>
+                                                    <swrl:IndividualPropertyAtom>
+                                                        <swrl:argument2 rdf:resource="&OntologyPersonalProfile;a"/>
+                                                        <swrl:propertyPredicate rdf:resource="&OntologyPersonalProfile;hasEcoAffinity"/>
+                                                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                                                    </swrl:IndividualPropertyAtom>
+                                                </rdf:first>
+                                            </swrl:AtomList>
+                                        </rdf:rest>
+                                    </swrl:AtomList>
+                                </rdf:rest>
+                                <rdf:first>
+                                    <swrl:ClassAtom>
+                                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Person"/>
+                                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;p"/>
+                                    </swrl:ClassAtom>
+                                </rdf:first>
+                            </swrl:AtomList>
+                        </rdf:rest>
+                    </swrl:AtomList>
+                </rdf:rest>
+                <rdf:first>
+                    <swrl:ClassAtom>
+                        <swrl:classPredicate rdf:resource="&OntologyPersonalProfile;Food"/>
+                        <swrl:argument1 rdf:resource="&OntologyPersonalProfile;b"/>
+                    </swrl:ClassAtom>
+                </rdf:first>
+            </swrl:AtomList>
+        </swrl:body>
     </swrl:Imp>
 </rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
+<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
 
