@@ -36,7 +36,7 @@ public class LilliansTest {
     public static final String myURI = "http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl";
 
 
-    //todo legge til reasoner i before ogsŒ?  + factory?
+    //todo legge til reasoner i before ogsï¿½?  + factory?
 
     @Before
     public void setUp() throws OWLOntologyCreationException {
@@ -46,6 +46,7 @@ public class LilliansTest {
         ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
+
     }
 
     //GET STARTED
@@ -207,8 +208,8 @@ public class LilliansTest {
 
    @Test
     public void findClassOfIndividualHervikJam() {
-        //mŒ vi ha en hasName-relation?
-        //hvilken klasse h¿rer HervikblablaJam til?
+        //mï¿½ vi ha en hasName-relation?
+        //hvilken klasse hï¿½rer HervikblablaJam til?
 
         OWLDataFactory factory = manager.getOWLDataFactory();
 
@@ -223,7 +224,7 @@ public class LilliansTest {
         //OWLClass classOfHSJ = hervikStrawberryJam.;
         List<OWLClass> result = new ArrayList<OWLClass>();
         Set<Set<OWLClass>> classesOfHSJSets = reasoner.getTypes(hervikStrawberryJam);
-        Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gj¿r ferdig!! trenger ikke like mye l¿kker
+        Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gjï¿½r ferdig!! trenger ikke like mye lï¿½kker
 
         for (Set<OWLClass> classesOfHSJSet : classesOfHSJSets) {
             for (OWLClass owlClass : classesOfHSJSet) {
@@ -480,7 +481,7 @@ public class LilliansTest {
         //Set<Set<OWLClass>> type = reasoner.getTypes(hervikSJ);
 
         Set<OWLObjectProperty> objectProperties = reasoner.getObjectProperties(); //alle
-        //sŒ kan man evt koble properties til domains, og videre lage lister for hvilke som h¿rer til hvilke domains, og videre hvilke ranges de har
+        //sï¿½ kan man evt koble properties til domains, og videre lage lister for hvilke som hï¿½rer til hvilke domains, og videre hvilke ranges de har
         for (OWLObjectProperty objectProperty : objectProperties) {
             System.out.println("objectProperty = " + objectProperty);
             OWLIndividual range = reasoner.getRelatedIndividual(hervikSJ, objectProperty);
@@ -549,7 +550,7 @@ public class LilliansTest {
         //properties = hervikSJ.
         Set<OWLProperty<?, ?>> properties = reasoner.getProperties();    //returnerer ALLE
 
-        //sŒ kan man evt koble properties til domains, og videre lage lister for hvilke som h¿rer til hvilke domains, og videre hvilke ranges de har
+        //sï¿½ kan man evt koble properties til domains, og videre lage lister for hvilke som hï¿½rer til hvilke domains, og videre hvilke ranges de har
 
         for (OWLProperty<?, ?> property : properties) {
             if (property instanceof OWLObjectProperty) {
@@ -571,22 +572,22 @@ public class LilliansTest {
             //OWLPropertyRange     ;
         }
 
-        //todo lag test - eller fjern siden jeg fŒ hentet ut datatype og objectproperties hver for seg
+        //todo lag test - eller fjern siden jeg fï¿½ hentet ut datatype og objectproperties hver for seg
     }
 
 
 
-    //todo StrawberryJam har x properties - mŒ legge til mer om ingredienser og pris og slikt
-    //todo lister for Œ hente ut informasjonen jeg finner -
+    //todo StrawberryJam har x properties - mï¿½ legge til mer om ingredienser og pris og slikt
+    //todo lister for ï¿½ hente ut informasjonen jeg finner -
     //todo metoder/tester som skal legges til: returnResult, computeRelevanceForCandidates
-    //todo finn properties til instanser     - mŒ gŒ ut fra at mediator kjenner til modellen
-    //todo finn mŒte Œ fŒ tak i range pŒ HJELP STIG
+    //todo finn properties til instanser     - mï¿½ gï¿½ ut fra at mediator kjenner til modellen
+    //todo finn mï¿½te ï¿½ fï¿½ tak i range pï¿½ HJELP STIG
 
     /*
     @Test
     public void findDirectSuperclass() {
-        //ikke mulig Œ finne direct superclass
-        //kombinasjonen at den mŒ v¾re subklasse av ProcessedFood eller Commodity
+        //ikke mulig ï¿½ finne direct superclass
+        //kombinasjonen at den mï¿½ vï¿½re subklasse av ProcessedFood eller Commodity
 
         OWLDataFactory factory = manager.getOWLDataFactory();
 
@@ -599,7 +600,7 @@ public class LilliansTest {
 
 
         //vet at han skal ha noe av typen strawberryjam
-        // trenger egenlig ikke vite akkurat hvilket produkt han hadde tenkt Œ ta...
+        // trenger egenlig ikke vite akkurat hvilket produkt han hadde tenkt ï¿½ ta...
         OWLClass strawberryJam = factory.getClass();
         OWLClass strawberryJam = reasoner.getType(hervikSJ);
 
@@ -607,8 +608,8 @@ public class LilliansTest {
     }
      **/
 
-    //metoder for Œ finne ut relevant informasjon om Bill ifht SC1
-    //mŒ vi f¿rst sjekke at de er definert for en person? eller kan vi anta at de er det?
+    //metoder for ï¿½ finne ut relevant informasjon om Bill ifht SC1
+    //mï¿½ vi fï¿½rst sjekke at de er definert for en person? eller kan vi anta at de er det?
 
 
     @Test
@@ -656,7 +657,7 @@ public class LilliansTest {
         assertEquals("HighFairTradeAffinity", typeOfFairTradeAffinity.toString());
     }
 
-    //blir n¿dt til Œ koble informasjonen vi har om produktet med en persons affinities
+    //blir nï¿½dt til ï¿½ koble informasjonen vi har om produktet med en persons affinities
     //bruke EcoConcernedPerson, FairTradeConcerenedPerson, MediumPriceConcernedPerson osv
     //koble to og to sammen?
     //husk innholdet i produktet
@@ -667,7 +668,7 @@ public class LilliansTest {
     // IKKE TATT MED
     @Test
     public void computeRelevanceOfAProduct() {
-        //mŒ gj¿res for alle aktuelle kandidater
+        //mï¿½ gjï¿½res for alle aktuelle kandidater
         OWLDataFactory factory = manager.getOWLDataFactory();
 
         OWLIndividual icaEco = factory.getOWLIndividual(URI.create(myURI + "#ICAEcologicalStrawberryJam"));
@@ -689,13 +690,13 @@ public class LilliansTest {
         }
 
         //find all the other individuals of the same type
-        //hva kan man hente ut ved hjelp av sp¿rring?
+        //hva kan man hente ut ved hjelp av spï¿½rring?
 
         //todo assertEquals
     }
 
-    /*  ikke sŒ lett nŒr jeg ikke vet hvilke atributter som er relevante
-    de avhenger jo av det vi fŒr vite i profilen
+    /*  ikke sï¿½ lett nï¿½r jeg ikke vet hvilke atributter som er relevante
+    de avhenger jo av det vi fï¿½r vite i profilen
     @Test
     public void findMostRlevantJam() {
         //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
@@ -743,7 +744,7 @@ public class LilliansTest {
         String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
 
         //assertEquals(wantedRs, bl);
-        //todo hvordan hŒndtere result sett fra sp¿rring - syntax for sp¿rringene - hvis man vet alt dette er det vel like greit Œ bruke vanlig reasoning?
+        //todo hvordan hï¿½ndtere result sett fra spï¿½rring - syntax for spï¿½rringene - hvis man vet alt dette er det vel like greit ï¿½ bruke vanlig reasoning?
     }
     */
 
@@ -751,8 +752,8 @@ public class LilliansTest {
     @Test
     public void sortFinalResult() {
 
-        //sorter etter verdi - instanser med tilh¿rende relevance weight
-        //Liste - f¿rste elementet skal v¾re
+        //sorter etter verdi - instanser med tilhï¿½rende relevance weight
+        //Liste - fï¿½rste elementet skal vï¿½re
     }
 
 
@@ -807,7 +808,7 @@ public class LilliansTest {
         String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
 
         //assertEquals(wantedRs, bl);
-        //todo hvordan hŒndtere result sett fra sp¿rring - syntax for sp¿rringene - hvis man vet alt dette er det vel like greit Œ bruke vanlig reasoning?
+        //todo hvordan hï¿½ndtere result sett fra spï¿½rring - syntax for spï¿½rringene - hvis man vet alt dette er det vel like greit ï¿½ bruke vanlig reasoning?
     }
 
 
@@ -861,7 +862,7 @@ public class LilliansTest {
         String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
 
         //assertEquals(wantedRs, bl);
-        //todo hvordan hŒndtere result sett fra sp¿rring - syntax for sp¿rringene - hvis man vet alt dette er det vel like greit Œ bruke vanlig reasoning?
+        //todo hvordan hï¿½ndtere result sett fra spï¿½rring - syntax for spï¿½rringene - hvis man vet alt dette er det vel like greit ï¿½ bruke vanlig reasoning?
     }
 
     @Test
@@ -914,7 +915,7 @@ public class LilliansTest {
         String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
 
         //assertEquals(wantedRs, bl);
-        //todo hvordan hŒndtere result sett fra sp¿rring - syntax for sp¿rringene - hvis man vet alt dette er det vel like greit Œ bruke vanlig reasoning?
+        //todo hvordan hï¿½ndtere result sett fra spï¿½rring - syntax for spï¿½rringene - hvis man vet alt dette er det vel like greit ï¿½ bruke vanlig reasoning?
     }
 
     @Test
@@ -965,14 +966,14 @@ public class LilliansTest {
         String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
 
         //assertEquals(wantedRs, bl);
-        //todo hvordan hŒndtere result sett fra sp¿rring - syntax for sp¿rringene - hvis man vet alt dette er det vel like greit Œ bruke vanlig reasoning?
+        //todo hvordan hï¿½ndtere result sett fra spï¿½rring - syntax for spï¿½rringene - hvis man vet alt dette er det vel like greit ï¿½ bruke vanlig reasoning?
     }
 
-//hvordan finne ut range til en relasjon? ->  mŒ vite instansen du h¿rer til
-//properties til en instans    - mŒ trikses med
+//hvordan finne ut range til en relasjon? ->  mï¿½ vite instansen du hï¿½rer til
+//properties til en instans    - mï¿½ trikses med
 //verdier til en property til en instans - ok
 
-//finne en instans sin klasse        - dvs noe med en property som h¿rer til en eller annen klasse
+//finne en instans sin klasse        - dvs noe med en property som hï¿½rer til en eller annen klasse
 
     /*
  @Test
@@ -987,7 +988,7 @@ public class LilliansTest {
         Set<Set<OWLClass>> type = reasoner.getTypes(hervikSJ);
 
         Set<OWLObjectProperty> objectProperties = reasoner.getObjectProperties(); //alle
-        //sŒ kan man evt koble properties til domains, og videre lage lister for hvilke som h¿rer til hvilke domains, og videre hvilke ranges de har
+        //sï¿½ kan man evt koble properties til domains, og videre lage lister for hvilke som hï¿½rer til hvilke domains, og videre hvilke ranges de har
         for (OWLObjectProperty objectProperty : objectProperties) {
 
         }
