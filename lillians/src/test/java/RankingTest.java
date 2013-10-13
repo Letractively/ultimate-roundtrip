@@ -1,35 +1,21 @@
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
-import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.model.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.*;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class RankingTest {
 
-    static OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-    static OWLDataFactory factory = manager.getOWLDataFactory();
+    static SparqlQueryFactory factory;
+    static Reasoner reasoner;
 
-    OWLOntology ontology;
-    public Reasoner reasoner;
-    public static final String myURI = "http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl";
-    public static final String prefix = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  ";
-
-    @Before
-    public void setUp() throws OWLOntologyCreationException, URISyntaxException {
-        ontology = manager.loadOntologyFromPhysicalURI(getClass().getResource("PersonalProfile.owl").toURI());
-        reasoner = new Reasoner(manager);
-        reasoner.loadOntology(ontology);
+    @BeforeClass
+    public static void setUp() {
+        factory = new SparqlQueryFactory();
+        reasoner = factory.reasoner;
     }
 
     //todo bytt ut med spørring? getallaffinities
@@ -83,7 +69,7 @@ public class RankingTest {
     @Test
     public void testRating() {
         //Get Product list - alle possible alternatives
-        OWLClass strawberryJam = findClassByName("#StrawberryJam");
+        OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> jams = reasoner.getIndividuals(strawberryJam, false);
 
         //test
@@ -91,23 +77,23 @@ public class RankingTest {
         assertEquals(10, jams.size());
 
 
-                //Profile with Bills Preferences
-                OWLIndividual bill = findIndividual("#Bill");
-                OWLObjectProperty hasEcoAffinity = findObjectProperty("#hasEcoAffinity");
-                OWLIndividual ecoAffinity = reasoner.getRelatedIndividual(bill, hasEcoAffinity);
-                System.out.println("ecoAffinity = " + ecoAffinity);
-                //Bill has Eco affinity
-                OWLClass billsEcoAffinity = reasoner.getType(ecoAffinity);
-                assertEquals("HighEcoAffinity", billsEcoAffinity.toString());
+        OWLIndividual bill = factory.findIndividual("#Bill");
+        //Profile with Bills Preferences
+        OWLObjectProperty hasEcoAffinity = factory.findObjectProperty("#hasEcoAffinity");
+        OWLIndividual ecoAffinity = reasoner.getRelatedIndividual(bill, hasEcoAffinity);
+        System.out.println("ecoAffinity = " + ecoAffinity);
+        //Bill has Eco affinity
+        OWLClass billsEcoAffinity = reasoner.getType(ecoAffinity);
+        assertEquals("HighEcoAffinity", billsEcoAffinity.toString());
 
-                OWLObjectProperty hasPriceSensitivity = findObjectProperty("#hasPriceSensitivity");
-                OWLIndividual priceSensitivity = reasoner.getRelatedIndividual(bill, hasPriceSensitivity);
-                OWLClass billsPriceSensitivity = reasoner.getType(priceSensitivity);
-                assertEquals("MediumPriceSensitivity", billsPriceSensitivity.toString());
+        OWLObjectProperty hasPriceSensitivity = factory.findObjectProperty("#hasPriceSensitivity");
+        OWLIndividual priceSensitivity = reasoner.getRelatedIndividual(bill, hasPriceSensitivity);
+        OWLClass billsPriceSensitivity = reasoner.getType(priceSensitivity);
+        assertEquals("MediumPriceSensitivity", billsPriceSensitivity.toString());
 
 
         //Calculate Bills affinities - hentes ut via spørring
-        List<OWLIndividual> allAffinities = executeQuery(getAllAffinities);
+        List<OWLIndividual> allAffinities = factory.executeQuery(getAllAffinities);
         Map<OWLIndividual, SimpleSortable> jamMap = createJamMap(jams);
 
         addBoosters(allAffinities, jamMap);
@@ -115,47 +101,44 @@ public class RankingTest {
         //Sort list based on score
         List<SimpleSortable> sortables = new ArrayList<SimpleSortable>(jamMap.values());
         Collections.sort(sortables);
-        assertEquals(findIndividual("#ICAEcologicalStrawberryJam"), sortables.get(0).jam);
+        assertEquals(factory.findIndividual("#ICAEcologicalStrawberryJam"), sortables.get(0).jam);
         assertEquals(6, sortables.get(0).relevance());
-        assertEquals(findIndividual("#HervikEcoStrawberryJam"), sortables.get(1).jam);
+        assertEquals(factory.findIndividual("#HervikEcoStrawberryJam"), sortables.get(1).jam);
         assertEquals(6, sortables.get(1).relevance());
-        assertEquals(findIndividual("#NoraOriginal"), sortables.get(2).jam);
+        assertEquals(factory.findIndividual("#NoraOriginal"), sortables.get(2).jam);
         assertEquals(0, sortables.get(2).relevance());
-        assertEquals(findIndividual("#EuroshopperStrawberryJam"), sortables.get(3).jam);
-        assertEquals(findIndividual("#HervikStrawberryJam"), sortables.get(4).jam);
-        assertEquals(findIndividual("#NoraSqueezy"), sortables.get(5).jam);
-        assertEquals(findIndividual("#NoraLightStrawberryJam"), sortables.get(6).jam);
-        assertEquals(findIndividual("#NoraNoSugar"), sortables.get(7).jam);
-        assertEquals(findIndividual("#NoraHomeMadeStrawberryAndWildJam"), sortables.get(8).jam);
-        assertEquals(findIndividual("#NoraHomeMadeStrawberryJam"), sortables.get(9).jam);
+        assertEquals(factory.findIndividual("#EuroshopperStrawberryJam"), sortables.get(3).jam);
+        assertEquals(factory.findIndividual("#HervikStrawberryJam"), sortables.get(4).jam);
+        assertEquals(factory.findIndividual("#NoraSqueezy"), sortables.get(5).jam);
+        assertEquals(factory.findIndividual("#NoraLightStrawberryJam"), sortables.get(6).jam);
+        assertEquals(factory.findIndividual("#NoraNoSugar"), sortables.get(7).jam);
+        assertEquals(factory.findIndividual("#NoraHomeMadeStrawberryAndWildJam"), sortables.get(8).jam);
+        assertEquals(factory.findIndividual("#NoraHomeMadeStrawberryJam"), sortables.get(9).jam);
     }
 
     @Test
     public void testRankedProducts() {
-        OWLIndividual bill = findIndividual("#Bill");
         //assertEquals(2, executeQuery(getAllEcoJams).size());
-        assertEquals(2, executeQuery(getProducts("Jam", "hasWayOfProduction", "Ecological")).size());
-        assertEquals(10, executeQuery(getProducts("Jam", "", "")).size());
-        List<OWLIndividual> results = executeQuery(getSatisfiesHighEcoAffinity);
+        assertEquals(2, factory.executeQuery(getProducts("Jam", "hasWayOfProduction", "Ecological")).size());
+        assertEquals(10, factory.executeQuery(getProducts("Jam", "", "")).size());
+        List<OWLIndividual> results = factory.executeQuery(getSatisfiesHighEcoAffinity);
         assertEquals(2, results.size());
         assertEquals("ICAEcologicalStrawberryJam", results.get(0).toString());
         assertEquals("HervikEcoStrawberryJam", results.get(1).toString());
-
-
     }
 
     private void addBoosters(List<OWLIndividual> allAffinities, Map<OWLIndividual, SimpleSortable> jamMap) {
         for (OWLIndividual jam : jamMap.keySet()) {
-            OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, findObjectProperty("#hasWayOfProduction"));
+            OWLIndividual relatedWayOfProductionIndividual = reasoner.getRelatedIndividual(jam, factory.findObjectProperty("#hasWayOfProduction"));
 
-            OWLDataProperty hasWOPValue = RankingTest.findDataType("#hasWOPValue");
+            OWLDataProperty hasWOPValue = factory.findDataType("#hasWOPValue");
             OWLConstant jamWOPValue = reasoner.getRelatedValue(relatedWayOfProductionIndividual, hasWOPValue);
 
             for (OWLIndividual affinity : allAffinities) {
                 //Sjekke om Affinitien har noe å gjøre med Way of production og sånt
                 if (isAffinityRelatedToProductInformation(affinity, jam)) {
                     System.out.println("affinity = " + affinity);
-                    OWLDataProperty hasAffinityValue = RankingTest.findDataType("#hasAffinityValue");
+                    OWLDataProperty hasAffinityValue = factory.findDataType("#hasAffinityValue");
 
                     OWLConstant affinityValue = reasoner.getRelatedValue(affinity, hasAffinityValue);
                     System.out.println("!!!!!!!!!!!affinityValue = " + affinityValue);
@@ -170,18 +153,16 @@ public class RankingTest {
     }
 
     @Test
-    public void testBoosterRelevance(){
-        OWLIndividual bill = findIndividual("#Bill");
+    public void testBoosterRelevance() {
+        List<OWLIndividual> boosters = factory.executeQuery(getAllHighBoosters("Bill"));
 
-         List<OWLIndividual> boosters = executeQuery(getAllHighBoosters("Bill"));
-
-         assertEquals(2, boosters.size());
+        assertEquals(2, boosters.size());
         assertEquals("HervikEcoStrawberryJam", boosters.get(1).toString());
         assertEquals("ICAEcologicalStrawberryJam", boosters.get(0).toString());
 
 
-         //Get Product list - alle possible alternatives
-        OWLClass strawberryJam = findClassByName("#StrawberryJam");
+        //Get Product list - alle possible alternatives
+        OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
 
 
         //List<OWLIndividual> allAffinities = getAllAffinities();
@@ -210,14 +191,12 @@ public class RankingTest {
     }
 
 
-
-
     //hva skal denne brukes til?
     @Test
     public void testAffinityRelatedToProductInformation() {
 
-        OWLIndividual hervikSJ = findIndividual("#HervikEcoStrawberryJam");
-        OWLIndividual eco = findIndividual("#BillsEcoAffinity");
+        OWLIndividual hervikSJ = factory.findIndividual("#HervikEcoStrawberryJam");
+        OWLIndividual eco = factory.findIndividual("#BillsEcoAffinity");
         assertTrue(isAffinityRelatedToProductInformation(eco, hervikSJ));
     }
 
@@ -226,11 +205,11 @@ public class RankingTest {
         Set<Set<OWLClass>> superclass = reasoner.getSuperClasses(affinityClass);
         Set<OWLClass> superclassFlat = OWLReasonerAdapter.flattenSetOfSets(superclass);
         for (OWLClass owlClass : superclassFlat) {
-            OWLObjectProperty hasQualityMark = findObjectProperty("#hasQualityMark");
-            OWLIndividual ecoQM = findIndividual("#TESTEcological");
+            OWLObjectProperty hasQualityMark = factory.findObjectProperty("#hasQualityMark");
+            OWLIndividual ecoQM = factory.findIndividual("#TESTEcological");
 
             boolean productIsEco = reasoner.hasObjectPropertyRelationship(product, hasQualityMark, ecoQM);
-            boolean instanceOfClassEcoAffinity = owlClass.equals(findClassByName("#EcoAffinity"));
+            boolean instanceOfClassEcoAffinity = owlClass.equals(factory.findClassByName("#EcoAffinity"));
             if (instanceOfClassEcoAffinity && productIsEco)
                 return true;
         }
@@ -239,39 +218,39 @@ public class RankingTest {
 
     @Test
     public void testGetAllEcoProds() {
-        assertEquals(2, executeQuery(getAllEcoProducts).size());
-        assertEquals("HervikEcoStrawberryJam", executeQuery(getAllEcoProducts).get(0).toString());
+        assertEquals(2, factory.executeQuery(getAllEcoProducts).size());
+        assertEquals("HervikEcoStrawberryJam", factory.executeQuery(getAllEcoProducts).get(0).toString());
     }
 
     String getAllHighBoosters(String person) {
-                return "SELECT ?x " +
+        return "SELECT ?x " +
                 "WHERE { " +
                 "?x rdf:type OntologyPersonalProfile:Food . " +
-                "OntologyPersonalProfile:"+ person + " OntologyPersonalProfile:boostersHigh ?x." +
+                "OntologyPersonalProfile:" + person + " OntologyPersonalProfile:boostersHigh ?x." +
                 "}";
     }
 
     //finner alle affinities til en person  - bill
     String getAllAffinities = "SELECT ?x WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Modifiers . " +
-                "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
-                "}";
+            "?x rdf:type OntologyPersonalProfile:Modifiers . " +
+            "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
+            "}";
 
     String getAllEcoProducts = "SELECT ?x WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Food." +
-                "?y rdf:type OntologyPersonalProfile:Ecological . " +
-                "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
-                "}";
+            "?x rdf:type OntologyPersonalProfile:Food." +
+            "?y rdf:type OntologyPersonalProfile:Ecological . " +
+            "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
+            "}";
 
     String getAllEcoJams = "SELECT ?x WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Jam." +
-                "?y rdf:type OntologyPersonalProfile:Ecological . " +
-                "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
-                "}";
+            "?x rdf:type OntologyPersonalProfile:Jam." +
+            "?y rdf:type OntologyPersonalProfile:Ecological . " +
+            "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
+            "}";
     String getSatisfiesHighEcoAffinity = "SELECT ?x WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Jam. " +
-                "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x." +
-                "}";
+            "?x rdf:type OntologyPersonalProfile:Jam. " +
+            "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x." +
+            "}";
 
     String getProducts(String xType, String relation, String yType) {
         String query = "SELECT ?x WHERE { ";
@@ -283,40 +262,6 @@ public class RankingTest {
             query += "?x OntologyPersonalProfile:" + relation + " ?y.";
         query += "}";
         return query;
-    }
-
-
-
-
-    private List<OWLIndividual> executeQuery(String query) {
-        SPARQLTests sparqlTest = new SPARQLTests();
-        try {
-            sparqlTest.setUp();
-        } catch (OWLOntologyCreationException e) {
-            throw new RuntimeException("Wooooops!");
-        }
-        List<String> ecosAsStrings = sparqlTest.jenaQuery(prefix + query, "x");
-        List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
-        for (String ecoAsString : ecosAsStrings) {
-            individuals.add(factory.getOWLIndividual(URI.create(ecoAsString)));
-        }
-        return individuals;
-    }
-
-    private static OWLObjectProperty findObjectProperty(String type) {
-        return factory.getOWLObjectProperty(URI.create(myURI + type));
-    }
-
-    private static OWLIndividual findIndividual(String name) {
-        return factory.getOWLIndividual(URI.create(myURI + name));
-    }
-
-    public static OWLClass findClassByName(String className) {
-        return manager.getOWLDataFactory().getOWLClass(URI.create(myURI + className));
-    }
-
-    public static OWLDataProperty findDataType(String name) {
-        return manager.getOWLDataFactory().getOWLDataProperty(URI.create(myURI + name));
     }
 }
 

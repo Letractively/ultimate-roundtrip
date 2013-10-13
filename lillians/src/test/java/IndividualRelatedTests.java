@@ -1,45 +1,34 @@
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
-import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.inference.OWLReasoner;
 import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.inference.OWLReasonerException;
 import org.semanticweb.owl.inference.OWLReasonerFactory;
 import org.semanticweb.owl.model.*;
 import org.semanticweb.reasonerfactory.pellet.PelletReasonerFactory;
-
-import java.net.URI;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by IntelliJ IDEA.
- * User: hella
+ * @author Lillian Hella
  * Date: Feb 8, 2010
- * Time: 8:52:28 AM
- * To change this template use File | Settings | File Templates.
  */
 public class IndividualRelatedTests {
-    OWLOntologyManager manager;
-    OWLOntology ontology;
-    Reasoner reasoner;
-    public static final String myURI = "http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl";
+  
+    private static SparqlQueryFactory factory;
+    private static OWLOntology ontology;
+    private static OWLOntologyManager manager;
+    private static Reasoner reasoner;
 
-    //todo legge til reasoner i before også?  + factory?
-
-    @Before
-    public void setUp() throws OWLOntologyCreationException {
-        manager = OWLManager.createOWLOntologyManager();
-        // We load an ontology
-        // read the ontology
-        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
-        reasoner = new Reasoner(manager);
-        reasoner.loadOntology(ontology);
+    @BeforeClass()
+    public static void beforeClass(){
+        factory = new SparqlQueryFactory();
+        ontology = factory.ontology;
+        manager = factory.manager;
+        reasoner = factory.reasoner;
     }
-
 
     @Test
     public void lookUpNumberOfIndividualsTest() {
@@ -57,13 +46,13 @@ public class IndividualRelatedTests {
         reasoner.loadOntologies(importsClosure);
         reasoner.classify();
 
-        OWLClass jam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#Jam"));
+        OWLClass jam = factory.findClassByName("#Jam");
 
         Set<Set<OWLClass>> subClsSets = reasoner.getDescendantClasses(jam);
 
         Set<OWLClass> subClses = OWLReasonerAdapter.flattenSetOfSets(subClsSets);
 
-        OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> ind = reasoner.getIndividuals(strawberryJam, true);
 
         assertEquals(4, subClses.size());
@@ -73,7 +62,7 @@ public class IndividualRelatedTests {
 
     @Test
     public void getAllInstancesOfACLass() {
-        OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
         //todo skrive dem ut? trenger i alle fall navn på dem...
         assertEquals(10, individuals.size());
@@ -81,9 +70,7 @@ public class IndividualRelatedTests {
 
     @Test
     public void getInstanceOfAClass() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLClass strawberryJam = factory.getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
         //todo trengs forløkke?
 
@@ -92,12 +79,10 @@ public class IndividualRelatedTests {
 
     @Test
     public void getAllInstancesOfAClass() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
         // create property and resources to query the reasoner
-        OWLClass person = factory.getOWLClass(URI.create(myURI + "#Person"));
-        OWLObjectProperty hasGender = factory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
-        OWLDataProperty hasAge = factory.getOWLDataProperty(URI.create(myURI + "#hasAge"));
+        OWLClass person = factory.findClassByName("#Person");
+        OWLObjectProperty hasGender = factory.findObjectProperty("#hasGender");
+        OWLDataProperty hasAge = factory.findDataType("#hasAge");
 
         // get all instances of class
         Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
@@ -113,11 +98,10 @@ public class IndividualRelatedTests {
 
     @Test
     public void domainTest() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "#hasEcoAffinity"));
-        OWLClass person = factory.getOWLClass(URI.create(myURI + "#Person"));
-        OWLClass ecoAffinity = factory.getOWLClass(URI.create(myURI + "#Person"));
-        OWLClass jam = factory.getOWLClass(URI.create(myURI + "#Jam"));
+        OWLObjectProperty prop = factory.getOWLObjectProperty("#hasEcoAffinity");
+        OWLClass person = factory.findClassByName("#Person");
+        OWLClass ecoAffinity = factory.findClassByName("#Person");
+        OWLClass jam = factory.findClassByName("#Jam");
         boolean hmm = reasoner.hasDomain(prop, person);
         boolean hmm2 = reasoner.hasDomain(prop, jam);
         boolean hmm3 = reasoner.hasDomain(prop, ecoAffinity);
@@ -133,12 +117,11 @@ public class IndividualRelatedTests {
 
     @Test
     public void testHasProperty() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
-        OWLIndividual billsEA = factory.getOWLIndividual(URI.create(myURI + "#BillsEcoAffinity"));
-        OWLObjectProperty prop = factory.getOWLObjectProperty(URI.create(myURI + "#hasEcoAffinity"));
+        OWLIndividual bill = factory.findIndividual("#Bill");
+        OWLIndividual billsEA = factory.findIndividual("#BillsEcoAffinity");
+        OWLObjectProperty prop = factory.findObjectProperty("#hasEcoAffinity");
         boolean hasProperty = reasoner.hasObjectPropertyRelationship(bill, prop, billsEA);
-        OWLObjectProperty hasGender = factory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
+        OWLObjectProperty hasGender = factory.findObjectProperty("#hasGender");
         boolean hasG = reasoner.hasObjectPropertyRelationship(bill, hasGender, billsEA);
         System.out.println("hasProperty = " + hasProperty);
         System.out.println("hasG = " + hasG);
@@ -151,10 +134,9 @@ public class IndividualRelatedTests {
     @Test
     public void testIfProuctIsFairTrade() {
         //er et product fairTrade?
-        OWLDataFactory factory = manager.getOWLDataFactory();
-        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
-        OWLObjectProperty hasQualityMark = factory.getOWLObjectProperty(URI.create(myURI + "#hasQualityMark"));
-        OWLIndividual fairTrade = factory.getOWLIndividual(URI.create(myURI + "#FairTrade"));
+        OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam");
+        OWLObjectProperty hasQualityMark = factory.findObjectProperty("#hasQualityMark");
+        OWLIndividual fairTrade = factory.findIndividual("#FairTrade");
 
         boolean isProductFairTrade = reasoner.hasObjectPropertyRelationship(hervikSJ, hasQualityMark, fairTrade);
         System.out.println("isProductFairTrade = " + isProductFairTrade);
@@ -169,14 +151,14 @@ public class IndividualRelatedTests {
     //todo metode ala som returnerer boolean (1 for ja og 0 for nei), med input individual - for da vil man kunne sjekke mange produkter for en og samme egenskap
     //todo 
     //todo hvordan vet man hvilke egenskaper man skal sjekke?
+
     @Test
     public void testIfProductIsEco() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-        OWLIndividual HEcoSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikEcoStrawberryJam"));
-        OWLIndividual HSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
+        OWLIndividual HEcoSJ = factory.findIndividual("#HervikEcoStrawberryJam");
+        OWLIndividual HSJ = factory.findIndividual("#HervikStrawberryJam");
 
-        OWLObjectProperty hasQualityMark = factory.getOWLObjectProperty(URI.create(myURI + "#hasQualityMark"));
-        OWLIndividual eco = factory.getOWLIndividual(URI.create(myURI + "#TESTEcological"));
+        OWLObjectProperty hasQualityMark = factory.findObjectProperty("#hasQualityMark");
+        OWLIndividual eco = factory.findIndividual("#TESTEcological");
 
         boolean isProductEco1 = reasoner.hasObjectPropertyRelationship(HSJ, hasQualityMark, eco);
         boolean isProductEco2 = reasoner.hasObjectPropertyRelationship(HEcoSJ, hasQualityMark, eco);
@@ -188,21 +170,4 @@ public class IndividualRelatedTests {
 
 
     }
-
-    //hasdomain hasrange
-
-    /*
-    @Test
-    public void testForCheckingType() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "Bill"));
-        OWLDescription hm = new OWLDescription();
-               // isOwlClass
-        boolean hasType = reasoner.hasType(bill, hm, true);
-        System.out.println("hasType = " + hasType);
-
-    }
-    **/
-
-
 }

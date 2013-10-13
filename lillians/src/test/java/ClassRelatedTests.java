@@ -14,11 +14,9 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by IntelliJ IDEA.
- * User: hella
+ * @author Lillian Hella
  * Date: Feb 8, 2010
  * Time: 8:52:14 AM
- * To change this template use File | Settings | File Templates.
  */
 public class ClassRelatedTests {
     OWLOntologyManager manager;

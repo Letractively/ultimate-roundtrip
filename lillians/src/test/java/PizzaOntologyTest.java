@@ -1,3 +1,4 @@
+import org.junit.Ignore;
 import org.junit.Test;
 import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.inference.OWLReasoner;
@@ -21,14 +22,14 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by IntelliJ IDEA.
- * User: hella
+ * @author Lillian Hella
  * Date: Jan 10, 2010
  * Time: 11:33:00 AM
- * To change this template use File | Settings | File Templates.
  */
 public class PizzaOntologyTest {
     @Test
+    @Ignore
+    //Could not locate Pizza ontology
     public void whatIsFirstOWLClassInOntologyEX1() throws OWLOntologyCreationException {
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
         URI physicalURI = URI.create("http://www.co-ode.org/ontologies/pizza/2007/02/12/pizza.owl");

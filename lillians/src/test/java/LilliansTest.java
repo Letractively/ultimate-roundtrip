@@ -15,13 +15,10 @@ import org.semanticweb.owl.inference.OWLReasonerException;
 import org.semanticweb.owl.inference.OWLReasonerFactory;
 import org.semanticweb.owl.model.*;
 import org.semanticweb.reasonerfactory.pellet.PelletReasonerFactory;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
-
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author Lillian Hella
@@ -92,8 +89,8 @@ public class LilliansTest {
     }
 
 
-     @Test
-    public void contactWithReasoner() {
+    @Test
+    public void hasContactWithReasoner() {
         OWLReasonerFactory reasonerFactory = new PelletReasonerFactory();
         OWLReasoner reasoner = reasonerFactory.createReasoner(manager);
         Set<OWLOntology> importsClosure = manager.getImportsClosure(ontology);
@@ -106,8 +103,8 @@ public class LilliansTest {
         }
     }
 
-       @Test
-    public void accessAllClasses() throws OWLReasonerException {
+    @Test
+    public void canAccessAllClasses() throws OWLReasonerException {
         OWLReasonerFactory reasonerFactory = new PelletReasonerFactory();
         OWLReasoner reasoner = reasonerFactory.createReasoner(manager);
 
@@ -120,16 +117,13 @@ public class LilliansTest {
     }
 
 
-
-
-
-
     /*MAIN OWL API INFO LOOK UPS*/
     // Det meste under her er kopiert
 
     //FOR INDIVIDUALS
 
     //FOR CLASSES
+
     @Test
     public void findSuperClassOfIndividualBill() {
         OWLDataFactory factory = manager.getOWLDataFactory();
@@ -167,7 +161,6 @@ public class LilliansTest {
 
 
     @Test
-    @Ignore
     public void findSuperClassOfIndividualHSJ() {
         OWLDataFactory factory = manager.getOWLDataFactory();
 
@@ -200,10 +193,11 @@ public class LilliansTest {
         assertEquals("RegularProducedFood", result.get(0).toString());
         assertEquals("HervikProducts", result.get(1).toString());
         assertEquals("Food", resultEnd.get(0).toString());
-        assertEquals("Jam", resultEnd.get(1).toString());
+        assertEquals("Food", resultEnd.get(1).toString());
+        assertEquals("Jam", resultEnd.get(2).toString());
     }
 
-   @Test
+    @Test
     public void findClassOfIndividualHervikJam() {
         //m� vi ha en hasName-relation?
         //hvilken klasse h�rer HervikblablaJam til?
@@ -232,7 +226,8 @@ public class LilliansTest {
         assertEquals("StrawberryJam", result.get(2).toString());
     }
 
-  //FOR PROPERTY INFORMATION
+    //FOR PROPERTY INFORMATION
+
     @Test
     public void getInstanceAndItsProperty() {
         OWLDataFactory factory = manager.getOWLDataFactory();
@@ -269,7 +264,7 @@ public class LilliansTest {
     }
 
 
-     //SPARQL
+    //SPARQL
 
     @Test
     public void findIndividualsOfClass() {
@@ -297,28 +292,21 @@ public class LilliansTest {
         QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
 
         ResultSet rs = qe.execSelect();
-
-        String bl = rs.toString();
-
-        String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryAndWildJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraSqueezy}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraOriginal}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraNoSugar}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
-
-        assertEquals(wantedRs, bl);
+        assertEquals(rs.toString(), "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryAndWildJam}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJam}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraSqueezy}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJam}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraOriginal}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJam}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraNoSugar}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJam}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]");
     }
 
 
-    /*
-            assertEquals({"http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam", });
-            [0]="{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}"
-        [1]="{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJam}"
-                [2]="{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJam}"
-        [3]="{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJam}"
-        [4]="{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam
-        [5]="{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJam}"
-
-    **/
-
     @Test
-    public void findAllCandidatesIndividualsOfClassWithSomeProperty() {
+    public void findAllHervikProducedJams() {
         //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
         // Create Pellet-OWLAPI reasoner
         // Get the KB from the reasoner
@@ -331,15 +319,11 @@ public class LilliansTest {
         InfModel model = ModelFactory.createInfModel(graph);
         // Create a query execution over this model
 
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT  ?x " +
+        String query = "SELECT  ?x " +
                 "WHERE { ?x rdf:type OntologyPersonalProfile:Jam . " +
                 "?x OntologyPersonalProfile:hasProducer OntologyPersonalProfile:Hervik . }";
 
-        Query queryQuery = QueryFactory.create(query);
+        Query queryQuery = QueryFactory.create(SparqlQueryFactory.prefix + query);
 
         QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
 
@@ -355,17 +339,11 @@ public class LilliansTest {
             //System.out.println("l = " + l);
         }
 
-        String bl = rs.toString();
-
-        String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
-
-        assertEquals(wantedRs, bl);
+        assertEquals("[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, " +
+                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]",
+                rs.toString());
 
     }
-
-
-
-    
 
 
     @Test
@@ -387,43 +365,45 @@ public class LilliansTest {
         OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
         Set<Set<OWLClass>> classesOfHSJ = reasoner.getTypes(bill);
         List<OWLClass> result = new ArrayList<OWLClass>();
-        Set<Set<OWLClass>> classesOfHSJSets = classesOfHSJ;
-        for (Set<OWLClass> classesOfHSJSet : classesOfHSJSets) {
+        for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
             for (OWLClass owlClass : classesOfHSJSet) {
                 result.add(owlClass);
             }
         }
         assertEquals("Man", result.get(0).toString());
         assertEquals("EcoConcernedPerson", result.get(1).toString());
+        assertEquals("MediumPriceConcernedPerson", result.get(2).toString());
+        assertEquals("Adult", result.get(3).toString());
+        assertEquals("FairTradeConcernedPerson", result.get(4).toString());
     }
 
 
-
-
-
     @Test
-    public void findObjectPropertyForIndividualsOfAClass() {
+    public void findJamsAndTheirProducers() {
         OWLDataFactory factory = manager.getOWLDataFactory();
 
         OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
         Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
         OWLObjectProperty hasProducer = factory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
 
-        OWLIndividual producer = null;
+        List<OWLIndividual> resultset = new ArrayList<OWLIndividual>();
 
         for (OWLIndividual ind : individuals) {
 
-            producer = reasoner.getRelatedIndividual(ind, hasProducer);
+            resultset.add(reasoner.getRelatedIndividual(ind, hasProducer));
             //for (Set<OWLClass> owlClasses : type) {
             //Set<OWLDescription> ranges = hasProducer.getRanges(ontology);
             //System.out.println(ind + "  " + "HasProducer: " + hasProducer.getRanges(ontology));
         }
 
-        assertEquals("Nora", producer.toString());
+        assertEquals(10, resultset.size());
+        assertEquals("ICA", resultset.get(0).toString());
+        //Ica - IcaStrawberryJam
+        //Nora - NoraSqueezy
     }
 
     @Test
-    public void findObjectPropertyForIndividualHervikSJ() {
+    public void findProducerHervikSJ() {
         OWLDataFactory factory = manager.getOWLDataFactory();
 
         OWLObjectProperty hasProducer = factory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
@@ -434,16 +414,12 @@ public class LilliansTest {
     }
 
 
-
-
-
     @Test
-    public void findAllDataPropertiesForIndividual() {
+    public void findAllDataPropertiesForIndividualBill() {
         OWLDataFactory factory = manager.getOWLDataFactory();
 
         // create property and resources to query the reasoner
         OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
-        OWLClass strawberryJam = factory.getOWLClass(URI.create(myURI + "#StrawberryJam"));
         Set<OWLDataProperty> dataProperties = reasoner.getDataProperties(); //ALLE
 
         List<String> list = new ArrayList<String>();
@@ -452,7 +428,6 @@ public class LilliansTest {
             System.out.println("owlDataProperty = " + owlDataProperty);
 
             OWLConstant value1 = reasoner.getRelatedValue(bill, owlDataProperty);
-            //String jala = reasoner.
             System.out.println("value1 = " + value1);
             if (value1 != null) {
                 list.add(value1.getLiteral());
@@ -468,148 +443,35 @@ public class LilliansTest {
         assertEquals("39", list.get(0));
     }
 
-    @Test
-    public void findAllObjectPropertiesForIndividual() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
-        OWLClass strawberryJam = factory.getOWLClass(URI.create(myURI + "#StrawberryJam"));
-        //Set<Set<OWLClass>> type = reasoner.getTypes(hervikSJ);
-
-        Set<OWLObjectProperty> objectProperties = reasoner.getObjectProperties(); //alle
-        //s� kan man evt koble properties til domains, og videre lage lister for hvilke som h�rer til hvilke domains, og videre hvilke ranges de har
-        for (OWLObjectProperty objectProperty : objectProperties) {
-            System.out.println("objectProperty = " + objectProperty);
-            OWLIndividual range = reasoner.getRelatedIndividual(hervikSJ, objectProperty);
-            System.out.println("range = " + range);
-        }
-
-        //todo lag test
-    }
-
-
-    //todo gettypes vs gettype
 
     @Test
-    public void findRangeOfPropertyOfIndividual() throws OWLOntologyCreationException, OWLOntologyChangeException, OWLReasonerException {
+    public void printOntologyClassTree() {
         reasoner.getKB().realize();
         reasoner.getKB().printClassTree();
+    }
 
+    @Test
+    public void findTypeAndIngredientsOfJam() throws OWLOntologyCreationException, OWLOntologyChangeException, OWLReasonerException {
         OWLClass jam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#Jam"));
         OWLObjectProperty hasIngredient = manager.getOWLDataFactory().getOWLObjectProperty(URI.create(myURI + "#hasIngredient"));
 
         Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
+        List<String> results = new ArrayList<String>();
+
         for (OWLIndividual ind : individuals) {
             // get the info about this specific individual
             //OWLIndividual name = reasoner.getRelatedIndividual(ind, hasIngredient);
             OWLClass type = reasoner.getType(ind);
             OWLIndividual ingredient = reasoner.getRelatedIndividual(ind, hasIngredient);
-            System.out.println("Type: " + type.getURI().getFragment());
-            System.out.println("Ingredient:  = " + ingredient);
+            results.add(ind.toString() + " " + type.getURI().getFragment() + " " + ingredient);
         }
-        //todo lag test
+        assertEquals("ICAEcologicalStrawberryJam EcologicalStrawberryJam Strawberry", results.get(0));
+        assertEquals("EuroshopperStrawberryJam RegularProducedFood Strawberry", results.get(1));
+        assertEquals(10, results.size());
     }
 
     @Test
-    public void findRangesOfPropertyOfIndividual() throws OWLOntologyCreationException, OWLOntologyChangeException, OWLReasonerException {
-        reasoner.getKB().realize();
-        reasoner.getKB().printClassTree();
-
-        OWLClass jam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#Jam"));
-        OWLObjectProperty hasIngredient = manager.getOWLDataFactory().getOWLObjectProperty(URI.create(myURI + "#hasIngredient"));
-
-        Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
-        for (OWLIndividual ind : individuals) {
-            // get the info about this specific individual
-            //OWLIndividual name = reasoner.getRelatedIndividual(ind, hasIngredient);
-            Set<Set<OWLClass>> types = reasoner.getTypes(ind);
-            for (Set<OWLClass> owlClasses : types) {
-
-                OWLIndividual ingredient = reasoner.getRelatedIndividual(ind, hasIngredient);
-                //System.out.println("Type: " + type.getURI().getFragment());
-                System.out.println("Ingredient:  = " + ingredient);
-            }
-
-        }
-        //todo lag test
-    }
-
-
-    //todo fjern?
-
-    @Test
-    public void findAllProperties() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        // create property and resources to query the reasoner
-        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
-        //properties = hervikSJ.
-        Set<OWLProperty<?, ?>> properties = reasoner.getProperties();    //returnerer ALLE
-
-        //s� kan man evt koble properties til domains, og videre lage lister for hvilke som h�rer til hvilke domains, og videre hvilke ranges de har
-
-        for (OWLProperty<?, ?> property : properties) {
-            if (property instanceof OWLObjectProperty) {
-                OWLObjectProperty owlObjectProperty = (OWLObjectProperty) property;
-                //OWLProperty prop2 = property.asOWLObjectProperty();
-                System.out.println("owlObjectProperty = " + owlObjectProperty);
-                //OWLObjectProperty prop22 = factory.getOWLObjectProperty(URI.create(myURI + "#"+ prop2));
-                OWLIndividual rangeOfProp2 = reasoner.getRelatedIndividual(hervikSJ, owlObjectProperty);
-                System.out.println("rangeOfProp2 = " + rangeOfProp2);
-            } else if (property instanceof OWLDataType) {
-                OWLDataType owlDatatype = (OWLDataType) property;
-                //OWLProperty prop1 = property.asOWLDataProperty();
-                System.out.println("owlDatatype = " + owlDatatype);
-                // OWLDataType rangeOfOwlDatatype = reasoner.getRelatedValue(hervikSJ, owlDatatype);
-                //OWLIndividual rangeOfProp1 = reasoner.getRelatedIndividual(HervikSJ, );
-            }
-
-
-            //OWLPropertyRange     ;
-        }
-
-        //todo lag test - eller fjern siden jeg f� hentet ut datatype og objectproperties hver for seg
-    }
-
-
-
-    //todo StrawberryJam har x properties - m� legge til mer om ingredienser og pris og slikt
-    //todo lister for � hente ut informasjonen jeg finner -
-    //todo metoder/tester som skal legges til: returnResult, computeRelevanceForCandidates
-    //todo finn properties til instanser     - m� g� ut fra at mediator kjenner til modellen
-    //todo finn m�te � f� tak i range p� HJELP STIG
-
-    /*
-    @Test
-    public void findDirectSuperclass() {
-        //ikke mulig � finne direct superclass
-        //kombinasjonen at den m� v�re subklasse av ProcessedFood eller Commodity
-
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        // load the ontology to the reasoner
-        Reasoner reasoner = new Reasoner(manager);
-        reasoner.setOntology(ontology);
-
-        // create property and resources to query the reasoner
-        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
-
-
-        //vet at han skal ha noe av typen strawberryjam
-        // trenger egenlig ikke vite akkurat hvilket produkt han hadde tenkt � ta...
-        OWLClass strawberryJam = factory.getClass();
-        OWLClass strawberryJam = reasoner.getType(hervikSJ);
-
-        System.out.println("strawberryJam = " + strawberryJam);
-    }
-     **/
-
-    //metoder for � finne ut relevant informasjon om Bill ifht SC1
-    //m� vi f�rst sjekke at de er definert for en person? eller kan vi anta at de er det?
-
-
-    @Test
-    public void findAPersonsEcoAffinity() {
+    public void findBillsEcoAffinity() {
         OWLDataFactory factory = manager.getOWLDataFactory();
 
         OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
@@ -617,14 +479,11 @@ public class LilliansTest {
 
         OWLIndividual ecoAffinity = reasoner.getRelatedIndividual(bill, hasEcoAffinity);
         OWLClass typeOfEcoAffinity = reasoner.getType(ecoAffinity);
-        //System.out.println("ecoAffinity = " + ecoAffinity);
-        //System.out.println("typeOfEcoAffinity = " + typeOfEcoAffinity);
-
         assertEquals("HighEcoAffinity", typeOfEcoAffinity.toString());
     }
 
     @Test
-    public void findAPersonsPriceSensitivity() {
+    public void findBillsPriceSensitivity() {
         OWLDataFactory factory = manager.getOWLDataFactory();
 
         OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
@@ -632,14 +491,11 @@ public class LilliansTest {
 
         OWLIndividual priceSensitivity = reasoner.getRelatedIndividual(bill, hasPriceAffinity);
         OWLClass typeOfPriceSensitivity = reasoner.getType(priceSensitivity);
-        //System.out.println("ecoAffinity = " + ecoAffinity);
-        //System.out.println("typeOfEcoAffinity = " + typeOfEcoAffinity);
-
         assertEquals("MediumPriceSensitivity", typeOfPriceSensitivity.toString());
     }
 
     @Test
-    public void findAPersonsFairTradeAffinity() {
+    public void findBillsFairTradeAffinity() {
         OWLDataFactory factory = manager.getOWLDataFactory();
 
         OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
@@ -647,22 +503,11 @@ public class LilliansTest {
 
         OWLIndividual fairTradeAffinity = reasoner.getRelatedIndividual(bill, hasFairTradeAffinity);
         OWLClass typeOfFairTradeAffinity = reasoner.getType(fairTradeAffinity);
-        //System.out.println("ecoAffinity = " + ecoAffinity);
-        //System.out.println("typeOfEcoAffinity = " + typeOfEcoAffinity);
-
         assertEquals("HighFairTradeAffinity", typeOfFairTradeAffinity.toString());
     }
 
-    //blir n�dt til � koble informasjonen vi har om produktet med en persons affinities
-    //bruke EcoConcernedPerson, FairTradeConcerenedPerson, MediumPriceConcernedPerson osv
-    //koble to og to sammen?
-    //husk innholdet i produktet
-
-
-
-
-    // IKKE TATT MED
     @Test
+    //TODO Skal kanskje gjøres på en annen måte
     public void computeRelevanceOfAProduct() {
         //m� gj�res for alle aktuelle kandidater
         OWLDataFactory factory = manager.getOWLDataFactory();
@@ -746,12 +591,14 @@ public class LilliansTest {
 
 
     @Test
-    public void sortFinalResult() {
-
-        //sorter etter verdi - instanser med tilh�rende relevance weight
-        //Liste - f�rste elementet skal v�re
+    public void findAManWithAge() {
+        List<OWLIndividual> a = new SparqlQueryFactory().executeQuery("SELECT ?z ?y " +
+                "WHERE { ?x rdf:type OntologyPersonalProfile:Man ." +
+                "?x OntologyPersonalProfile:hasFirstName ?z . " +            //<Bill>
+                "?x OntologyPersonalProfile:hasAge ?y  . " +
+                "}");
+        System.out.println("a = " + a);
     }
-
 
     @Test
     public void test() {
@@ -803,7 +650,7 @@ public class LilliansTest {
 
         String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
 
-        //assertEquals(wantedRs, bl);
+        assertEquals(wantedRs, bl);
         //todo hvordan h�ndtere result sett fra sp�rring - syntax for sp�rringene - hvis man vet alt dette er det vel like greit � bruke vanlig reasoning?
     }
 
@@ -1013,7 +860,6 @@ public class LilliansTest {
 
      */
 
-    
 
     public class MyComparableClass implements Comparable {
         final int relevance;
