@@ -1,3 +1,5 @@
+import no.ntnu.ontology.ResultSetRetriever;
+import no.ntnu.ontology.SingleResultSetRetrieverImpl;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,6 +15,7 @@ public class RankingTest {
 
     static SparqlQueryFactory factory;
     static Reasoner reasoner;
+    private ResultSetRetriever retriever = new SingleResultSetRetrieverImpl("x");
 
     @BeforeClass
     public static void setUp() throws URISyntaxException {
@@ -95,7 +98,12 @@ public class RankingTest {
 
 
         //Calculate Bills affinities - hentes ut via sp¿rring
-        List<OWLIndividual> allAffinities = factory.executeQuery(getAllAffinities);
+//finner alle affinities til en person  - bill
+        String getAllAffinities = "SELECT ?x WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Modifiers . " +
+                "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
+                "}";
+        List<OWLIndividual> allAffinities = factory.executeQuery(getAllAffinities, retriever);
         Map<OWLIndividual, SimpleSortable> jamMap = createJamMap(jams);
 
         addBoosters(allAffinities, jamMap);
@@ -121,9 +129,10 @@ public class RankingTest {
     @Test
     public void testRankedProducts() {
         //assertEquals(2, executeQuery(getAllEcoJams).size());
-        assertEquals(2, factory.executeQuery(getProducts("Jam", "hasWayOfProduction", "Ecological")).size());
-        assertEquals(10, factory.executeQuery(getProducts("Jam", "", "")).size());
-        List<OWLIndividual> results = factory.executeQuery(getSatisfiesHighEcoAffinity);
+        //TODO Use the special parameters query!!
+        assertEquals(2, factory.executeQuery(getProducts("Jam", "hasWayOfProduction", "Ecological"), retriever).size());
+        assertEquals(10, factory.executeQuery(getProducts("Jam", "", ""), retriever).size());
+        List<OWLIndividual> results = factory.executeQuery(getSatisfiesHighEcoAffinity, retriever);
         assertEquals(2, results.size());
         assertEquals("ICAEcologicalStrawberryJam", results.get(0).toString());
         assertEquals("HervikEcoStrawberryJam", results.get(1).toString());
@@ -156,7 +165,7 @@ public class RankingTest {
 
     @Test
     public void testBoosterRelevance() {
-        List<OWLIndividual> boosters = factory.executeQuery(getAllHighBoosters("Bill"));
+        List<OWLIndividual> boosters = factory.executeQuery(getAllHighBoosters("Bill"), retriever);
 
         assertEquals(2, boosters.size());
         assertEquals("HervikEcoStrawberryJam", boosters.get(1).toString());
@@ -220,8 +229,8 @@ public class RankingTest {
 
     @Test
     public void testGetAllEcoProds() {
-        assertEquals(2, factory.executeQuery(getAllEcoProducts).size());
-        assertEquals("HervikEcoStrawberryJam", factory.executeQuery(getAllEcoProducts).get(0).toString());
+        assertEquals(2, factory.executeQuery(getAllEcoProducts, retriever).size());
+        assertEquals("HervikEcoStrawberryJam", factory.executeQuery(getAllEcoProducts, retriever).get(0).toString());
     }
 
     String getAllHighBoosters(String person) {
@@ -232,11 +241,6 @@ public class RankingTest {
                 "}";
     }
 
-    //finner alle affinities til en person  - bill
-    String getAllAffinities = "SELECT ?x WHERE { " +
-            "?x rdf:type OntologyPersonalProfile:Modifiers . " +
-            "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
-            "}";
 
     String getAllEcoProducts = "SELECT ?x WHERE { " +
             "?x rdf:type OntologyPersonalProfile:Food." +

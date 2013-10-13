@@ -1,6 +1,7 @@
 import com.clarkparsia.pellet.sparqldl.jena.SparqlDLExecutionFactory;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.*;
+import no.ntnu.ontology.SingleResultSetRetrieverImpl;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,6 +25,7 @@ public class SPARQLTests {
 
     static SparqlQueryFactory factory;
     static Reasoner reasoner;
+    SingleResultSetRetrieverImpl retriever = new SingleResultSetRetrieverImpl("x");
 
     @BeforeClass
     public static void beforeClass() throws URISyntaxException {
@@ -33,7 +35,7 @@ public class SPARQLTests {
 
     @Test
     public void findIndividualsOfClass() {
-        List<OWLIndividual> result = factory.executeQuery("SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam}");
+        List<OWLIndividual> result = factory.executeQuery("SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam}", retriever);
         assertEquals(10, result.size());
         assertEquals("NoraHomeMadeStrawberryAndWildJam", result.get(0).toString());
         assertEquals("HervikEcoStrawberryJam", result.get(9).toString());
@@ -42,7 +44,7 @@ public class SPARQLTests {
     @Test
     public void findAllCandidatesIndividualsOfClassWithSomeProperty() {
         List<OWLIndividual> result = factory.executeQuery("SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam . " +
-                "?x OntologyPersonalProfile:hasProducer OntologyPersonalProfile:Hervik . }");
+                "?x OntologyPersonalProfile:hasProducer OntologyPersonalProfile:Hervik . }", retriever);
         assertEquals(2, result.size());
         assertEquals("HervikStrawberryJam", result.get(0).toString());
         assertEquals("HervikEcoStrawberryJam", result.get(1).toString());
@@ -213,7 +215,7 @@ public class SPARQLTests {
     public void testFindAllECoJams() {
         //From Bills list
         List<OWLIndividual> ecoList = factory.executeQuery("SELECT ?x WHERE { " +
-                "?x  rdf:type OntologyPersonalProfile:EcologicalJam .}");
+                "?x  rdf:type OntologyPersonalProfile:EcologicalJam .}", retriever);
 
         assertEquals("ICAEcologicalStrawberryJam", ecoList.get(0).toString());
         assertEquals("HervikEcoStrawberryJam", ecoList.get(1).toString());
@@ -228,7 +230,7 @@ public class SPARQLTests {
                 "?x OntologyPersonalProfile:containsAdditive OntologyPersonalProfile:Natriumbenzoat. " +
                 //"?y OntologyPersonalProfile:hasEffect ?z . " +
                 //"?z rdf:type OntologyPersonalProfile:Additive " +
-                "}");
+                "}", retriever);
 
         assertEquals("NoraNoSugar", result.get(0).toString());
         assertEquals(1, result.size());
@@ -241,7 +243,7 @@ public class SPARQLTests {
                 "?x OntologyPersonalProfile:containsAdditive OntologyPersonalProfile:Natriumbenzoat. " +
                 //"?y OntologyPersonalProfile:hasEffect ?z . " +
                 //"?z rdf:type OntologyPersonalProfile:Additive " +
-                "}");
+                "}", retriever);
         assertEquals("EuroshopperStrawberryJam", result.get(0).toString());
         assertEquals("NoraNoSugar", result.get(1).toString());
         assertEquals(2, result.size());
@@ -251,7 +253,7 @@ public class SPARQLTests {
     public void testFindAllEcoPersons() {
         List<OWLIndividual> result = factory.executeQuery("SELECT ?x WHERE { " +
                 "?x  rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
-                "}");
+                "}", retriever);
         assertEquals("Bill", result.get(0).toString());
     }
 
@@ -262,7 +264,7 @@ public class SPARQLTests {
                 "?y  OntologyPersonalProfile:hasShoppingListItem ?x. " +
 
                 //   "?x OntologyPersonalProfile:hasShoppingListItem OntologyPersonalProfile:Bill." +
-                "}");
+                "}", retriever);
 
         List<OWLClass> typesOfAffinity = new ArrayList<OWLClass>();
         for (OWLIndividual affinity : result) {
@@ -278,7 +280,7 @@ public class SPARQLTests {
         List<OWLIndividual> affinities = factory.executeQuery("SELECT ?x WHERE { " +
                 "?x rdf:type OntologyPersonalProfile:Modifiers . " +
                 "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
-                "}");
+                "}", retriever);
 
         List<OWLClass> typesOfAffinity = new ArrayList<OWLClass>();
         for (OWLIndividual affinity : affinities) {
@@ -345,7 +347,7 @@ public class SPARQLTests {
                 "?x rdf:type OntologyPersonalProfile:StrawberryJam ." +
                 //"?y OntologyPersonalProfile:Person . " +
                 "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x ." +
-                "}");
+                "}", retriever);
         assertEquals(2, result.size());
     }
 }

@@ -46,8 +46,8 @@ public class SparqlQueryFactory {
         factory = manager.getOWLDataFactory();
     }
 
-    public List<OWLIndividual> executeQuery(String query) {
-        List<String> ecosAsStrings = jenaQuery(SparqlQueryFactory.prefix + query, "x");
+    public List<OWLIndividual> executeQuery(String query, ResultSetRetriever callback) {
+        List<String> ecosAsStrings = jenaQuery(query, callback);
         List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
         for (String ecoAsString : ecosAsStrings) {
             individuals.add(factory.getOWLIndividual(URI.create(ecoAsString)));
@@ -55,7 +55,7 @@ public class SparqlQueryFactory {
         return individuals;
     }
 
-    public List<String> jenaQuery(String query, String unknownVariable) {
+    public List<String> jenaQuery(String query, ResultSetRetriever callback) {
         KnowledgeBase kb = reasoner.getKB();
         // Create Pellet-Jena reasoner
         PelletReasoner pelletReasoner = new PelletReasoner();
@@ -65,26 +65,12 @@ public class SparqlQueryFactory {
         InfModel model = ModelFactory.createInfModel(graph);
         // Create a query execution over this model
 
-
-        Query queryQuery = QueryFactory.create(query);
-
+        Query queryQuery = QueryFactory.create(SparqlQueryFactory.prefix + query);
         QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
-
-        ResultSet rs = qe.execSelect();
-
-        // String bl = rs.toString();
-        //System.out.println("bl = " + bl);
-
-        List<String> resultUrls = new ArrayList<String>();
-        while (rs.hasNext()) {
-            QuerySolution soln = rs.nextSolution();
-            RDFNode x = soln.get(unknownVariable);       // Get a result variable by name.
-
-            String affinityURL = x.toString();
-            resultUrls.add(affinityURL);
-        }
-        return resultUrls;
+        ResultSet resultSet = qe.execSelect();
+        return callback.getResultset(resultSet);
     }
+
 
     public OWLIndividual getOWLIndividual(URI uri) {
         return factory.getOWLIndividual(uri);
@@ -114,3 +100,4 @@ public class SparqlQueryFactory {
     }
 
 }
+

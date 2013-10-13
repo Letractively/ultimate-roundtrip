@@ -1,8 +1,11 @@
 import com.clarkparsia.pellet.sparqldl.jena.SparqlDLExecutionFactory;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.*;
+import no.ntnu.ontology.ResultSetRetriever;
+import no.ntnu.ontology.SingleResultSetRetrieverImpl;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mindswap.pellet.KnowledgeBase;
 import org.mindswap.pellet.jena.PelletInfGraph;
@@ -557,7 +560,7 @@ public class LilliansTest {
                 "WHERE { ?x rdf:type OntologyPersonalProfile:Man ." +
                 "?x OntologyPersonalProfile:hasFirstName ?z . " +            //<Bill>
                 "?x OntologyPersonalProfile:hasAge ?y  . " +
-                "}");
+                "}", new SingleResultSetRetrieverImpl("x"));
         System.out.println("a = " + a);
     }
 
@@ -617,51 +620,38 @@ public class LilliansTest {
 
 
     @Test
+    @Ignore
+    // Test not written good enough!
     public void test2() {
-        //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
-        // Create Pellet-OWLAPI reasoner
-        // Get the KB from the reasoner
-        KnowledgeBase kb = reasoner.getKB();
-        // Create Pellet-Jena reasoner
-        PelletReasoner jenaReasoner = new PelletReasoner();
-        // Create a Pellet graph using the KB from OWLAPI
-        PelletInfGraph graph = jenaReasoner.bind(kb);
-        // Wrap the graph in a model
-        InfModel model = ModelFactory.createInfModel(graph);
-        // Create a query execution over this model
-
-
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT  ?x ?y " +
+        List<String> result = factory.jenaQuery("SELECT  ?x ?y " +
                 "WHERE { " +
                 "?x rdf:type OntologyPersonalProfile:Man . " +
                 "?x OntologyPersonalProfile:hasFirstName \"Bill\" . " +            //<Bill>
                 "?x OntologyPersonalProfile:hasAge ?y  . " +
-                "}";
+                "}", new ResultSetRetriever() {
+            public List<String> getResultset(ResultSet rs) {
+                List<String> xes = new ArrayList<String>();
+                while (rs.hasNext()) {
+                    QuerySolution soln = rs.nextSolution();
+                    RDFNode x = soln.get("x");       // Get a result variable by name.
+                    System.out.println("x = " + x);
 
-        Query queryQuery = QueryFactory.create(query);
+                    System.out.println("soln.get(\"y\") = " + soln.get("y"));
+                    Resource r = soln.getResource("x"); // Get a result variable - must be a resource
+                    System.out.println("r = " + r);
+                    //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
+                    //System.out.println("l = " + l);
+                }
+                return xes;
+            }
+        });
 
-        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
 
-        ResultSet rs = qe.execSelect();
-
-        while (rs.hasNext()) {
-            QuerySolution soln = rs.nextSolution();
-            RDFNode x = soln.get("x");       // Get a result variable by name.
-            System.out.println("x = " + x);
-
-            System.out.println("soln.get(\"y\") = " + soln.get("y"));
-            Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-            // System.out.println("r = " + r);
-            //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
-            //System.out.println("l = " + l);
+        for (String r : result) {
+            System.out.println("r = " + r);
         }
-
-        String bl = rs.toString();
-        System.out.println("bl = " + bl);
+        //String bl = rs.toString();
+        //System.out.println("bl = " + bl);
 
         String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
 
