@@ -1,21 +1,19 @@
 import com.clarkparsia.pellet.sparqldl.jena.SparqlDLExecutionFactory;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.*;
-import org.junit.Before;
-import org.junit.Ignore;
+import no.ntnu.ontology.SparqlQueryFactory;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mindswap.pellet.KnowledgeBase;
 import org.mindswap.pellet.jena.PelletInfGraph;
 import org.mindswap.pellet.jena.PelletReasoner;
 import org.mindswap.pellet.owlapi.Reasoner;
-import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.inference.OWLReasoner;
 import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.inference.OWLReasonerException;
 import org.semanticweb.owl.inference.OWLReasonerFactory;
 import org.semanticweb.owl.model.*;
 import org.semanticweb.reasonerfactory.pellet.PelletReasonerFactory;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 import static org.junit.Assert.*;
@@ -24,23 +22,17 @@ import static org.junit.Assert.*;
  * @author Lillian Hella
  */
 public class LilliansTest {
-    OWLOntologyManager manager;
-    OWLOntology ontology;
-    Reasoner reasoner;
-    public static final String myURI = "http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl";
+    private static SparqlQueryFactory factory;
+    private static OWLOntology ontology;
+    private static OWLOntologyManager manager;
+    private static Reasoner reasoner;
 
-
-    //todo legge til reasoner i before ogs�?  + factory?
-
-    @Before
-    public void setUp() throws OWLOntologyCreationException, URISyntaxException {
-        manager = OWLManager.createOWLOntologyManager();
-        // We load an ontology
-        // read the ontology
-        ontology = manager.loadOntologyFromPhysicalURI(getClass().getResource("PersonalProfile.owl").toURI());
-        reasoner = new Reasoner(manager);
-        reasoner.loadOntology(ontology);
-
+    @BeforeClass
+    public static void setUp() throws URISyntaxException {
+        factory = new SparqlQueryFactory(LilliansTest.class.getResource("PersonalProfile.owl").toURI());
+        ontology = factory.ontology;
+        manager = factory.manager;
+        reasoner = factory.reasoner;
     }
 
     //GET STARTED
@@ -85,7 +77,7 @@ public class LilliansTest {
     @Test
     public void correctURIInOntology() {
         String ontologyURI = ontology.getURI().toString();
-        assertEquals(myURI, ontologyURI);
+        assertEquals(SparqlQueryFactory.myURI, ontologyURI);
     }
 
 
@@ -126,9 +118,7 @@ public class LilliansTest {
 
     @Test
     public void findSuperClassOfIndividualBill() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
+        OWLIndividual bill = factory.findIndividual("#Bill");
         Set<Set<OWLClass>> classesOfHSJ = reasoner.getTypes(bill);
         List<OWLClass> result = new ArrayList<OWLClass>();
 
@@ -162,9 +152,7 @@ public class LilliansTest {
 
     @Test
     public void findSuperClassOfIndividualHSJ() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
+        OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam");
         Set<Set<OWLClass>> classesOfHSJ = reasoner.getTypes(hervikSJ);
         List<OWLClass> result = new ArrayList<OWLClass>();
 
@@ -202,16 +190,15 @@ public class LilliansTest {
         //m� vi ha en hasName-relation?
         //hvilken klasse h�rer HervikblablaJam til?
 
-        OWLDataFactory factory = manager.getOWLDataFactory();
 
         // create property and resources to query the reasoner
         //OWLClass jam = factory.getOWLClass(URI.create(myURI + "#Jam"));
-        //OWLObjectProperty hasProducer = factory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
+        //OWLObjectProperty hasProducer = factory.findClassByName("#hasProducer"));
 
         //Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
         //OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
         //String age = reasoner.getRelatedValue(ind[2], hasProducer).getLiteral();
-        OWLIndividual hervikStrawberryJam = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
+        OWLIndividual hervikStrawberryJam = factory.findIndividual("#HervikStrawberryJam");
         List<OWLClass> result = new ArrayList<OWLClass>();
         Set<Set<OWLClass>> classesOfHSJSets = reasoner.getTypes(hervikStrawberryJam);
         Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gj�r ferdig!! trenger ikke like mye l�kker
@@ -230,12 +217,10 @@ public class LilliansTest {
 
     @Test
     public void getInstanceAndItsProperty() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
         // create property and resources to query the reasoner
-        OWLClass person = factory.getOWLClass(URI.create(myURI + "#Person"));
-        OWLObjectProperty hasGender = factory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
-        OWLDataProperty hasAge = factory.getOWLDataProperty(URI.create(myURI + "#hasAge"));
+        OWLClass person = factory.findClassByName("#Person");
+        OWLObjectProperty hasGender = factory.findObjectProperty("#hasGender");
+        OWLDataProperty hasAge = factory.findDataType("#hasAge");
 
         Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
         OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
@@ -249,11 +234,9 @@ public class LilliansTest {
 
     @Test
     public void findRangeOfRelation() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
         // create property and resources to query the reasoner
-        OWLClass jam = factory.getOWLClass(URI.create(myURI + "#Jam"));
-        OWLObjectProperty hasProducer = factory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
+        OWLClass jam = factory.findClassByName("#Jam");
+        OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
 
         Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
         OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
@@ -348,11 +331,9 @@ public class LilliansTest {
 
     @Test
     public void findProducerOfHervikJam() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
         // create property and resources to query the reasoner
-        OWLIndividual hervikStrawberryJam = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
-        OWLObjectProperty hasProducer = factory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
+        OWLIndividual hervikStrawberryJam = factory.findIndividual("#HervikStrawberryJam");
+        OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
         OWLIndividual producer = reasoner.getRelatedIndividual(hervikStrawberryJam, hasProducer);
 
         assertEquals("Hervik", producer.toString());
@@ -360,9 +341,7 @@ public class LilliansTest {
 
     @Test
     public void checkClassOfInstance() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
+        OWLIndividual bill = factory.findIndividual("#Bill");
         Set<Set<OWLClass>> classesOfHSJ = reasoner.getTypes(bill);
         List<OWLClass> result = new ArrayList<OWLClass>();
         for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
@@ -380,11 +359,9 @@ public class LilliansTest {
 
     @Test
     public void findJamsAndTheirProducers() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLClass strawberryJam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
-        OWLObjectProperty hasProducer = factory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
+        OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
 
         List<OWLIndividual> resultset = new ArrayList<OWLIndividual>();
 
@@ -404,10 +381,8 @@ public class LilliansTest {
 
     @Test
     public void findProducerHervikSJ() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLObjectProperty hasProducer = factory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
-        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
+        OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
+        OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam");
         OWLIndividual producer = reasoner.getRelatedIndividual(hervikSJ, hasProducer);
 
         assertEquals("Hervik", producer.toString());
@@ -416,10 +391,8 @@ public class LilliansTest {
 
     @Test
     public void findAllDataPropertiesForIndividualBill() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
         // create property and resources to query the reasoner
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
+        OWLIndividual bill = factory.findIndividual("#Bill");
         Set<OWLDataProperty> dataProperties = reasoner.getDataProperties(); //ALLE
 
         List<String> list = new ArrayList<String>();
@@ -452,8 +425,8 @@ public class LilliansTest {
 
     @Test
     public void findTypeAndIngredientsOfJam() throws OWLOntologyCreationException, OWLOntologyChangeException, OWLReasonerException {
-        OWLClass jam = manager.getOWLDataFactory().getOWLClass(URI.create(myURI + "#Jam"));
-        OWLObjectProperty hasIngredient = manager.getOWLDataFactory().getOWLObjectProperty(URI.create(myURI + "#hasIngredient"));
+        OWLClass jam = factory.findClassByName("#Jam");
+        OWLObjectProperty hasIngredient = factory.findObjectProperty("#hasIngredient");
 
         Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
         List<String> results = new ArrayList<String>();
@@ -472,10 +445,8 @@ public class LilliansTest {
 
     @Test
     public void findBillsEcoAffinity() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
-        OWLObjectProperty hasEcoAffinity = factory.getOWLObjectProperty(URI.create(myURI + "#hasEcoAffinity"));
+        OWLIndividual bill = factory.findIndividual("#Bill");
+        OWLObjectProperty hasEcoAffinity = factory.findObjectProperty("#hasEcoAffinity");
 
         OWLIndividual ecoAffinity = reasoner.getRelatedIndividual(bill, hasEcoAffinity);
         OWLClass typeOfEcoAffinity = reasoner.getType(ecoAffinity);
@@ -484,10 +455,8 @@ public class LilliansTest {
 
     @Test
     public void findBillsPriceSensitivity() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
-        OWLObjectProperty hasPriceAffinity = factory.getOWLObjectProperty(URI.create(myURI + "#hasPriceSensitivity"));
+        OWLIndividual bill = factory.findIndividual("#Bill");
+        OWLObjectProperty hasPriceAffinity = factory.findObjectProperty("#hasPriceSensitivity");
 
         OWLIndividual priceSensitivity = reasoner.getRelatedIndividual(bill, hasPriceAffinity);
         OWLClass typeOfPriceSensitivity = reasoner.getType(priceSensitivity);
@@ -496,10 +465,8 @@ public class LilliansTest {
 
     @Test
     public void findBillsFairTradeAffinity() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
-        OWLObjectProperty hasFairTradeAffinity = factory.getOWLObjectProperty(URI.create(myURI + "#hasFairTradeAffinity"));
+        OWLIndividual bill = factory.findIndividual("#Bill");
+        OWLObjectProperty hasFairTradeAffinity = factory.findObjectProperty("#hasFairTradeAffinity");
 
         OWLIndividual fairTradeAffinity = reasoner.getRelatedIndividual(bill, hasFairTradeAffinity);
         OWLClass typeOfFairTradeAffinity = reasoner.getType(fairTradeAffinity);
@@ -510,13 +477,7 @@ public class LilliansTest {
     //TODO Skal kanskje gjøres på en annen måte
     public void computeRelevanceOfAProduct() {
         //m� gj�res for alle aktuelle kandidater
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
-        OWLIndividual icaEco = factory.getOWLIndividual(URI.create(myURI + "#ICAEcologicalStrawberryJam"));
-
-        OWLIndividual bill = factory.getOWLIndividual(URI.create(myURI + "#Bill"));
-
-        int relevance;
+        OWLIndividual icaEco = factory.findIndividual("#ICAEcologicalStrawberryJam");
 
         List<MyComparableClass> sortableList = new ArrayList<MyComparableClass>();
         sortableList.add(new MyComparableClass(icaEco, 3));
@@ -592,7 +553,7 @@ public class LilliansTest {
 
     @Test
     public void findAManWithAge() {
-        List<OWLIndividual> a = new SparqlQueryFactory().executeQuery("SELECT ?z ?y " +
+        List<OWLIndividual> a = factory.executeQuery("SELECT ?z ?y " +
                 "WHERE { ?x rdf:type OntologyPersonalProfile:Man ." +
                 "?x OntologyPersonalProfile:hasFirstName ?z . " +            //<Bill>
                 "?x OntologyPersonalProfile:hasAge ?y  . " +
@@ -821,13 +782,11 @@ public class LilliansTest {
     /*
  @Test
     public void findAllObjectPropertiesForIndividual() {
-        OWLDataFactory factory = manager.getOWLDataFactory();
-
         Reasoner reasoner = new Reasoner(manager);
         reasoner.setOntology(ontology);
 
-        OWLIndividual hervikSJ = factory.getOWLIndividual(URI.create(myURI + "#HervikStrawberryJam"));
-        OWLClass strawberryJam = factory.getOWLClass(URI.create(myURI + "#StrawberryJam"));
+        OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam"));
+        OWLClass strawberryJam = factory.findClassByName("#StrawberryJam"));
         Set<Set<OWLClass>> type = reasoner.getTypes(hervikSJ);
 
         Set<OWLObjectProperty> objectProperties = reasoner.getObjectProperties(); //alle
@@ -841,7 +800,7 @@ public class LilliansTest {
                 OWLObjectProperty owlObjectProperty = (OWLObjectProperty) property;
                 //OWLProperty prop2 = property.asOWLObjectProperty();
                 System.out.println("owlObjectProperty = " + owlObjectProperty);
-                //OWLObjectProperty prop22 = factory.getOWLObjectProperty(URI.create(myURI + "#"+ prop2));
+                //OWLObjectProperty prop22 = factory.findClassByName("#"+ prop2));
                 OWLIndividual rangeOfProp2 = reasoner.getRelatedIndividual(hervikSJ, owlObjectProperty);
                 System.out.println("rangeOfProp2 = " + rangeOfProp2);
             } else if (property instanceof OWLDataType) {

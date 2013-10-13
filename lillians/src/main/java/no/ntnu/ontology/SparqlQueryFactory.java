@@ -1,3 +1,5 @@
+package no.ntnu.ontology;
+
 import com.clarkparsia.pellet.sparqldl.jena.SparqlDLExecutionFactory;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -30,24 +32,22 @@ public class SparqlQueryFactory {
     OWLDataFactory factory;
 
 
-    public SparqlQueryFactory() {
+    public SparqlQueryFactory(URI ontologyFile) {
         manager = OWLManager.createOWLOntologyManager();
         // We load an ontology
         try {
-            ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
+            this.ontology = manager.loadOntology(ontologyFile);
         } catch (OWLOntologyCreationException e) {
             throw new RuntimeException("Error creating ontology" + e);
         }
         // read the ontology
         reasoner = new Reasoner(manager);
-        reasoner.loadOntology(ontology);
+        reasoner.loadOntology(this.ontology);
         factory = manager.getOWLDataFactory();
     }
 
-    List<OWLIndividual> executeQuery(String query) {
-        SparqlQueryFactory factory = new SparqlQueryFactory();
-
-        List<String> ecosAsStrings = factory.jenaQuery(SparqlQueryFactory.prefix + query, "x");
+    public List<OWLIndividual> executeQuery(String query) {
+        List<String> ecosAsStrings = jenaQuery(SparqlQueryFactory.prefix + query, "x");
         List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
         for (String ecoAsString : ecosAsStrings) {
             individuals.add(factory.getOWLIndividual(URI.create(ecoAsString)));

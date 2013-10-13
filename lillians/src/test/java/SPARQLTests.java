@@ -1,6 +1,7 @@
 import com.clarkparsia.pellet.sparqldl.jena.SparqlDLExecutionFactory;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.*;
+import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mindswap.pellet.KnowledgeBase;

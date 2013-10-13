@@ -1,8 +1,10 @@
+import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.model.*;
+import java.net.URISyntaxException;
 import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,8 +15,8 @@ public class RankingTest {
     static Reasoner reasoner;
 
     @BeforeClass
-    public static void setUp() {
-        factory = new SparqlQueryFactory();
+    public static void setUp() throws URISyntaxException {
+        factory = new SparqlQueryFactory(RankingTest.class.getResource("PersonalProfile.owl").toURI());
         reasoner = factory.reasoner;
     }
 
