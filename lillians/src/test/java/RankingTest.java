@@ -6,6 +6,7 @@ import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.model.*;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -19,10 +20,14 @@ public class RankingTest {
     OWLOntology ontology;
     public Reasoner reasoner;
     public static final String myURI = "http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl";
+    public static final String prefix = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
+                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  ";
 
     @Before
-    public void setUp() throws OWLOntologyCreationException {
-        ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:./src/main/resources/PersonalProfile.owl"));
+    public void setUp() throws OWLOntologyCreationException, URISyntaxException {
+        ontology = manager.loadOntologyFromPhysicalURI(getClass().getResource("PersonalProfile.owl").toURI());
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
     }
@@ -85,7 +90,7 @@ public class RankingTest {
         assertEquals("ICAEcologicalStrawberryJam", jams.toArray(new OWLIndividual[]{})[0].toString());
         assertEquals(10, jams.size());
 
-        /*
+
                 //Profile with Bills Preferences
                 OWLIndividual bill = findIndividual("#Bill");
                 OWLObjectProperty hasEcoAffinity = findObjectProperty("#hasEcoAffinity");
@@ -99,10 +104,10 @@ public class RankingTest {
                 OWLIndividual priceSensitivity = reasoner.getRelatedIndividual(bill, hasPriceSensitivity);
                 OWLClass billsPriceSensitivity = reasoner.getType(priceSensitivity);
                 assertEquals("MediumPriceSensitivity", billsPriceSensitivity.toString());
-        **/
+
 
         //Calculate Bills affinities - hentes ut via sp¿rring
-        List<OWLIndividual> allAffinities = getAllAffinities();
+        List<OWLIndividual> allAffinities = executeQuery(getAllAffinities);
         Map<OWLIndividual, SimpleSortable> jamMap = createJamMap(jams);
 
         addBoosters(allAffinities, jamMap);
@@ -123,6 +128,20 @@ public class RankingTest {
         assertEquals(findIndividual("#NoraNoSugar"), sortables.get(7).jam);
         assertEquals(findIndividual("#NoraHomeMadeStrawberryAndWildJam"), sortables.get(8).jam);
         assertEquals(findIndividual("#NoraHomeMadeStrawberryJam"), sortables.get(9).jam);
+    }
+
+    @Test
+    public void testRankedProducts() {
+        OWLIndividual bill = findIndividual("#Bill");
+        //assertEquals(2, executeQuery(getAllEcoJams).size());
+        assertEquals(2, executeQuery(getProducts("Jam", "hasWayOfProduction", "Ecological")).size());
+        assertEquals(10, executeQuery(getProducts("Jam", "", "")).size());
+        List<OWLIndividual> results = executeQuery(getSatisfiesHighEcoAffinity);
+        assertEquals(2, results.size());
+        assertEquals("ICAEcologicalStrawberryJam", results.get(0).toString());
+        assertEquals("HervikEcoStrawberryJam", results.get(1).toString());
+
+
     }
 
     private void addBoosters(List<OWLIndividual> allAffinities, Map<OWLIndividual, SimpleSortable> jamMap) {
@@ -154,7 +173,7 @@ public class RankingTest {
     public void testBoosterRelevance(){
         OWLIndividual bill = findIndividual("#Bill");
 
-         List<OWLIndividual> boosters = getAllHighBoosters("Bill");
+         List<OWLIndividual> boosters = executeQuery(getAllHighBoosters("Bill"));
 
          assertEquals(2, boosters.size());
         assertEquals("HervikEcoStrawberryJam", boosters.get(1).toString());
@@ -220,85 +239,66 @@ public class RankingTest {
 
     @Test
     public void testGetAllEcoProds() {
-        assertEquals(2, getAllEcoProducts().size());
-        assertEquals("HervikEcoStrawberryJam", getAllEcoProducts().get(0).toString());
+        assertEquals(2, executeQuery(getAllEcoProducts).size());
+        assertEquals("HervikEcoStrawberryJam", executeQuery(getAllEcoProducts).get(0).toString());
     }
 
-
-    private List<OWLIndividual> getAllEcoProducts() {
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT ?x " +
+    String getAllHighBoosters(String person) {
+                return "SELECT ?x " +
                 "WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Food . " +
+                "OntologyPersonalProfile:"+ person + " OntologyPersonalProfile:boostersHigh ?x." +
+                "}";
+    }
+
+    //finner alle affinities til en person  - bill
+    String getAllAffinities = "SELECT ?x WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Modifiers . " +
+                "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
+                "}";
+
+    String getAllEcoProducts = "SELECT ?x WHERE { " +
                 "?x rdf:type OntologyPersonalProfile:Food." +
                 "?y rdf:type OntologyPersonalProfile:Ecological . " +
                 "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
                 "}";
 
+    String getAllEcoJams = "SELECT ?x WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Jam." +
+                "?y rdf:type OntologyPersonalProfile:Ecological . " +
+                "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
+                "}";
+    String getSatisfiesHighEcoAffinity = "SELECT ?x WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Jam. " +
+                "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x." +
+                "}";
+
+    String getProducts(String xType, String relation, String yType) {
+        String query = "SELECT ?x WHERE { ";
+        if (!xType.isEmpty())
+            query += "?x rdf:type OntologyPersonalProfile:" + xType + ".";
+        if (!yType.isEmpty())
+            query += "?y rdf:type OntologyPersonalProfile:" + yType + " . ";
+        if (!relation.isEmpty())
+            query += "?x OntologyPersonalProfile:" + relation + " ?y.";
+        query += "}";
+        return query;
+    }
+
+
+
+
+    private List<OWLIndividual> executeQuery(String query) {
         SPARQLTests sparqlTest = new SPARQLTests();
         try {
             sparqlTest.setUp();
         } catch (OWLOntologyCreationException e) {
             throw new RuntimeException("Wooooops!");
         }
-        List<String> ecosAsStrings = sparqlTest.jenaQuery(query, "x");
+        List<String> ecosAsStrings = sparqlTest.jenaQuery(prefix + query, "x");
         List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
         for (String ecoAsString : ecosAsStrings) {
             individuals.add(factory.getOWLIndividual(URI.create(ecoAsString)));
-        }
-        return individuals;
-    }
-
-     private List<OWLIndividual> getAllHighBoosters(String person) {
-
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT ?x " +
-                "WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Food . " +
-                "OntologyPersonalProfile:"+ person + " OntologyPersonalProfile:boostersHigh ?x." +
-                "}";
-
-        SPARQLTests sparqlTest = new SPARQLTests();
-        try {
-            sparqlTest.setUp();
-        } catch (OWLOntologyCreationException e) {
-            throw new RuntimeException("Wooooops!");
-        }
-        List<String> affinitiesAsStrings = sparqlTest.jenaQuery(query, "x");
-        List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
-        for (String affinityAsString : affinitiesAsStrings) {
-            individuals.add(factory.getOWLIndividual(URI.create(affinityAsString)));
-        }
-        return individuals;
-    }
-
-    private List<OWLIndividual> getAllAffinities() {
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT ?x " +
-                "WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Modifiers . " +
-                "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
-                "}";
-
-        //finner alle affinities til en person  - bill
-        SPARQLTests sparqlTest = new SPARQLTests();
-        try {
-            sparqlTest.setUp();
-        } catch (OWLOntologyCreationException e) {
-            throw new RuntimeException("Wooooops!");
-        }
-        List<String> affinitiesAsStrings = sparqlTest.jenaQuery(query, "x");
-        List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
-        for (String affinityAsString : affinitiesAsStrings) {
-            individuals.add(factory.getOWLIndividual(URI.create(affinityAsString)));
         }
         return individuals;
     }
