@@ -1,3 +1,4 @@
+import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
@@ -7,6 +8,8 @@ import org.semanticweb.owl.inference.OWLReasonerException;
 import org.semanticweb.owl.inference.OWLReasonerFactory;
 import org.semanticweb.owl.model.*;
 import org.semanticweb.reasonerfactory.pellet.PelletReasonerFactory;
+
+import java.net.URISyntaxException;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -23,8 +26,8 @@ public class IndividualRelatedTests {
     private static Reasoner reasoner;
 
     @BeforeClass()
-    public static void beforeClass(){
-        factory = new SparqlQueryFactory();
+    public static void beforeClass() throws URISyntaxException {
+        factory = new SparqlQueryFactory(IndividualRelatedTests.class.getResource("PersonalProfile.owl").toURI());
         ontology = factory.ontology;
         manager = factory.manager;
         reasoner = factory.reasoner;

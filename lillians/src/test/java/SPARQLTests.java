@@ -10,6 +10,7 @@ import org.mindswap.pellet.jena.PelletReasoner;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.model.*;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class SPARQLTests {
     static Reasoner reasoner;
 
     @BeforeClass
-    public static void beforeClass() {
-        factory = new SparqlQueryFactory();
+    public static void beforeClass() throws URISyntaxException {
+        factory = new SparqlQueryFactory(SPARQLTests.class.getResource("PersonalProfile.owl").toURI());
         reasoner = factory.reasoner;
     }
 
