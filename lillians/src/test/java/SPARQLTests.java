@@ -4,7 +4,6 @@ import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.model.*;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -19,12 +18,10 @@ import static org.junit.Assert.assertEquals;
 public class SPARQLTests {
 
     static SparqlQueryFactory factory;
-    static Reasoner reasoner;
 
     @BeforeClass
     public static void beforeClass() throws URISyntaxException {
         factory = new SparqlQueryFactory(SPARQLTests.class.getResource("PersonalProfile.owl").toURI());
-        reasoner = factory.reasoner;
     }
 
     @Test
@@ -118,7 +115,7 @@ public class SPARQLTests {
 
         List<OWLClass> typesOfAffinity = new ArrayList<OWLClass>();
         for (OWLIndividual affinity : result) {
-            typesOfAffinity.add(reasoner.getType(affinity));
+            typesOfAffinity.add(factory.getType(affinity));
         }
 
         assertEquals("HervikStrawberryJam", result.get(0).toString());
@@ -134,7 +131,7 @@ public class SPARQLTests {
 
         List<OWLClass> typesOfAffinity = new ArrayList<OWLClass>();
         for (OWLIndividual affinity : affinities) {
-            typesOfAffinity.add(reasoner.getType(affinity));
+            typesOfAffinity.add(factory.getType(affinity));
         }
 
         assertEquals("MediumPriceSensitivity", typesOfAffinity.get(0).toString());

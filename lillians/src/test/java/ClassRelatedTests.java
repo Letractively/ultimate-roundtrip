@@ -115,10 +115,10 @@ public class ClassRelatedTests {
             for (OWLClass owlClass : classesOfHSJSet) {
                 result.add(owlClass);
             }
-        }    // 0 0 RegProduced
-        // 1 0 HervikProducts
-        //  12 0 StrawberryJam
+        }
+        assertEquals("RegularProducedFood", result.get(0).toString());
         assertEquals("HervikProducts", result.get(1).toString());
+        assertEquals("StrawberryJam", result.get(2).toString());
     }
 
       @Test
@@ -152,9 +152,6 @@ public class ClassRelatedTests {
 
         OWLIndividual ecoAffinity = factory.getRelatedIndividual(bill, hasEcoAffinity);
         OWLClass typeOfEcoAffinity = factory.getType(ecoAffinity);
-        //System.out.println("ecoAffinity = " + ecoAffinity);
-        //System.out.println("typeOfEcoAffinity = " + typeOfEcoAffinity);
-
         assertEquals("HighEcoAffinity", typeOfEcoAffinity.toString());
     }
 
@@ -165,9 +162,6 @@ public class ClassRelatedTests {
 
         OWLIndividual priceSensitivity = factory.getRelatedIndividual(bill, hasPriceAffinity);
         OWLClass typeOfPriceSensitivity = factory.getType(priceSensitivity);
-        //System.out.println("ecoAffinity = " + ecoAffinity);
-        //System.out.println("typeOfEcoAffinity = " + typeOfEcoAffinity);
-
         assertEquals("MediumPriceSensitivity", typeOfPriceSensitivity.toString());
     }
 
@@ -178,9 +172,6 @@ public class ClassRelatedTests {
 
         OWLIndividual fairTradeAffinity = factory.getRelatedIndividual(bill, hasFairTradeAffinity);
         OWLClass typeOfFairTradeAffinity = factory.getType(fairTradeAffinity);
-        //System.out.println("ecoAffinity = " + ecoAffinity);
-        //System.out.println("typeOfEcoAffinity = " + typeOfEcoAffinity);
-
         assertEquals("HighFairTradeAffinity", typeOfFairTradeAffinity.toString());
     }
 

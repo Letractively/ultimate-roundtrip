@@ -113,7 +113,7 @@ public class LilliansTest {
     @Test
     public void findSuperClassOfIndividualBill() {
         OWLIndividual bill = factory.findIndividual("#Bill");
-        Set<Set<OWLClass>> classesOfHSJ = reasoner.getTypes(bill);
+        Set<Set<OWLClass>> classesOfHSJ = factory.getTypes(bill);
         List<OWLClass> result = new ArrayList<OWLClass>();
 
         for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
@@ -147,7 +147,7 @@ public class LilliansTest {
     @Test
     public void findSuperClassOfIndividualHSJ() {
         OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam");
-        Set<Set<OWLClass>> classesOfHSJ = reasoner.getTypes(hervikSJ);
+        Set<Set<OWLClass>> classesOfHSJ = factory.getTypes(hervikSJ);
         List<OWLClass> result = new ArrayList<OWLClass>();
 
         for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
@@ -194,7 +194,7 @@ public class LilliansTest {
         //String age = reasoner.getRelatedValue(ind[2], hasProducer).getLiteral();
         OWLIndividual hervikStrawberryJam = factory.findIndividual("#HervikStrawberryJam");
         List<OWLClass> result = new ArrayList<OWLClass>();
-        Set<Set<OWLClass>> classesOfHSJSets = reasoner.getTypes(hervikStrawberryJam);
+        Set<Set<OWLClass>> classesOfHSJSets = factory.getTypes(hervikStrawberryJam);
         Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gj�r ferdig!! trenger ikke like mye l�kker
 
         for (Set<OWLClass> classesOfHSJSet : classesOfHSJSets) {
@@ -211,7 +211,7 @@ public class LilliansTest {
 
     @Test
     public void getInstanceAndItsProperty() {
-        // create property and resources to query the reasoner
+        // create property and resources to query the factory
         OWLClass person = factory.findClassByName("#Person");
         OWLObjectProperty hasGender = factory.findObjectProperty("#hasGender");
         OWLDataProperty hasAge = factory.findDataType("#hasAge");
@@ -219,7 +219,7 @@ public class LilliansTest {
         Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
         OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
         String age = reasoner.getRelatedValue(ind[2], hasAge).getLiteral();
-        OWLIndividual gender = reasoner.getRelatedIndividual(ind[2], hasGender);
+        OWLIndividual gender = factory.getRelatedIndividual(ind[2], hasGender);
 
         assertEquals("Male", gender.toString());
         assertEquals("39", age);
@@ -228,14 +228,14 @@ public class LilliansTest {
 
     @Test
     public void findRangeOfRelation() {
-        // create property and resources to query the reasoner
+        // create property and resources to query the factory
         OWLClass jam = factory.findClassByName("#Jam");
         OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
 
         Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
         OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-        //String age = reasoner.getRelatedValue(ind[2], hasProducer).getLiteral();
-        OWLIndividual producer = reasoner.getRelatedIndividual(ind[2], hasProducer);
+        //String age = factory.getRelatedValue(ind[2], hasProducer).getLiteral();
+        OWLIndividual producer = factory.getRelatedIndividual(ind[2], hasProducer);
 
         assertEquals("Nora", producer.toString());
     }
@@ -244,10 +244,10 @@ public class LilliansTest {
 
     @Test
     public void findProducerOfHervikJam() {
-        // create property and resources to query the reasoner
+        // create property and resources to query the factory
         OWLIndividual hervikStrawberryJam = factory.findIndividual("#HervikStrawberryJam");
         OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
-        OWLIndividual producer = reasoner.getRelatedIndividual(hervikStrawberryJam, hasProducer);
+        OWLIndividual producer = factory.getRelatedIndividual(hervikStrawberryJam, hasProducer);
 
         assertEquals("Hervik", producer.toString());
     }
@@ -255,7 +255,7 @@ public class LilliansTest {
     @Test
     public void checkClassOfInstance() {
         OWLIndividual bill = factory.findIndividual("#Bill");
-        Set<Set<OWLClass>> classesOfHSJ = reasoner.getTypes(bill);
+        Set<Set<OWLClass>> classesOfHSJ = factory.getTypes(bill);
         List<OWLClass> result = new ArrayList<OWLClass>();
         for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
             for (OWLClass owlClass : classesOfHSJSet) {
@@ -280,7 +280,7 @@ public class LilliansTest {
 
         for (OWLIndividual ind : individuals) {
 
-            resultset.add(reasoner.getRelatedIndividual(ind, hasProducer));
+            resultset.add(factory.getRelatedIndividual(ind, hasProducer));
             //for (Set<OWLClass> owlClasses : type) {
             //Set<OWLDescription> ranges = hasProducer.getRanges(ontology);
             //System.out.println(ind + "  " + "HasProducer: " + hasProducer.getRanges(ontology));
@@ -296,7 +296,7 @@ public class LilliansTest {
     public void findProducerHervikSJ() {
         OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
         OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam");
-        OWLIndividual producer = reasoner.getRelatedIndividual(hervikSJ, hasProducer);
+        OWLIndividual producer = factory.getRelatedIndividual(hervikSJ, hasProducer);
 
         assertEquals("Hervik", producer.toString());
     }
@@ -304,7 +304,7 @@ public class LilliansTest {
 
     @Test
     public void findAllDataPropertiesForIndividualBill() {
-        // create property and resources to query the reasoner
+        // create property and resources to query the factory
         OWLIndividual bill = factory.findIndividual("#Bill");
         Set<OWLDataProperty> dataProperties = reasoner.getDataProperties(); //ALLE
 
@@ -346,9 +346,9 @@ public class LilliansTest {
 
         for (OWLIndividual ind : individuals) {
             // get the info about this specific individual
-            //OWLIndividual name = reasoner.getRelatedIndividual(ind, hasIngredient);
-            OWLClass type = reasoner.getType(ind);
-            OWLIndividual ingredient = reasoner.getRelatedIndividual(ind, hasIngredient);
+            //OWLIndividual name = .getRelatedIndividual(ind, hasIngredient);
+            OWLClass type = factory.getType(ind);
+            OWLIndividual ingredient = factory.getRelatedIndividual(ind, hasIngredient);
             results.add(ind.toString() + " " + type.getURI().getFragment() + " " + ingredient);
         }
         assertEquals("ICAEcologicalStrawberryJam EcologicalStrawberryJam Strawberry", results.get(0));
@@ -361,8 +361,8 @@ public class LilliansTest {
         OWLIndividual bill = factory.findIndividual("#Bill");
         OWLObjectProperty hasEcoAffinity = factory.findObjectProperty("#hasEcoAffinity");
 
-        OWLIndividual ecoAffinity = reasoner.getRelatedIndividual(bill, hasEcoAffinity);
-        OWLClass typeOfEcoAffinity = reasoner.getType(ecoAffinity);
+        OWLIndividual ecoAffinity = factory.getRelatedIndividual(bill, hasEcoAffinity);
+        OWLClass typeOfEcoAffinity = factory.getType(ecoAffinity);
         assertEquals("HighEcoAffinity", typeOfEcoAffinity.toString());
     }
 
@@ -371,8 +371,8 @@ public class LilliansTest {
         OWLIndividual bill = factory.findIndividual("#Bill");
         OWLObjectProperty hasPriceAffinity = factory.findObjectProperty("#hasPriceSensitivity");
 
-        OWLIndividual priceSensitivity = reasoner.getRelatedIndividual(bill, hasPriceAffinity);
-        OWLClass typeOfPriceSensitivity = reasoner.getType(priceSensitivity);
+        OWLIndividual priceSensitivity = factory.getRelatedIndividual(bill, hasPriceAffinity);
+        OWLClass typeOfPriceSensitivity = factory.getType(priceSensitivity);
         assertEquals("MediumPriceSensitivity", typeOfPriceSensitivity.toString());
     }
 
@@ -381,8 +381,8 @@ public class LilliansTest {
         OWLIndividual bill = factory.findIndividual("#Bill");
         OWLObjectProperty hasFairTradeAffinity = factory.findObjectProperty("#hasFairTradeAffinity");
 
-        OWLIndividual fairTradeAffinity = reasoner.getRelatedIndividual(bill, hasFairTradeAffinity);
-        OWLClass typeOfFairTradeAffinity = reasoner.getType(fairTradeAffinity);
+        OWLIndividual fairTradeAffinity = factory.getRelatedIndividual(bill, hasFairTradeAffinity);
+        OWLClass typeOfFairTradeAffinity = factory.getType(fairTradeAffinity);
         assertEquals("HighFairTradeAffinity", typeOfFairTradeAffinity.toString());
     }
 
@@ -410,91 +410,6 @@ public class LilliansTest {
         //todo assertEquals
     }
 
-    /*  ikke s� lett n�r jeg ikke vet hvilke atributter som er relevante
-    de avhenger jo av det vi f�r vite i profilen
-    @Test
-    public void findMostRlevantJam() {
-        //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
-        Reasoner reasoner = new Reasoner(manager);
-        reasoner.setOntology(ontology);
-        KnowledgeBase kb = reasoner.getKB();
-        PelletReasoner jenaReasoner = new PelletReasoner();
-        // Create a Pellet graph using the KB from OWLAPI
-        PelletInfGraph graph = jenaReasoner.bind(kb);
-        // Wrap the graph in a model
-        InfModel model = ModelFactory.createInfModel(graph);
-
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT  ?x" +
-                "WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:StrawberryJam . " +
-                "?x OntologyPersonalProfile: . " +            //<Bill>
-                "?x OntologyPersonalProfile:hasAge ?y  . " +
-                "}";
-
-        Query queryQuery = QueryFactory.create(query);
-
-        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
-
-        ResultSet rs = qe.execSelect();
-
-        while (rs.hasNext()) {
-            QuerySolution soln = rs.nextSolution();
-            RDFNode x = soln.get("x");       // Get a result variable by name.
-            System.out.println("x = " + x);
-
-            System.out.println("soln.get(\"y\") = " + soln.get("y"));
-            Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-            // System.out.println("r = " + r);
-            //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
-            //System.out.println("l = " + l);
-        }
-
-        String bl = rs.toString();
-        System.out.println("bl = " + bl);
-
-        String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
-
-        //assertEquals(wantedRs, bl);
-        //todo hvordan h�ndtere result sett fra sp�rring - syntax for sp�rringene - hvis man vet alt dette er det vel like greit � bruke vanlig reasoning?
-    }
-    */
-
-    
-    /*
-    @Test
-    public void test3() {
-        factory.singleQuery("SELECT ?z ?y WHERE { " +
-                "?y rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
-                //"?y OntologyPersonalProfile:hasFirstName \"Bill\" . " +            //<Bill>
-                "?y OntologyPersonalProfile:hasMatchingEcoProducts ?x  . " +
-                "}", new ResultSetRetriever() {
-            public List<String> retrieveResultset(ResultSet rs) {
-                while (rs.hasNext()) {
-                    QuerySolution soln = rs.nextSolution();
-                    RDFNode x = soln.get("x");       // Get a result variable by name.
-                    System.out.println("x = " + x);
-
-                    System.out.println("soln.get(\"y\") = " + soln.get("y"));
-                    Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-                    // System.out.println("r = " + r);
-                    //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
-                    //System.out.println("l = " + l);
-                }
-
-                String bl = rs.toString();
-                System.out.println("bl = " + bl);
-                return new ArrayList<String>();
-
-            }
-        });
-
-    }
-   */
-
 //hvordan finne ut range til en relasjon? ->  m� vite instansen du h�rer til
 //properties til en instans    - m� trikses med
 //verdier til en property til en instans - ok
@@ -504,14 +419,14 @@ public class LilliansTest {
     /*
  @Test
     public void findAllObjectPropertiesForIndividual() {
-        Reasoner reasoner = new Reasoner(manager);
-        reasoner.setOntology(ontology);
+          = new (manager);
+        .setOntology(ontology);
 
         OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam"));
         OWLClass strawberryJam = factory.findClassByName("#StrawberryJam"));
-        Set<Set<OWLClass>> type = reasoner.getTypes(hervikSJ);
+        Set<Set<OWLClass>> type = .getTypes(hervikSJ);
 
-        Set<OWLObjectProperty> objectProperties = reasoner.getObjectProperties(); //alle
+        Set<OWLObjectProperty> objectProperties = .getObjectProperties(); //alle
         //s� kan man evt koble properties til domains, og videre lage lister for hvilke som h�rer til hvilke domains, og videre hvilke ranges de har
         for (OWLObjectProperty objectProperty : objectProperties) {
 
@@ -523,14 +438,14 @@ public class LilliansTest {
                 //OWLProperty prop2 = property.asOWLObjectProperty();
                 System.out.println("owlObjectProperty = " + owlObjectProperty);
                 //OWLObjectProperty prop22 = factory.findClassByName("#"+ prop2));
-                OWLIndividual rangeOfProp2 = reasoner.getRelatedIndividual(hervikSJ, owlObjectProperty);
+                OWLIndividual rangeOfProp2 = .getRelatedIndividual(hervikSJ, owlObjectProperty);
                 System.out.println("rangeOfProp2 = " + rangeOfProp2);
             } else if (property instanceof OWLDataType) {
                 OWLDataType owlDatatype = (OWLDataType) property;
                 //OWLProperty prop1 = property.asOWLDataProperty();
                 System.out.println("owlDatatype = " + owlDatatype);
-                // OWLDataType rangeOfOwlDatatype = reasoner.getRelatedValue(hervikSJ, owlDatatype);
-                //OWLIndividual rangeOfProp1 = reasoner.getRelatedIndividual(HervikSJ, );
+                // OWLDataType rangeOfOwlDatatype = .getRelatedValue(hervikSJ, owlDatatype);
+                //OWLIndividual rangeOfProp1 = .getRelatedIndividual(HervikSJ, );
             }
 
 

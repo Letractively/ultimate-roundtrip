@@ -112,6 +112,5 @@ public class SparqlQueryFactory {
     public Set<Set<OWLClass>> getTypes(OWLIndividual indvidual) {
         return reasoner.getTypes(indvidual);
     }
-
 }
 
