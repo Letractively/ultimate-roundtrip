@@ -1,5 +1,3 @@
-import no.ntnu.ontology.ResultSetRetriever;
-import no.ntnu.ontology.SingleResultSetRetrieverImpl;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,7 +13,6 @@ public class RankingTest {
 
     static SparqlQueryFactory factory;
     static Reasoner reasoner;
-    private ResultSetRetriever retriever = new SingleResultSetRetrieverImpl("x");
 
     @BeforeClass
     public static void setUp() throws URISyntaxException {
@@ -99,11 +96,10 @@ public class RankingTest {
 
         //Calculate Bills affinities - hentes ut via sp¿rring
 //finner alle affinities til en person  - bill
-        String getAllAffinities = "SELECT ?x WHERE { " +
+        List<OWLIndividual> allAffinities = factory.singleQuery("SELECT ?x WHERE { " +
                 "?x rdf:type OntologyPersonalProfile:Modifiers . " +
                 "?x OntologyPersonalProfile:belongsTo OntologyPersonalProfile:Bill." +
-                "}";
-        List<OWLIndividual> allAffinities = factory.executeQuery(getAllAffinities, retriever);
+                "}", "x");
         Map<OWLIndividual, SimpleSortable> jamMap = createJamMap(jams);
 
         addBoosters(allAffinities, jamMap);
@@ -127,12 +123,20 @@ public class RankingTest {
     }
 
     @Test
-    public void testRankedProducts() {
-        //assertEquals(2, executeQuery(getAllEcoJams).size());
-        //TODO Use the special parameters query!!
-        assertEquals(2, factory.executeQuery(getProducts("Jam", "hasWayOfProduction", "Ecological"), retriever).size());
-        assertEquals(10, factory.executeQuery(getProducts("Jam", "", ""), retriever).size());
-        List<OWLIndividual> results = factory.executeQuery(getSatisfiesHighEcoAffinity, retriever);
+    public void testDifferentQueries() {
+          assertEquals(2, factory.singleQuery("SELECT ?x WHERE { " +
+            "?x rdf:type OntologyPersonalProfile:Jam." +
+            "?y rdf:type OntologyPersonalProfile:Ecological . " +
+            "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
+            "}", "x").size());
+
+          assertEquals(10, factory.singleQuery("SELECT ?x WHERE { " +
+            "?x rdf:type OntologyPersonalProfile:Jam.}", "x").size());
+
+        List<OWLIndividual> results = factory.singleQuery("SELECT ?x WHERE { " +
+            "?x rdf:type OntologyPersonalProfile:Jam. " +
+            "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x." +
+            "}", "x");
         assertEquals(2, results.size());
         assertEquals("ICAEcologicalStrawberryJam", results.get(0).toString());
         assertEquals("HervikEcoStrawberryJam", results.get(1).toString());
@@ -165,7 +169,10 @@ public class RankingTest {
 
     @Test
     public void testBoosterRelevance() {
-        List<OWLIndividual> boosters = factory.executeQuery(getAllHighBoosters("Bill"), retriever);
+        List<OWLIndividual> boosters = factory.singleQuery("SELECT ?x WHERE { " +
+                "?x rdf:type OntologyPersonalProfile:Food . " +
+                "OntologyPersonalProfile:Bill OntologyPersonalProfile:boostersHigh ?x." +
+                "}", "x");
 
         assertEquals(2, boosters.size());
         assertEquals("HervikEcoStrawberryJam", boosters.get(1).toString());
@@ -191,16 +198,6 @@ public class RankingTest {
 
 
     }
-
-    private Map<OWLIndividual, SimpleSortable> createJamMap(Set<OWLIndividual> jams) {
-        Map<OWLIndividual, SimpleSortable> jamMap = new HashMap<OWLIndividual, SimpleSortable>();
-
-        for (OWLIndividual jam : jams) {
-            jamMap.put(jam, new SimpleSortable(jam));
-        }
-        return jamMap;
-    }
-
 
     //hva skal denne brukes til?
     @Test
@@ -229,45 +226,22 @@ public class RankingTest {
 
     @Test
     public void testGetAllEcoProds() {
-        assertEquals(2, factory.executeQuery(getAllEcoProducts, retriever).size());
-        assertEquals("HervikEcoStrawberryJam", factory.executeQuery(getAllEcoProducts, retriever).get(0).toString());
-    }
-
-    String getAllHighBoosters(String person) {
-        return "SELECT ?x " +
-                "WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Food . " +
-                "OntologyPersonalProfile:" + person + " OntologyPersonalProfile:boostersHigh ?x." +
-                "}";
-    }
-
-
-    String getAllEcoProducts = "SELECT ?x WHERE { " +
+        List<OWLIndividual> result = factory.singleQuery("SELECT ?x WHERE { " +
             "?x rdf:type OntologyPersonalProfile:Food." +
             "?y rdf:type OntologyPersonalProfile:Ecological . " +
             "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
-            "}";
+            "}", "x");
+        assertEquals(2, result.size());
+        assertEquals("HervikEcoStrawberryJam", result.get(0).toString());
+    }
 
-    String getAllEcoJams = "SELECT ?x WHERE { " +
-            "?x rdf:type OntologyPersonalProfile:Jam." +
-            "?y rdf:type OntologyPersonalProfile:Ecological . " +
-            "?x OntologyPersonalProfile:hasWayOfProduction ?y." +
-            "}";
-    String getSatisfiesHighEcoAffinity = "SELECT ?x WHERE { " +
-            "?x rdf:type OntologyPersonalProfile:Jam. " +
-            "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x." +
-            "}";
+    private Map<OWLIndividual, SimpleSortable> createJamMap(Set<OWLIndividual> jams) {
+        Map<OWLIndividual, SimpleSortable> jamMap = new HashMap<OWLIndividual, SimpleSortable>();
 
-    String getProducts(String xType, String relation, String yType) {
-        String query = "SELECT ?x WHERE { ";
-        if (!xType.isEmpty())
-            query += "?x rdf:type OntologyPersonalProfile:" + xType + ".";
-        if (!yType.isEmpty())
-            query += "?y rdf:type OntologyPersonalProfile:" + yType + " . ";
-        if (!relation.isEmpty())
-            query += "?x OntologyPersonalProfile:" + relation + " ?y.";
-        query += "}";
-        return query;
+        for (OWLIndividual jam : jams) {
+            jamMap.put(jam, new SimpleSortable(jam));
+        }
+        return jamMap;
     }
 }
 

@@ -101,7 +101,7 @@ public class IndividualRelatedTests {
 
     @Test
     public void domainTest() {
-        OWLObjectProperty prop = factory.getOWLObjectProperty("#hasEcoAffinity");
+        OWLObjectProperty prop = factory.findObjectProperty("#hasEcoAffinity");
         OWLClass person = factory.findClassByName("#Person");
         OWLClass ecoAffinity = factory.findClassByName("#Person");
         OWLClass jam = factory.findClassByName("#Jam");

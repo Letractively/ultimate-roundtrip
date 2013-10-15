@@ -13,11 +13,11 @@ import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.model.*;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Lillian Hella
+ * Handles all the difficulties of the Ontology API in a simple to use abstraction
  */
 
 public class SparqlQueryFactory {
@@ -29,7 +29,8 @@ public class SparqlQueryFactory {
                     "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
                     "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
                     "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  ";
-    OWLDataFactory factory;
+    private final OWLDataFactory factory;
+    ResultSetRetriever resultRetriever = new MultipleResultSetRetriever();
 
 
     public SparqlQueryFactory(URI ontologyFile) {
@@ -46,16 +47,16 @@ public class SparqlQueryFactory {
         factory = manager.getOWLDataFactory();
     }
 
-    public List<OWLIndividual> executeQuery(String query, ResultSetRetriever callback) {
-        List<String> ecosAsStrings = jenaQuery(query, callback);
-        List<OWLIndividual> individuals = new ArrayList<OWLIndividual>();
-        for (String ecoAsString : ecosAsStrings) {
-            individuals.add(factory.getOWLIndividual(URI.create(ecoAsString)));
+    public List<OWLIndividual> singleQuery(String query, String variableName) {
+        List<Map<String, OWLIndividual>> resultMap = convertToOWLIndividuals(multipleResultsQuery(query, resultRetriever));
+        List<OWLIndividual> results = new ArrayList<OWLIndividual>();
+        for (Map<String, OWLIndividual> individualMap : resultMap) {
+            results.add(individualMap.get(variableName));
         }
-        return individuals;
+        return results;
     }
 
-    public List<String> jenaQuery(String query, ResultSetRetriever callback) {
+    public List<Map<String, RDFNode>> multipleResultsQuery(String query, ResultSetRetriever resultSetRetriever) {
         KnowledgeBase kb = reasoner.getKB();
         // Create Pellet-Jena reasoner
         PelletReasoner pelletReasoner = new PelletReasoner();
@@ -68,13 +69,21 @@ public class SparqlQueryFactory {
         Query queryQuery = QueryFactory.create(SparqlQueryFactory.prefix + query);
         QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
         ResultSet resultSet = qe.execSelect();
-        return callback.getResultset(resultSet);
+        return resultSetRetriever.retrieveResultset(resultSet);
     }
 
-
-    public OWLIndividual getOWLIndividual(URI uri) {
-        return factory.getOWLIndividual(uri);
+    List<Map<String, OWLIndividual>> convertToOWLIndividuals(List<Map<String, RDFNode>> in) {
+        ArrayList<Map<String, OWLIndividual>> result = new ArrayList<Map<String, OWLIndividual>>();
+        for (Map<String, RDFNode> stringOWLIndividualMap : in) {
+            for (Map.Entry<String, RDFNode> stringRDFNodeEntry : stringOWLIndividualMap.entrySet()) {
+                HashMap<String, OWLIndividual> individualMap = new HashMap<String, OWLIndividual>();
+                individualMap.put(stringRDFNodeEntry.getKey(), factory.getOWLIndividual(URI.create(stringRDFNodeEntry.getValue().toString())));
+                result.add(individualMap);
+            }
+        }
+        return result;
     }
+
 
     public OWLObjectProperty findObjectProperty(String type) {
         return factory.getOWLObjectProperty(URI.create(myURI + type));
@@ -92,11 +101,16 @@ public class SparqlQueryFactory {
         return manager.getOWLDataFactory().getOWLDataProperty(URI.create(myURI + name));
     }
 
-    /**
-     * Simplification
-     */
-    public OWLObjectProperty getOWLObjectProperty(String something) {
-        return factory.getOWLObjectProperty(URI.create(myURI + something));
+    public OWLIndividual getRelatedIndividual(OWLIndividual individual, OWLObjectProperty relation) {
+        return reasoner.getRelatedIndividual(individual, relation);
+    }
+
+    public OWLClass getType(OWLIndividual individual) {
+        return reasoner.getType(individual);
+    }
+
+    public Set<Set<OWLClass>> getTypes(OWLIndividual indvidual) {
+        return reasoner.getTypes(indvidual);
     }
 
 }

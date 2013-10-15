@@ -1,15 +1,6 @@
-import com.clarkparsia.pellet.sparqldl.jena.SparqlDLExecutionFactory;
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.*;
-import no.ntnu.ontology.ResultSetRetriever;
-import no.ntnu.ontology.SingleResultSetRetrieverImpl;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mindswap.pellet.KnowledgeBase;
-import org.mindswap.pellet.jena.PelletInfGraph;
-import org.mindswap.pellet.jena.PelletReasoner;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.inference.OWLReasoner;
 import org.semanticweb.owl.inference.OWLReasonerAdapter;
@@ -250,87 +241,6 @@ public class LilliansTest {
     }
 
 
-    //SPARQL
-
-    @Test
-    public void findIndividualsOfClass() {
-        //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
-        // Get the KB from the reasoner
-        KnowledgeBase kb = reasoner.getKB();
-        // Create Pellet-Jena reasoner
-        PelletReasoner jenaReasoner = new PelletReasoner();
-
-        // Create a Pellet graph using the KB from OWLAPI
-        PelletInfGraph graph = jenaReasoner.bind(kb);
-        // Wrap the graph in a model
-        InfModel model = ModelFactory.createInfModel(graph);
-        // Create a query execution over this model
-
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT  ?x " +
-                "WHERE { ?x rdf:type OntologyPersonalProfile:Jam}";
-
-        Query queryQuery = QueryFactory.create(query);
-
-        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
-
-        ResultSet rs = qe.execSelect();
-        assertEquals(rs.toString(), "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryAndWildJam}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ICAEcologicalStrawberryJam}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraSqueezy}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraLightStrawberryJam}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraOriginal}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EuroshopperStrawberryJam}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraNoSugar}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#NoraHomeMadeStrawberryJam}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]");
-    }
-
-
-    @Test
-    public void findAllHervikProducedJams() {
-        //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
-        // Create Pellet-OWLAPI reasoner
-        // Get the KB from the reasoner
-        KnowledgeBase kb = reasoner.getKB();
-        // Create Pellet-Jena reasoner
-        PelletReasoner jenaReasoner = new PelletReasoner();
-        // Create a Pellet graph using the KB from OWLAPI
-        PelletInfGraph graph = jenaReasoner.bind(kb);
-        // Wrap the graph in a model
-        InfModel model = ModelFactory.createInfModel(graph);
-        // Create a query execution over this model
-
-        String query = "SELECT  ?x " +
-                "WHERE { ?x rdf:type OntologyPersonalProfile:Jam . " +
-                "?x OntologyPersonalProfile:hasProducer OntologyPersonalProfile:Hervik . }";
-
-        Query queryQuery = QueryFactory.create(SparqlQueryFactory.prefix + query);
-
-        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
-
-        ResultSet rs = qe.execSelect();
-
-        while (rs.hasNext()) {
-            QuerySolution soln = rs.nextSolution();
-            RDFNode x = soln.get("x");       // Get a result variable by name.
-            System.out.println("x = " + x);
-            Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-            System.out.println("r = " + r);
-            //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
-            //System.out.println("l = " + l);
-        }
-
-        assertEquals("[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, " +
-                "{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]",
-                rs.toString());
-
-    }
-
 
     @Test
     public void findProducerOfHervikJam() {
@@ -553,84 +463,16 @@ public class LilliansTest {
     }
     */
 
-
+    
+    /*
     @Test
-    public void findAManWithAge() {
-        List<OWLIndividual> a = factory.executeQuery("SELECT ?z ?y " +
-                "WHERE { ?x rdf:type OntologyPersonalProfile:Man ." +
-                "?x OntologyPersonalProfile:hasFirstName ?z . " +            //<Bill>
-                "?x OntologyPersonalProfile:hasAge ?y  . " +
-                "}", new SingleResultSetRetrieverImpl("x"));
-        System.out.println("a = " + a);
-    }
-
-    @Test
-    public void test() {
-        //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
-        // Create Pellet-OWLAPI reasoner
-        // Get the KB from the reasoner
-        KnowledgeBase kb = reasoner.getKB();
-        // Create Pellet-Jena reasoner
-        PelletReasoner jenaReasoner = new PelletReasoner();
-        // Create a Pellet graph using the KB from OWLAPI
-        PelletInfGraph graph = jenaReasoner.bind(kb);
-        // Wrap the graph in a model
-        InfModel model = ModelFactory.createInfModel(graph);
-        // Create a query execution over this model
-
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT  ?x ?z ?y " +
-                "WHERE { ?x rdf:type OntologyPersonalProfile:Man ." +
-                "?x OntologyPersonalProfile:hasFirstName ?z . " +            //<Bill>  
-                "?x OntologyPersonalProfile:hasAge ?y  . " +
-                "}";
-
-        Query queryQuery = QueryFactory.create(query);
-
-        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
-
-        ResultSet rs = qe.execSelect();
-
-        while (rs.hasNext()) {
-            QuerySolution soln = rs.nextSolution();
-            RDFNode x = soln.get("x");       // Get a result variable by name.
-            System.out.println("x = " + x);
-
-            RDFNode z = soln.get("z");
-            System.out.println("z = " + z);
-
-            System.out.println("soln.get(\"y\") = " + soln.get("y"));
-            Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-            // System.out.println("r = " + r);
-            //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
-            //System.out.println("l = " + l);
-        }
-
-        String bl = rs.toString();
-        System.out.println("bl = " + bl);
-
-        String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
-
-        assertEquals(wantedRs, bl);
-        //todo hvordan h�ndtere result sett fra sp�rring - syntax for sp�rringene - hvis man vet alt dette er det vel like greit � bruke vanlig reasoning?
-    }
-
-
-    @Test
-    @Ignore
-    // Test not written good enough!
-    public void test2() {
-        List<String> result = factory.jenaQuery("SELECT  ?x ?y " +
-                "WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:Man . " +
-                "?x OntologyPersonalProfile:hasFirstName \"Bill\" . " +            //<Bill>
-                "?x OntologyPersonalProfile:hasAge ?y  . " +
+    public void test3() {
+        factory.singleQuery("SELECT ?z ?y WHERE { " +
+                "?y rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
+                //"?y OntologyPersonalProfile:hasFirstName \"Bill\" . " +            //<Bill>
+                "?y OntologyPersonalProfile:hasMatchingEcoProducts ?x  . " +
                 "}", new ResultSetRetriever() {
-            public List<String> getResultset(ResultSet rs) {
-                List<String> xes = new ArrayList<String>();
+            public List<String> retrieveResultset(ResultSet rs) {
                 while (rs.hasNext()) {
                     QuerySolution soln = rs.nextSolution();
                     RDFNode x = soln.get("x");       // Get a result variable by name.
@@ -638,130 +480,20 @@ public class LilliansTest {
 
                     System.out.println("soln.get(\"y\") = " + soln.get("y"));
                     Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-                    System.out.println("r = " + r);
+                    // System.out.println("r = " + r);
                     //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
                     //System.out.println("l = " + l);
                 }
-                return xes;
+
+                String bl = rs.toString();
+                System.out.println("bl = " + bl);
+                return new ArrayList<String>();
+
             }
         });
 
-
-        for (String r : result) {
-            System.out.println("r = " + r);
-        }
-        //String bl = rs.toString();
-        //System.out.println("bl = " + bl);
-
-        String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
-
-        //assertEquals(wantedRs, bl);
-        //todo hvordan h�ndtere result sett fra sp�rring - syntax for sp�rringene - hvis man vet alt dette er det vel like greit � bruke vanlig reasoning?
     }
-
-    @Test
-    public void test3() {
-        //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
-        // Create Pellet-OWLAPI reasoner
-        // Get the KB from the reasoner
-        KnowledgeBase kb = reasoner.getKB();
-        // Create Pellet-Jena reasoner
-        PelletReasoner jenaReasoner = new PelletReasoner();
-        // Create a Pellet graph using the KB from OWLAPI
-        PelletInfGraph graph = jenaReasoner.bind(kb);
-        // Wrap the graph in a model
-        InfModel model = ModelFactory.createInfModel(graph);
-        // Create a query execution over this model
-
-
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT ?y ?x " +
-                "WHERE { " +
-                "?y rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
-                //"?y OntologyPersonalProfile:hasFirstName \"Bill\" . " +            //<Bill>
-                "?y OntologyPersonalProfile:hasMatchingEcoProducts ?x  . " +
-                "}";
-
-        Query queryQuery = QueryFactory.create(query);
-
-        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
-
-        ResultSet rs = qe.execSelect();
-
-        while (rs.hasNext()) {
-            QuerySolution soln = rs.nextSolution();
-            RDFNode x = soln.get("x");       // Get a result variable by name.
-            System.out.println("x = " + x);
-
-            System.out.println("soln.get(\"y\") = " + soln.get("y"));
-            Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-            // System.out.println("r = " + r);
-            //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
-            //System.out.println("l = " + l);
-        }
-
-        String bl = rs.toString();
-        System.out.println("bl = " + bl);
-
-        String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
-
-        //assertEquals(wantedRs, bl);
-        //todo hvordan h�ndtere result sett fra sp�rring - syntax for sp�rringene - hvis man vet alt dette er det vel like greit � bruke vanlig reasoning?
-    }
-
-    @Test
-    public void testFindAllAffinities() {
-        //forslag fra http://lists.owldl.com/pipermail/pellet-users/2008-December/003218.html
-        // Create Pellet-OWLAPI reasoner
-        // Get the KB from the reasoner
-        KnowledgeBase kb = reasoner.getKB();
-        // Create Pellet-Jena reasoner
-        PelletReasoner jenaReasoner = new PelletReasoner();
-        // Create a Pellet graph using the KB from OWLAPI
-        PelletInfGraph graph = jenaReasoner.bind(kb);
-        // Wrap the graph in a model
-        InfModel model = ModelFactory.createInfModel(graph);
-        // Create a query execution over this model
-
-
-        String query = "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX OntologyPersonalProfile: <http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#>" +
-                "PREFIX owl:  <http://www.w3.org/2002/07/owl#>  " +
-                "SELECT ?y " +
-                "WHERE { " +
-                "?y rdf:type OntologyPersonalProfile:Modifiers . " +
-                "}";
-
-        Query queryQuery = QueryFactory.create(query);
-
-        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
-
-        ResultSet rs = qe.execSelect();
-
-        while (rs.hasNext()) {
-            QuerySolution soln = rs.nextSolution();
-            RDFNode x = soln.get("x");       // Get a result variable by name.
-            System.out.println("x = " + x);
-
-            System.out.println("soln.get(\"y\") = " + soln.get("y"));
-            Resource r = soln.getResource("x"); // Get a result variable - must be a resource
-            // System.out.println("r = " + r);
-            //Literal l = soln.getLiteral("x");   // Get a result variable - must be a literal
-            //System.out.println("l = " + l);
-        }
-
-        String bl = rs.toString();
-        System.out.println("bl = " + bl);
-
-        String wantedRs = "[{var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikStrawberryJam}, {var(x)=http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#HervikEcoStrawberryJam}]";
-
-        //assertEquals(wantedRs, bl);
-        //todo hvordan h�ndtere result sett fra sp�rring - syntax for sp�rringene - hvis man vet alt dette er det vel like greit � bruke vanlig reasoning?
-    }
+   */
 
 //hvordan finne ut range til en relasjon? ->  m� vite instansen du h�rer til
 //properties til en instans    - m� trikses med
