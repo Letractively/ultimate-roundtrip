@@ -140,20 +140,6 @@ public class SPARQLTests {
 
     }
 
-
-    @Test
-    @Ignore //todo Query does not produce a result
-    public void testProductsRelatedToAffinity() {
-        List<Map<String, RDFNode>> result = factory.multipleResultsQuery("SELECT ?x ?Y WHERE { " +
-                "?x rdf:type OntologyPersonalProfile:EcologicalFood ." +
-                "?y rdf:type OntologyPersonalProfile:EcoAffinity . " +
-                "?y OntologyPersonalProfile:hasRelatedEcoProducts ?x ." +
-                "}", new MultipleResultSetRetriever());   //fordi jeg ikke har spesifisert denne relasjonen til noen av individene...
-        assertEquals("MediumPriceSensitivity", result.get(0).get("x").toString());
-        assertEquals("HighFairTradeAffinity", result.get(1).get("x").toString());
-    }
-
-
     @Test
     public void findAllEcoPositives() {
         List<OWLIndividual> result = factory.singleQuery("SELECT ?x WHERE { " +
