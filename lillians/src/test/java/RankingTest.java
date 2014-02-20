@@ -20,7 +20,7 @@ public class RankingTest {
         reasoner = factory.reasoner;
     }
 
-    //todo bytt ut med spørring? getallaffinities
+    //todo bytt ut med spørring? getallaffinities for a person - need to know which affinities they are, to avoid getting all relations for a person
 
     /*
     byttet ut med spørring i stedet - denne går ikke på affinities for en person, men for alle med affinities
@@ -161,6 +161,8 @@ public class RankingTest {
                     //todo trenger disse å hardkodes? finnes det en måte hvor man kan summere alle aktuelle delrelevanser hvor det er en match mellom preferanse og et produkts egenskap?
                     //todo delrelevans = preferanseverdi x tilfreddstillelse av egenskapet hos produktet
                     //todo relevans = summen av alle delrelevanser
+                    //todo nødvendigheten av denne er avhengig av framgangsmåten for personaliseringen - skal vi bruke verdier eller relevant/ikke relevant
+                    //todo i stedet for delrelevans og summen av disse, kan man i stedet ser på relevans i seg selv og ikke graden av det
                     jamMap.get(jam).addRelevance(affinityValue, jamWOPValue);
                 }
             }

@@ -29,7 +29,7 @@ public class SPARQLTests {
         List<OWLIndividual> result = factory.singleQuery("SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam}", "x");
         assertEquals(10, result.size());
         assertEquals("NoraHomeMadeStrawberryAndWildJam", result.get(0).toString());
-        assertEquals("HervikEcoStrawberryJam", result.get(9).toString());
+        assertEquals("NoraHomeMadeStrawberryJam", result.get(9).toString());
     }
 
     @Test
@@ -49,14 +49,15 @@ public class SPARQLTests {
                 "?x rdf:type OntologyPersonalProfile:Modifiers . " +
                 "}","x");
 
+        assertEquals(11, result.size());
         assertEquals("BillsPriceSensitivity", result.get(0).toString());
         assertEquals("BillsFairTradeAffinity", result.get(1).toString());
         assertEquals("StudentEcoAffinity", result.get(2).toString());
         assertEquals("StudentPriceSensitivity", result.get(3).toString());
         assertEquals("StudentADHDAffinity", result.get(4).toString());
-        assertEquals("BillsEcoAffinity", result.get(5).toString());
-        assertEquals("BillsADHDAdditiveAffinity", result.get(6).toString());
-        assertEquals("StudentFairTradeAffinity", result.get(7).toString());
+        assertEquals("EcoConernedPeronsEcoAffinity", result.get(5).toString());
+        assertEquals("BillsEcoAffinity", result.get(6).toString());
+        assertEquals("AvoidADHDAdditiveAffinity", result.get(7).toString());
     }
 
     @Test
@@ -102,7 +103,9 @@ public class SPARQLTests {
         List<OWLIndividual> result = factory.singleQuery("SELECT ?x WHERE { " +
                 "?x  rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
                 "}", "x");
-        assertEquals("Bill", result.get(0).toString());
+        assertEquals(2, result.size());
+        assertEquals("EcoConcernedPerson", result.get(0).toString());
+        assertEquals("Bill", result.get(1).toString());
     }
 
     @Test
@@ -118,8 +121,8 @@ public class SPARQLTests {
             typesOfAffinity.add(factory.getType(affinity));
         }
 
-        assertEquals("HervikStrawberryJam", result.get(0).toString());
-        assertEquals("RegularProducedFood", typesOfAffinity.get(0).toString());
+        assertEquals("HervikEcoStrawberryJam", result.get(0).toString());
+        assertEquals("EcologicalStrawberryJam", typesOfAffinity.get(0).toString());
     }
 
     @Test
@@ -148,6 +151,9 @@ public class SPARQLTests {
                 "OntologyPersonalProfile:Bill OntologyPersonalProfile:satisfiesHighEcoAffinity ?x ." +
                 "}", "x");
         assertEquals(2, result.size());
+        assertEquals("ICAEcologicalStrawberryJam", result.get(0).toString());
+        assertEquals("HervikEcoStrawberryJam", result.get(1).toString());
+
     }
     
     //Multiple variables
@@ -163,4 +169,19 @@ public class SPARQLTests {
         assertEquals("Bill^^http://www.w3.org/2001/XMLSchema#string", result.get("z").toString());
     }
 
+
+    @Test
+    @Ignore
+    public void findPreferencesOfPersonForPhd() {
+        //Bills affinities
+//        List<OWLIndividual> result = factory.singleQuery("SELECT distinct ?typeOfAffinity WHERE " +
+//                "{ OntologyPersonalProfile:Bill OntologyPersonalProfile:hasAffinity ?affinity. ?affinity rdf:type ?typeOfAffinity.}", "typeOfAffinity");
+        List<OWLIndividual> result = factory.singleQuery("select ?strawberry where " +
+                                " { ?strawberry rdf:type OntologyPersonalProfile:StrawberryJam.}" +
+                " UNION {?strawberry rdf:type OntologyPersonalProfile:EcologicalFood} }", "strawberry");
+        //"SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam}"
+        assertEquals(2, result.size());
+        assertEquals("NoraHomeMadeStrawberryAndWildJam", result.get(0).toString());
+
+    }
 }

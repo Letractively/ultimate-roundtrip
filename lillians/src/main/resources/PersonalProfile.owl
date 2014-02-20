@@ -37,6 +37,11 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/source -->
+
     <owl:AnnotationProperty rdf:about="&dc;source"/>
     
 
@@ -236,8 +241,8 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasFamilyRelations -->
 
     <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasFamilyRelations">
-        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
         <rdfs:range rdf:resource="&OntologyPersonalProfile;Person"/>
+        <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
     </owl:ObjectProperty>
     
 
@@ -271,8 +276,8 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#hasIngredient -->
 
     <owl:ObjectProperty rdf:about="&OntologyPersonalProfile;hasIngredient">
-        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
         <rdfs:domain rdf:resource="&OntologyPersonalProfile;Food"/>
+        <rdfs:range rdf:resource="&OntologyPersonalProfile;Food"/>
         <rdfs:subPropertyOf rdf:resource="&OntologyPersonalProfile;hasProductProperties"/>
     </owl:ObjectProperty>
     
@@ -517,7 +522,7 @@
 
     <owl:DatatypeProperty rdf:about="&OntologyPersonalProfile;hasBirthdate">
         <rdfs:domain rdf:resource="&OntologyPersonalProfile;Person"/>
-        <rdfs:range rdf:resource="&xsd;date"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
     </owl:DatatypeProperty>
     
 
@@ -701,6 +706,17 @@
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDEffectProducts -->
 
     <owl:Class rdf:about="&OntologyPersonalProfile;ADHDEffectProducts">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&OntologyPersonalProfile;ProcessedFood"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&OntologyPersonalProfile;containsAdditive"/>
+                        <owl:someValuesFrom rdf:resource="&OntologyPersonalProfile;ADHDAdditive"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="&OntologyPersonalProfile;ProcessedFood"/>
     </owl:Class>
     
@@ -1631,6 +1647,15 @@
     
 
 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#ADHDavoider -->
+
+    <owl:NamedIndividual rdf:about="&OntologyPersonalProfile;ADHDavoider">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Man"/>
+        <hasADHDAdditiveAffinity rdf:resource="&OntologyPersonalProfile;AvoidADHDAdditiveAffinity"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#Alginat -->
 
     <owl:Thing rdf:about="&OntologyPersonalProfile;Alginat">
@@ -1647,6 +1672,14 @@
         <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <owl:sameAs rdf:resource="&OntologyPersonalProfile;E296"/>
     </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#AvoidADHDAdditiveAffinity -->
+
+    <owl:NamedIndividual rdf:about="&OntologyPersonalProfile;AvoidADHDAdditiveAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;AvoidADHDAdditives"/>
+    </owl:NamedIndividual>
     
 
 
@@ -1712,7 +1745,7 @@
     <owl:Thing rdf:about="&OntologyPersonalProfile;BillsShoppingList">
         <rdf:type rdf:resource="&OntologyPersonalProfile;ShoppingList"/>
         <rdf:type rdf:resource="&owl;NamedIndividual"/>
-        <hasShoppingListItem rdf:resource="&OntologyPersonalProfile;HervikStrawberryJam"/>
+        <hasShoppingListItem rdf:resource="&OntologyPersonalProfile;HervikEcoStrawberryJam"/>
     </owl:Thing>
     
 
@@ -1850,6 +1883,23 @@
         <rdf:type rdf:resource="&owl;NamedIndividual"/>
         <owl:sameAs rdf:resource="&OntologyPersonalProfile;Sukralose"/>
     </owl:Thing>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcoConcernedPerson -->
+
+    <owl:NamedIndividual rdf:about="&OntologyPersonalProfile;EcoConcernedPerson">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;Man"/>
+        <hasEcoAffinity rdf:resource="&OntologyPersonalProfile;EcoConernedPeronsEcoAffinity"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#EcoConernedPeronsEcoAffinity -->
+
+    <owl:NamedIndividual rdf:about="&OntologyPersonalProfile;EcoConernedPeronsEcoAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;HighEcoAffinity"/>
+    </owl:NamedIndividual>
     
 
 
@@ -2370,7 +2420,14 @@
     
 
 
-    <!-- 
+    <!-- http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl#WithOutADHDsAffinity -->
+
+    <owl:NamedIndividual rdf:about="&OntologyPersonalProfile;WithOutADHDsAffinity">
+        <rdf:type rdf:resource="&OntologyPersonalProfile;HighEcoAffinity"/>
+    </owl:NamedIndividual>
+
+
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Rules
@@ -2653,5 +2710,5 @@
 
 
 
-<!-- Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net -->
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
 
