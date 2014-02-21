@@ -1,3 +1,4 @@
+import no.ntnu.TestUtils;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -10,9 +11,12 @@ import org.semanticweb.owl.model.*;
 import org.semanticweb.reasonerfactory.pellet.PelletReasonerFactory;
 
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.Set;
 
+import static no.ntnu.TestUtils.contains;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Lillian Hella
@@ -67,37 +71,20 @@ public class IndividualRelatedTests {
     public void getAllInstancesOfACLass() {
         OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
-        //todo skrive dem ut? trenger i alle fall navn pŒ dem...
+        //todo skrive dem ut? trenger i alle fall navn pï¿½ dem...
         assertEquals(10, individuals.size());
-    } //todo kan bruke query for Œ hente dem lettere ut? hvordan leser man resultatet lettest?
+    } //todo kan bruke query for ï¿½ hente dem lettere ut? hvordan leser man resultatet lettest?
 
     @Test
     public void getInstanceOfAClass() {
         OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
-        //todo trengs forl¿kke?
+        //todo trengs forlï¿½kke?
 
-        assertEquals("ICAEcologicalStrawberryJam", individuals.toArray()[0].toString());
+        assertTrue(contains("ICAEcologicalStrawberryJam", individuals));
+
     }
 
-    @Test
-    public void getAllInstancesOfAClass() {
-        // create property and resources to query the reasoner
-        OWLClass person = factory.findClassByName("#Person");
-        OWLObjectProperty hasGender = factory.findObjectProperty("#hasGender");
-        OWLDataProperty hasAge = factory.findDataType("#hasAge");
-
-        // get all instances of class
-        Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
-        OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-        String age = reasoner.getRelatedValue(ind[2], hasAge).getLiteral();
-        OWLIndividual gender = reasoner.getRelatedIndividual(ind[2], hasGender);
-
-        assertEquals(6, individuals.size());
-        assertEquals("39", age);
-        assertEquals("Male", gender.toString());
-        assertEquals("Bill", individuals.toArray()[2].toString());
-    }
 
     @Test
     public void domainTest() {
@@ -150,7 +137,7 @@ public class IndividualRelatedTests {
 
     //todo kan man lage metoder som sjekker disse egenskapene?
     //todo hvordan hente ut aktuelle egenskaper?
-    //todo utgangspunktet er at man ha en individual -> trenger sŒ alle egenskaper ved denne, eller kan man sjekke noen utvalgte?
+    //todo utgangspunktet er at man ha en individual -> trenger sï¿½ alle egenskaper ved denne, eller kan man sjekke noen utvalgte?
     //todo metode ala som returnerer boolean (1 for ja og 0 for nei), med input individual - for da vil man kunne sjekke mange produkter for en og samme egenskap
     //todo 
     //todo hvordan vet man hvilke egenskaper man skal sjekke?

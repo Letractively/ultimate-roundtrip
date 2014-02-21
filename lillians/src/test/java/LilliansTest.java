@@ -1,15 +1,18 @@
+import no.ntnu.FlatMapCallback;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.inference.OWLReasoner;
-import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.inference.OWLReasonerException;
 import org.semanticweb.owl.inference.OWLReasonerFactory;
 import org.semanticweb.owl.model.*;
 import org.semanticweb.reasonerfactory.pellet.PelletReasonerFactory;
 import java.net.URISyntaxException;
 import java.util.*;
+
+import static no.ntnu.TestUtils.contains;
+import static no.ntnu.TestUtils.flatSomething;
 import static org.junit.Assert.*;
 
 /**
@@ -33,10 +36,10 @@ public class LilliansTest {
 
     @Test
     public void loadOntologyTest() {
-        OWLClass[] result = ontology.getReferencedClasses().toArray(new OWLClass[]{});
+        Set<OWLClass> result = ontology.getReferencedClasses();
         assertEquals("dette var feil", 73, ontology.getReferencedClasses().size());
-        assertEquals("HighPriceSensitivity", result[0].toString());
-        assertEquals(false, result[0].isOWLThing());
+        assertTrue(contains("HighPriceSensitivity", result));
+        assertEquals(false, result.toArray(new OWLClass[]{})[0].isOWLThing());
     }
 
     @Test
@@ -102,145 +105,101 @@ public class LilliansTest {
         assertEquals(true, reasoner.isClassified());
     }
 
-
-    /*MAIN OWL API INFO LOOK UPS*/
-    // Det meste under her er kopiert
-
-    //FOR INDIVIDUALS
-
-    //FOR CLASSES
-
     @Test
     public void findSuperClassOfIndividualBill() {
         OWLIndividual bill = factory.findIndividual("#Bill");
-        Set<Set<OWLClass>> classesOfHSJ = factory.getTypes(bill);
-        List<OWLClass> result = new ArrayList<OWLClass>();
 
-        for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
-            for (OWLClass owlClass : classesOfHSJSet) {
-                result.add(owlClass);
-                System.out.println("owlIndividual = " + owlClass);
+        List<OWLClass> result = flatSomething(Collections.singletonList(bill), new FlatMapCallback() {
+            public Set<Set<OWLClass>> doMagic(OWLEntity individual) {
+                return factory.getTypes((OWLIndividual) individual);
             }
-        }
+        });
 
-        List<OWLClass> resultEnd = new ArrayList<OWLClass>();
-
-        for (OWLClass owlClass : result) {
-            Set<Set<OWLClass>> superClassesOfTypesOfClass = reasoner.getSuperClasses(owlClass);
-            System.out.println("superClassesOfTypesOfClass = " + superClassesOfTypesOfClass);
-            for (Set<OWLClass> owlClass2 : superClassesOfTypesOfClass) {
-                System.out.println("owlClass2 = " + owlClass2);
-                for (OWLClass aClass : owlClass2) {
-                    resultEnd.add(aClass);
-                }
+        List<OWLClass> resultEnd = flatSomething(result, new FlatMapCallback() {
+            public Set<Set<OWLClass>> doMagic(OWLEntity individual) {
+                return reasoner.getSuperClasses((OWLClass)individual);
             }
-        }
+        });
 
         System.err.println(resultEnd.toString());
-        assertEquals("Man", result.get(0).toString());
-        assertEquals("EcoConcernedPerson", result.get(1).toString());
-        assertEquals("Person", resultEnd.get(0).toString());
-        assertEquals("Person", resultEnd.get(1).toString());
+        assertTrue(contains("Man", result));
+        assertTrue(contains("EcoConcernedPerson", result));
+        assertTrue(contains("Person", resultEnd));
     }
 
 
     @Test
     public void findSuperClassOfIndividualHSJ() {
         OWLIndividual hervikSJ = factory.findIndividual("#HervikStrawberryJam");
-        Set<Set<OWLClass>> classesOfHSJ = factory.getTypes(hervikSJ);
-        List<OWLClass> result = new ArrayList<OWLClass>();
 
-        for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
-            for (OWLClass owlClass : classesOfHSJSet) {
-                result.add(owlClass);
-                System.out.println("owlIndividual = " + owlClass);
+        List<OWLClass> types = flatSomething(Collections.singletonList(hervikSJ), new FlatMapCallback() {
+            public Set<Set<OWLClass>> doMagic(OWLEntity individual) {
+                return factory.getTypes((OWLIndividual)individual);
             }
-        }
+        });
 
-        List<OWLClass> resultEnd = new ArrayList<OWLClass>();
-
-        for (OWLClass owlClass : result) {
-            Set<Set<OWLClass>> superClassesOfTypesOfClass = reasoner.getSuperClasses(owlClass);
-            System.out.println("superClassesOfTypesOfClass = " + superClassesOfTypesOfClass);
-            for (Set<OWLClass> owlClass2 : superClassesOfTypesOfClass) {
-                System.out.println("owlClass2 = " + owlClass2);
-                for (OWLClass aClass : owlClass2) {
-                    resultEnd.add(aClass);
-                }
+        List<OWLClass> superClasses = flatSomething(types, new FlatMapCallback() {
+            public Set<Set<OWLClass>> doMagic(OWLEntity individual) {
+                return reasoner.getSuperClasses((OWLClass)individual);
             }
-        }
+        });
 
-
-        System.err.println(resultEnd.toString());
-        assertEquals("RegularProducedFood", result.get(0).toString());
-        assertEquals("HervikProducts", result.get(1).toString());
-        assertEquals("Food", resultEnd.get(0).toString());
-        assertEquals("Food", resultEnd.get(1).toString());
-        assertEquals("Jam", resultEnd.get(2).toString());
+        assertTrue(contains("RegularProducedFood", types));
+        assertTrue(contains("HervikProducts", types));
+        assertTrue(contains("Food", superClasses));
+        assertTrue(contains("Jam", superClasses));
+        assertEquals("[Food, Food, Jam]", superClasses.toString());
     }
 
     @Test
     public void findClassOfIndividualHervikJam() {
-        //m� vi ha en hasName-relation?
-        //hvilken klasse h�rer HervikblablaJam til?
-
-
-        // create property and resources to query the reasoner
-        //OWLClass jam = factory.getOWLClass(URI.create(myURI + "#Jam"));
-        //OWLObjectProperty hasProducer = factory.findClassByName("#hasProducer"));
-
-        //Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
-        //OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-        //String age = reasoner.getRelatedValue(ind[2], hasProducer).getLiteral();
         OWLIndividual hervikStrawberryJam = factory.findIndividual("#HervikStrawberryJam");
-        List<OWLClass> result = new ArrayList<OWLClass>();
-        Set<Set<OWLClass>> classesOfHSJSets = factory.getTypes(hervikStrawberryJam);
-        Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gj�r ferdig!! trenger ikke like mye l�kker
-
-        for (Set<OWLClass> classesOfHSJSet : classesOfHSJSets) {
-            for (OWLClass owlClass : classesOfHSJSet) {
-                result.add(owlClass);
+        List<OWLClass> result = flatSomething(Collections.singletonList(hervikStrawberryJam), new FlatMapCallback() {
+            public Set<Set<OWLClass>> doMagic(OWLEntity individual) {
+                return factory.getTypes((OWLIndividual)individual);
             }
-        }
-        assertEquals("RegularProducedFood", result.get(0).toString());
-        assertEquals("HervikProducts", result.get(1).toString());
+        });
+        assertEquals(3, result.size());
+        assertEquals("HervikProducts", result.get(0).toString());
+        assertEquals("RegularProducedFood", result.get(1).toString());
         assertEquals("StrawberryJam", result.get(2).toString());
     }
 
-    //FOR PROPERTY INFORMATION
-
     @Test
     public void getInstanceAndItsProperty() {
-        // create property and resources to query the factory
         OWLClass person = factory.findClassByName("#Person");
         OWLObjectProperty hasGender = factory.findObjectProperty("#hasGender");
         OWLDataProperty hasAge = factory.findDataType("#hasAge");
 
         Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
-        OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-        String age = reasoner.getRelatedValue(ind[2], hasAge).getLiteral();
-        OWLIndividual gender = factory.getRelatedIndividual(ind[2], hasGender);
 
-        assertEquals("Male", gender.toString());
-        assertEquals("39", age);
-        assertEquals("Bill", individuals.toArray()[2].toString());
+        assertEquals(6, individuals.size());
+        boolean foundBill = false;
+        for (OWLIndividual individual : individuals) {
+            if("Bill".equals(individual.toString())) {
+                assertEquals("39", reasoner.getRelatedValue(individual, hasAge).getLiteral());
+                assertEquals("Male", factory.getRelatedIndividual(individual, hasGender).toString());
+                foundBill = true;
+            }
+        }
+        assertTrue("Could not find bill in resultSet", foundBill);
     }
 
     @Test
-    public void findRangeOfRelation() {
-        // create property and resources to query the factory
+    public void findProducersOfJam() {
         OWLClass jam = factory.findClassByName("#Jam");
         OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
 
-        Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
-        OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-        //String age = factory.getRelatedValue(ind[2], hasProducer).getLiteral();
-        OWLIndividual producer = factory.getRelatedIndividual(ind[2], hasProducer);
+        List<OWLIndividual> producers = new ArrayList<OWLIndividual>();
+        for (OWLIndividual individual : reasoner.getIndividuals(jam, false)) {
+            producers.add(factory.getRelatedIndividual(individual, hasProducer));
+        }
 
-        assertEquals("Nora", producer.toString());
+        assertTrue(contains("Nora", producers));
+        assertTrue(contains("Hervik", producers));
+        assertTrue(contains("ICA", producers));
+        assertTrue(contains("Euroshopper", producers));
     }
-
-
 
     @Test
     public void findProducerOfHervikJam() {
@@ -255,18 +214,17 @@ public class LilliansTest {
     @Test
     public void checkClassOfInstance() {
         OWLIndividual bill = factory.findIndividual("#Bill");
-        Set<Set<OWLClass>> classesOfHSJ = factory.getTypes(bill);
-        List<OWLClass> result = new ArrayList<OWLClass>();
-        for (Set<OWLClass> classesOfHSJSet : classesOfHSJ) {
-            for (OWLClass owlClass : classesOfHSJSet) {
-                result.add(owlClass);
+        List<OWLClass> billsTypes = flatSomething(Collections.singletonList(bill), new FlatMapCallback() {
+            public Set<Set<OWLClass>> doMagic(OWLEntity individual) {
+                return factory.getTypes((OWLIndividual) individual);
             }
-        }
-        assertEquals("Man", result.get(0).toString());
-        assertEquals("EcoConcernedPerson", result.get(1).toString());
-        assertEquals("MediumPriceConcernedPerson", result.get(2).toString());
-        assertEquals("Adult", result.get(3).toString());
-        assertEquals("FairTradeConcernedPerson", result.get(4).toString());
+        });
+
+        assertTrue(contains("Man", billsTypes));
+        assertTrue(contains("EcoConcernedPerson", billsTypes));
+        assertTrue(contains("MediumPriceConcernedPerson", billsTypes));
+        assertTrue(contains("Adult", billsTypes));
+        assertTrue(contains("FairTradeConcernedPerson", billsTypes));
     }
 
 
@@ -274,22 +232,20 @@ public class LilliansTest {
     public void findJamsAndTheirProducers() {
         OWLClass strawberryJam = factory.findClassByName("#StrawberryJam");
         Set<OWLIndividual> individuals = reasoner.getIndividuals(strawberryJam, false);
-        OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
+        final OWLObjectProperty hasProducer = factory.findObjectProperty("#hasProducer");
 
         List<OWLIndividual> resultset = new ArrayList<OWLIndividual>();
 
         for (OWLIndividual ind : individuals) {
-
-            resultset.add(factory.getRelatedIndividual(ind, hasProducer));
-            //for (Set<OWLClass> owlClasses : type) {
-            //Set<OWLDescription> ranges = hasProducer.getRanges(ontology);
-            //System.out.println(ind + "  " + "HasProducer: " + hasProducer.getRanges(ontology));
+            Set<OWLIndividual> b = factory.getRelatedIndividuals(ind, hasProducer);
+            for (OWLIndividual individual : b) {
+                resultset.add(individual);
+            }
         }
 
-        assertEquals(10, resultset.size());
-        assertEquals("ICA", resultset.get(0).toString());
-        //Ica - IcaStrawberryJam
-        //Nora - NoraSqueezy
+        assertEquals(9, resultset.size());
+        assertTrue(contains("ICA", resultset));
+        assertTrue(contains("Nora", resultset));
     }
 
     @Test
@@ -351,8 +307,8 @@ public class LilliansTest {
             OWLIndividual ingredient = factory.getRelatedIndividual(ind, hasIngredient);
             results.add(ind.toString() + " " + type.getURI().getFragment() + " " + ingredient);
         }
-        assertEquals("ICAEcologicalStrawberryJam EcologicalStrawberryJam Strawberry", results.get(0));
-        assertEquals("EuroshopperStrawberryJam RegularProducedFood Strawberry", results.get(1));
+        assertTrue(results.contains("ICAEcologicalStrawberryJam EcologicalStrawberryJam Strawberry"));
+        assertTrue(results.contains("EuroshopperStrawberryJam RegularProducedFood Strawberry"));
         assertEquals(10, results.size());
     }
 

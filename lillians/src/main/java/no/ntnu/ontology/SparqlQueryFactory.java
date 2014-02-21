@@ -113,6 +113,9 @@ public class SparqlQueryFactory {
     public OWLIndividual getRelatedIndividual(OWLIndividual individual, OWLObjectProperty relation) {
         return reasoner.getRelatedIndividual(individual, relation);
     }
+    public Set<OWLIndividual> getRelatedIndividuals(OWLIndividual individual, OWLObjectProperty relation) {
+        return reasoner.getRelatedIndividuals(individual, relation);
+    }
 
     public OWLClass getType(OWLIndividual individual) {
         return reasoner.getType(individual);

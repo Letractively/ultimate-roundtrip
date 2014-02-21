@@ -1,4 +1,5 @@
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import no.ntnu.FlatMapCallback;
 import no.ntnu.ontology.MultipleResultSetRetriever;
 import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.BeforeClass;
@@ -9,7 +10,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import static no.ntnu.TestUtils.contains;
+import static no.ntnu.TestUtils.flatSomething;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Lillian Hella
@@ -28,8 +33,9 @@ public class SPARQLTests {
     public void findIndividualsOfClass() {
         List<OWLIndividual> result = factory.singleQuery("SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam}", "x");
         assertEquals(10, result.size());
-        assertEquals("NoraHomeMadeStrawberryAndWildJam", result.get(0).toString());
-        assertEquals("NoraHomeMadeStrawberryJam", result.get(9).toString());
+        assertTrue(contains("NoraHomeMadeStrawberryJam", result));
+        assertTrue(contains("NoraHomeMadeStrawberryAndWildJam", result));
+        assertTrue(contains("HervikEcoStrawberryJam", result));
     }
 
     @Test
@@ -38,9 +44,9 @@ public class SPARQLTests {
                 "?x rdf:type OntologyPersonalProfile:Jam . " +
                 "?x OntologyPersonalProfile:hasProducer OntologyPersonalProfile:Hervik . " +
                 "}", "x");
-
-        assertEquals("HervikStrawberryJam", result.get(0).toString());
-        assertEquals("HervikEcoStrawberryJam", result.get(1).toString());
+        assertEquals(2, result.size());
+        assertTrue(contains("HervikStrawberryJam", result));
+        assertTrue(contains("HervikEcoStrawberryJam", result));
     }
 
     @Test
@@ -49,15 +55,14 @@ public class SPARQLTests {
                 "?x rdf:type OntologyPersonalProfile:Modifiers . " +
                 "}","x");
 
-        assertEquals(11, result.size());
-        assertEquals("BillsPriceSensitivity", result.get(0).toString());
-        assertEquals("BillsFairTradeAffinity", result.get(1).toString());
-        assertEquals("StudentEcoAffinity", result.get(2).toString());
-        assertEquals("StudentPriceSensitivity", result.get(3).toString());
-        assertEquals("StudentADHDAffinity", result.get(4).toString());
-        assertEquals("EcoConernedPeronsEcoAffinity", result.get(5).toString());
-        assertEquals("BillsEcoAffinity", result.get(6).toString());
-        assertEquals("AvoidADHDAdditiveAffinity", result.get(7).toString());
+        assertTrue(contains("BillsPriceSensitivity", result));
+        assertTrue(contains("BillsFairTradeAffinity", result));
+        assertTrue(contains("StudentEcoAffinity", result));
+        assertTrue(contains("StudentPriceSensitivity", result));
+        assertTrue(contains("StudentADHDAffinity", result));
+        assertTrue(contains("BillsEcoAffinity", result));
+        assertTrue(contains("BillsADHDAdditiveAffinity", result));
+        assertTrue(contains("StudentFairTradeAffinity", result));
     }
 
     @Test
@@ -66,8 +71,8 @@ public class SPARQLTests {
         List<OWLIndividual> ecoList = factory.singleQuery("SELECT ?x WHERE { " +
                 "?x  rdf:type OntologyPersonalProfile:EcologicalJam .}", "x");
 
-        assertEquals("ICAEcologicalStrawberryJam", ecoList.get(0).toString());
-        assertEquals("HervikEcoStrawberryJam", ecoList.get(1).toString());
+        assertTrue(contains("ICAEcologicalStrawberryJam", ecoList));
+        assertTrue(contains("HervikEcoStrawberryJam", ecoList));
         assertEquals(2, ecoList.size());
     }
 
@@ -81,7 +86,7 @@ public class SPARQLTests {
                 //"?z rdf:type OntologyPersonalProfile:Additive " +
                 "}", "x");
 
-        assertEquals("NoraNoSugar", result.get(0).toString());
+        assertTrue(contains("NoraNoSugar", result));
         assertEquals(1, result.size());
     }
 
@@ -93,8 +98,8 @@ public class SPARQLTests {
                 //"?y OntologyPersonalProfile:hasEffect ?z . " +
                 //"?z rdf:type OntologyPersonalProfile:Additive " +
                 "}", "x");
-        assertEquals("EuroshopperStrawberryJam", result.get(0).toString());
-        assertEquals("NoraNoSugar", result.get(1).toString());
+        assertTrue(contains("EuroshopperStrawberryJam", result));
+        assertTrue(contains("NoraNoSugar", result));
         assertEquals(2, result.size());
     }
 
@@ -104,8 +109,8 @@ public class SPARQLTests {
                 "?x  rdf:type OntologyPersonalProfile:EcoConcernedPerson . " +
                 "}", "x");
         assertEquals(2, result.size());
-        assertEquals("EcoConcernedPerson", result.get(0).toString());
-        assertEquals("Bill", result.get(1).toString());
+        assertTrue(contains("EcoConcernedPerson", result));
+        assertTrue(contains("Bill", result));
     }
 
     @Test
@@ -116,13 +121,13 @@ public class SPARQLTests {
                 //   "?x OntologyPersonalProfile:hasShoppingListItem OntologyPersonalProfile:Bill." +
                 "}", "x");
 
-        List<OWLClass> typesOfAffinity = new ArrayList<OWLClass>();
-        for (OWLIndividual affinity : result) {
-            typesOfAffinity.add(factory.getType(affinity));
-        }
-
-        assertEquals("HervikEcoStrawberryJam", result.get(0).toString());
-        assertEquals("EcologicalStrawberryJam", typesOfAffinity.get(0).toString());
+        assertTrue(contains("HervikEcoStrawberryJam", result));
+        List<OWLClass> typesOfAffinity = flatSomething(result, new FlatMapCallback() {
+            public Set<Set<OWLClass>> doMagic(OWLEntity individual) {
+                return factory.getTypes((OWLIndividual) individual);
+            }
+        });
+        assertTrue(contains("EcologicalStrawberryJam", typesOfAffinity));
     }
 
     @Test
@@ -137,8 +142,10 @@ public class SPARQLTests {
             typesOfAffinity.add(factory.getType(affinity));
         }
 
-        assertEquals("MediumPriceSensitivity", typesOfAffinity.get(0).toString());
-        assertEquals("HighFairTradeAffinity", typesOfAffinity.get(1).toString());
+        assertTrue(contains("AvoidADHDAdditives", typesOfAffinity));
+        assertTrue(contains("MediumPriceSensitivity", typesOfAffinity));
+        assertTrue(contains("HighEcoAffinity", typesOfAffinity));
+        assertTrue(contains("HighFairTradeAffinity", typesOfAffinity));
         assertEquals(4, typesOfAffinity.size());
 
     }

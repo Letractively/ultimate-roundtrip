@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static no.ntnu.TestUtils.contains;
 
 /**
  * @author Lillian Hella
@@ -51,11 +53,10 @@ public class ClassRelatedTests {
         }
 
         System.err.println(resultEnd.toString());
-        assertEquals("Man", result.get(0).toString());
-        assertEquals("EcoConcernedPerson", result.get(1).toString());
-        assertEquals("Person", resultEnd.get(0).toString());
-        assertEquals("Person", resultEnd.get(1).toString());
-    }
+           assertTrue(contains("Man", result));
+        assertTrue(contains("EcoConcernedPerson", result));
+           assertTrue(contains("Person", resultEnd));
+       }
 
 
     @Test
@@ -95,8 +96,8 @@ public class ClassRelatedTests {
 
    @Test
     public void findClassOfIndividualHervikJam() {
-        //mŒ vi ha en hasName-relation?
-        //hvilken klasse h¿rer HervikblablaJam til?
+        //mï¿½ vi ha en hasName-relation?
+        //hvilken klasse hï¿½rer HervikblablaJam til?
 
         // create property and resources to query the reasoner
         //OWLClass jam = factory.getOWLClass(URI.create(myURI + "#Jam"));
@@ -109,19 +110,19 @@ public class ClassRelatedTests {
         //OWLClass classOfHSJ = hervikStrawberryJam.;
         List<OWLClass> result = new ArrayList<OWLClass>();
         Set<Set<OWLClass>> classesOfHSJSets = factory.getTypes(hervikStrawberryJam);
-        Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gj¿r ferdig!! trenger ikke like mye l¿kker
+        Set<OWLClass> clsesOfHSJ = OWLReasonerAdapter.flattenSetOfSets(classesOfHSJSets); //todo gjï¿½r ferdig!! trenger ikke like mye lï¿½kker
 
         for (Set<OWLClass> classesOfHSJSet : classesOfHSJSets) {
             for (OWLClass owlClass : classesOfHSJSet) {
                 result.add(owlClass);
             }
         }
-        assertEquals("RegularProducedFood", result.get(0).toString());
-        assertEquals("HervikProducts", result.get(1).toString());
-        assertEquals("StrawberryJam", result.get(2).toString());
+       assertTrue(contains("RegularProducedFood", result));
+       assertTrue(contains("HervikProducts", result));
+       assertTrue(contains("StrawberryJam", result));
     }
 
-      @Test
+    @Test
     public void findProducerOfHervikJam() {
         // create property and resources to query the reasoner
         OWLIndividual hervikStrawberryJam = factory.findIndividual("#HervikStrawberryJam");
@@ -141,11 +142,11 @@ public class ClassRelatedTests {
                 result.add(owlClass);
             }
         }
-        assertEquals("Man", result.get(0).toString());
-        assertEquals("EcoConcernedPerson", result.get(1).toString());
+        assertTrue(contains("Man", result));
+        assertTrue(contains("EcoConcernedPerson", result));
     }
 
-     @Test
+    @Test
     public void findAPersonsEcoAffinity() {
         OWLIndividual bill = factory.findIndividual("#Bill");
         OWLObjectProperty hasEcoAffinity = factory.findObjectProperty("#hasEcoAffinity");
@@ -177,7 +178,7 @@ public class ClassRelatedTests {
 
     
 
-    //blir n¿dt til Œ koble informasjonen vi har om produktet med en persons affinities
+    //blir nï¿½dt til ï¿½ koble informasjonen vi har om produktet med en persons affinities
     //bruke EcoConcernedPerson, FairTradeConcerenedPerson, MediumPriceConcernedPerson osv
     //koble to og to sammen?
     //husk innholdet i produktet

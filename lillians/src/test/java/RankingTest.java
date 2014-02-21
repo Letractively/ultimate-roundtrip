@@ -6,6 +6,8 @@ import org.semanticweb.owl.inference.OWLReasonerAdapter;
 import org.semanticweb.owl.model.*;
 import java.net.URISyntaxException;
 import java.util.*;
+
+import static no.ntnu.TestUtils.contains;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -20,10 +22,11 @@ public class RankingTest {
         reasoner = factory.reasoner;
     }
 
-    //todo bytt ut med sp¿rring? getallaffinities for a person - need to know which affinities they are, to avoid getting all relations for a person
+
+    //todo bytt ut med spï¿½rring? getallaffinities for a person - need to know which affinities they are, to avoid getting all relations for a person
 
     /*
-    byttet ut med sp¿rring i stedet - denne gŒr ikke pŒ affinities for en person, men for alle med affinities
+    byttet ut med spï¿½rring i stedet - denne gï¿½r ikke pï¿½ affinities for en person, men for alle med affinities
     @Test
     public void testFindPreferenceProductRelation() {
         OWLClass modifiers = findClassByName("#Modifiers");
@@ -53,7 +56,7 @@ public class RankingTest {
 
         //Hente ut alle ecomenn (Eller bare den ene mannen vi har
         //Hvor ekomenn er de? Fra en skala fra 1-masse, hvor mye bryr de seg?
-        //FŒ tak i hvor mye bill bryr seg om eco
+        //Fï¿½ tak i hvor mye bill bryr seg om eco
 
         OWLClass ecoAffinityKlasse = ecoAffinity.asOWLClass();
         OWLIndividual billsEcoAffinity = (OWLIndividual) reasoner.getIndividuals(ecoAffinityKlasse, false).toArray()[0];
@@ -62,8 +65,8 @@ public class RankingTest {
         assertEquals(findIndividual("#Student"), reasoner.getRelatedIndividual(billsEcoAffinity, belongsTo));
 
 
-        //Hva betyr det at et produkt er ¿kologisk?
-        //Jo, det betyr at man skal se pŒ om det er WOP er ¿kologisk eller regular
+        //Hva betyr det at et produkt er ï¿½kologisk?
+        //Jo, det betyr at man skal se pï¿½ om det er WOP er ï¿½kologisk eller regular
 
     }
     **/
@@ -75,7 +78,7 @@ public class RankingTest {
         Set<OWLIndividual> jams = reasoner.getIndividuals(strawberryJam, false);
 
         //test
-        assertEquals("ICAEcologicalStrawberryJam", jams.toArray(new OWLIndividual[]{})[0].toString());
+        assertTrue(contains("ICAEcologicalStrawberryJam", jams));
         assertEquals(10, jams.size());
 
 
@@ -94,7 +97,7 @@ public class RankingTest {
         assertEquals("MediumPriceSensitivity", billsPriceSensitivity.toString());
 
 
-        //Calculate Bills affinities - hentes ut via sp¿rring
+        //Calculate Bills affinities - hentes ut via spï¿½rring
 //finner alle affinities til en person  - bill
         List<OWLIndividual> allAffinities = factory.singleQuery("SELECT ?x WHERE { " +
                 "?x rdf:type OntologyPersonalProfile:Modifiers . " +
@@ -150,7 +153,7 @@ public class RankingTest {
             OWLConstant jamWOPValue = reasoner.getRelatedValue(relatedWayOfProductionIndividual, hasWOPValue);
 
             for (OWLIndividual affinity : allAffinities) {
-                //Sjekke om Affinitien har noe Œ gj¿re med Way of production og sŒnt
+                //Sjekke om Affinitien har noe ï¿½ gjï¿½re med Way of production og sï¿½nt
                 if (isAffinityRelatedToProductInformation(affinity, jam)) {
                     System.out.println("affinity = " + affinity);
                     OWLDataProperty hasAffinityValue = factory.findDataType("#hasAffinityValue");
@@ -158,11 +161,11 @@ public class RankingTest {
                     OWLConstant affinityValue = reasoner.getRelatedValue(affinity, hasAffinityValue);
                     System.out.println("!!!!!!!!!!!affinityValue = " + affinityValue);
 
-                    //todo trenger disse Œ hardkodes? finnes det en mŒte hvor man kan summere alle aktuelle delrelevanser hvor det er en match mellom preferanse og et produkts egenskap?
+                    //todo trenger disse ï¿½ hardkodes? finnes det en mï¿½te hvor man kan summere alle aktuelle delrelevanser hvor det er en match mellom preferanse og et produkts egenskap?
                     //todo delrelevans = preferanseverdi x tilfreddstillelse av egenskapet hos produktet
                     //todo relevans = summen av alle delrelevanser
-                    //todo n¿dvendigheten av denne er avhengig av framgangsmŒten for personaliseringen - skal vi bruke verdier eller relevant/ikke relevant
-                    //todo i stedet for delrelevans og summen av disse, kan man i stedet ser pŒ relevans i seg selv og ikke graden av det
+                    //todo nï¿½dvendigheten av denne er avhengig av framgangsmï¿½ten for personaliseringen - skal vi bruke verdier eller relevant/ikke relevant
+                    //todo i stedet for delrelevans og summen av disse, kan man i stedet ser pï¿½ relevans i seg selv og ikke graden av det
                     jamMap.get(jam).addRelevance(affinityValue, jamWOPValue);
                 }
             }

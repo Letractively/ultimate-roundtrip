@@ -1,3 +1,4 @@
+import no.ntnu.ontology.SparqlQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mindswap.pellet.owlapi.Reasoner;
@@ -17,6 +18,7 @@ import org.semanticweb.owl.model.OWLOntologyManager;
 import org.semanticweb.owl.model.OWLOntologyChangeException;
 import org.semanticweb.owl.model.OWLProperty;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -35,45 +37,14 @@ public class PropertyRelatedTests {
     public static final String myURI = "http://www.idi.ntnu.no/~hella/ontology/2009/OntologyPersonalProfile.owl";
 
     @Before
-    public void setUp() throws OWLOntologyCreationException {
+    public void setUp() throws OWLOntologyCreationException, URISyntaxException {
         manager = OWLManager.createOWLOntologyManager();
         // We load an ontology
         // read the ontology
-        OWLOntology ontology = manager.loadOntologyFromPhysicalURI(URI.create("file:/Users/hella/IdeaProjects/ny-kodebase/src/main/resources/PersonalProfile.owl"));
+        OWLOntology ontology = manager.loadOntologyFromPhysicalURI(getClass().getResource("PersonalProfile.owl").toURI());
         reasoner = new Reasoner(manager);
         reasoner.loadOntology(ontology);
         owlDataFactory = manager.getOWLDataFactory();
-    }
-
-    @Test
-    public void getInstanceAndItsProperty() {
-        // create property and resources to query the reasoner
-        OWLClass person = owlDataFactory.getOWLClass(URI.create(myURI + "#Person"));
-        OWLObjectProperty hasGender = owlDataFactory.getOWLObjectProperty(URI.create(myURI + "#hasGender"));
-        OWLDataProperty hasAge = owlDataFactory.getOWLDataProperty(URI.create(myURI + "#hasAge"));
-
-        Set<OWLIndividual> individuals = reasoner.getIndividuals(person, false);
-        OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-        String age = reasoner.getRelatedValue(ind[2], hasAge).getLiteral();
-        OWLIndividual gender = reasoner.getRelatedIndividual(ind[2], hasGender);
-
-        assertEquals("Male", gender.toString());
-        assertEquals("39", age);
-        assertEquals("Bill", individuals.toArray()[2].toString());
-    }
-
-    @Test
-    public void findRangeOfRelation() {
-        // create property and resources to query the reasoner
-        OWLClass jam = owlDataFactory.getOWLClass(URI.create(myURI + "#Jam"));
-        OWLObjectProperty hasProducer = owlDataFactory.getOWLObjectProperty(URI.create(myURI + "#hasProducer"));
-
-        Set<OWLIndividual> individuals = reasoner.getIndividuals(jam, false);
-        OWLIndividual[] ind = individuals.toArray(new OWLIndividual[]{});
-        //String age = reasoner.getRelatedValue(ind[2], hasProducer).getLiteral();
-        OWLIndividual producer = reasoner.getRelatedIndividual(ind[2], hasProducer);
-
-        assertEquals("Nora", producer.toString());
     }
 
     @Test
@@ -140,14 +111,14 @@ public class PropertyRelatedTests {
          //Set<Set<OWLClass>> type = reasoner.getTypes(hervikSJ);
 
          Set<OWLObjectProperty> objectProperties = reasoner.getObjectProperties(); //alle
-         //sŒ kan man evt koble properties til domains, og videre lage lister for hvilke som h¿rer til hvilke domains, og videre hvilke ranges de har
+         //sï¿½ kan man evt koble properties til domains, og videre lage lister for hvilke som hï¿½rer til hvilke domains, og videre hvilke ranges de har
          for (OWLObjectProperty objectProperty : objectProperties) {
              System.out.println("objectProperty = " + objectProperty);
              OWLIndividual range = reasoner.getRelatedIndividual(hervikSJ, objectProperty);
              System.out.println("range = " + range);
          }
 
-         //todo lag test ?? hva pr¿ver denne pŒ?
+         //todo lag test ?? hva prï¿½ver denne pï¿½?
      }
 
 
@@ -170,7 +141,7 @@ public class PropertyRelatedTests {
              System.out.println("Type: " + type.getURI().getFragment());
              System.out.println("Ingredient:  = " + ingredient);
          }
-         //todo lag test  ?? hvorfor? har antakeligvis mer enn en type - evt kj¿re den pŒ uresonnert ontologi....
+         //todo lag test  ?? hvorfor? har antakeligvis mer enn en type - evt kjï¿½re den pï¿½ uresonnert ontologi....
      }
 
      @Test
@@ -194,7 +165,7 @@ public class PropertyRelatedTests {
              }
 
          }
-         //todo lag test - ligner veldig pŒ den over
+         //todo lag test - ligner veldig pï¿½ den over
      }
 
 
@@ -207,7 +178,7 @@ public class PropertyRelatedTests {
          //properties = hervikSJ.
          Set<OWLProperty<?, ?>> properties = reasoner.getProperties();    //returnerer ALLE
 
-         //sŒ kan man evt koble properties til domains, og videre lage lister for hvilke som h¿rer til hvilke domains, og videre hvilke ranges de har
+         //sï¿½ kan man evt koble properties til domains, og videre lage lister for hvilke som hï¿½rer til hvilke domains, og videre hvilke ranges de har
 
          for (OWLProperty<?, ?> property : properties) {
              if (property instanceof OWLObjectProperty) {
@@ -229,7 +200,7 @@ public class PropertyRelatedTests {
              //OWLPropertyRange     ;
          }
 
-         //todo lag test - eller fjern siden jeg fŒ hentet ut datatype og objectproperties hver for seg
+         //todo lag test - eller fjern siden jeg fï¿½ hentet ut datatype og objectproperties hver for seg
      }
     
 }
