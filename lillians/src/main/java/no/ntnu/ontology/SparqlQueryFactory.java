@@ -13,14 +13,8 @@ import org.mindswap.pellet.jena.PelletReasoner;
 import org.mindswap.pellet.KnowledgeBase;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.apibinding.OWLManager;
-import org.semanticweb.owl.model.OWLClass;
-import org.semanticweb.owl.model.OWLDataFactory;
-import org.semanticweb.owl.model.OWLDataProperty;
-import org.semanticweb.owl.model.OWLIndividual;
-import org.semanticweb.owl.model.OWLOntology;
-import org.semanticweb.owl.model.OWLOntologyCreationException;
-import org.semanticweb.owl.model.OWLOntologyManager;
-import org.semanticweb.owl.model.OWLObjectProperty;
+import org.semanticweb.owl.model.*;
+
 import java.net.URI;
 import java.util.*;
 
@@ -81,6 +75,21 @@ public class SparqlQueryFactory {
         return resultSetRetriever.retrieveResultset(resultSet);
     }
 
+    public boolean ask(String query) {
+        KnowledgeBase kb = reasoner.getKB();
+        // Create Pellet-Jena reasoner
+        PelletReasoner pelletReasoner = new PelletReasoner();
+        // Create a Pellet graph using the KB from OWLAPI
+        PelletInfGraph graph = pelletReasoner.bind(kb);
+        // Wrap the graph in a model
+        InfModel model = ModelFactory.createInfModel(graph);
+        // Create a query execution over this model
+
+        Query queryQuery = QueryFactory.create(SparqlQueryFactory.prefix + query);
+        QueryExecution qe = SparqlDLExecutionFactory.create(queryQuery, model);
+        return qe.execAsk();
+    }
+
     List<Map<String, OWLIndividual>> convertToOWLIndividuals(List<Map<String, RDFNode>> in) {
         ArrayList<Map<String, OWLIndividual>> result = new ArrayList<Map<String, OWLIndividual>>();
         for (Map<String, RDFNode> stringOWLIndividualMap : in) {
@@ -108,6 +117,10 @@ public class SparqlQueryFactory {
 
     public OWLDataProperty findDataType(String name) {
         return manager.getOWLDataFactory().getOWLDataProperty(URI.create(myURI + name));
+    }
+
+    public Set<OWLIndividual> getIndividuals(OWLDescription owlDescription, boolean direct) {
+        return reasoner.getIndividuals(owlDescription, direct);
     }
 
     public OWLIndividual getRelatedIndividual(OWLIndividual individual, OWLObjectProperty relation) {

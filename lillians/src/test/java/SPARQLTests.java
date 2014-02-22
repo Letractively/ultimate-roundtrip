@@ -180,12 +180,20 @@ public class SPARQLTests {
     @Test
     public void findPreferencesOfPersonForPhd() {
         //Bills affinities
-//        List<OWLIndividual> result = factory.singleQuery("SELECT distinct ?typeOfAffinity WHERE " +
-//                "{ OntologyPersonalProfile:Bill OntologyPersonalProfile:hasAffinity ?affinity. ?affinity rdf:type ?typeOfAffinity.}", "typeOfAffinity");
-        /*List<OWLIndividual> result = factory.singleQuery("select ?strawberry where " +
+        List<OWLIndividual> result = factory.singleQuery("SELECT distinct ?typeOfAffinity WHERE " +
+                "{ OntologyPersonalProfile:Bill OntologyPersonalProfile:hasAffinity ?affinity. ?affinity rdf:type OntologyPersonalProfile:ADHDAdditiveAffinity ; rdf:type ?typeOfAffinity .}", "typeOfAffinity");
+        assertEquals(4, result.size());
+
+        for (OWLIndividual owlIndividual : result) {
+            Set<Set<OWLClass>> owlClass = factory.getTypes(owlIndividual);
+            //factory.getIndividuals(owlClass, true);
+            System.out.println(owlClass);
+        }
+        /*
+        List<OWLIndividual> result = factory.singleQuery("select ?strawberry where " +
                                 " { ?strawberry rdf:type OntologyPersonalProfile:StrawberryJam.}" +
                 " UNION {?strawberry rdf:type OntologyPersonalProfile:EcologicalFood} }", "strawberry");
-        */
+*/
         //"SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam}"
     }
 
@@ -197,5 +205,44 @@ public class SPARQLTests {
 
         assertEquals(1, result.size());
         assertTrue(contains("Bill", result));
+    }
+
+    @Test
+    public void matchRelevantService2() {
+        List<OWLIndividual> result = factory.singleQuery("select ?person WHERE " +
+                " { ?person rdf:type OntologyPersonalProfile:Person; OntologyPersonalProfile:hasAge ?age; rdf:type OntologyPersonalProfile:EcoConcernedPerson; OntologyPersonalProfile:hasShoppingList ?list ." +
+                " FILTER (?age > 35) " +
+                " ?list rdf:type OntologyPersonalProfile:ShoppingList; OntologyPersonalProfile:hasShoppingListItem ?item." +
+                " ?item rdf:type OntologyPersonalProfile:EcologicalFood }", "person");
+
+        assertEquals(1, result.size());
+        assertTrue(contains("Bill", result));
+    }
+
+    @Test
+    public void askAdhdAffinity() {
+        assertTrue(factory.ask("ask { OntologyPersonalProfile:Bill OntologyPersonalProfile:hasAffinity ?affinity. ?affinity rdf:type OntologyPersonalProfile:AvoidADHDAdditives.}"));
+        List<OWLIndividual> jams = factory.singleQuery("select ?jam WHERE { ?jam rdf:type OntologyPersonalProfile:StrawberryJam; rdf:type OntologyPersonalProfile:ADHDEffectProducts.}", "jam");
+        assertEquals(4, jams.size());
+        assertTrue(contains("NoraHomeMadeStrawberryAndWildJam", jams));
+        assertTrue(contains("EuroshopperStrawberryJam", jams));
+        assertTrue(contains("NoraLightStrawberryJam", jams));
+        assertTrue(contains("NoraNoSugar", jams));
+    }
+
+    @Test
+    public void askEcoAffinity() {
+        assertTrue(factory.ask("ask { OntologyPersonalProfile:Bill OntologyPersonalProfile:hasAffinity ?affinity. ?affinity rdf:type OntologyPersonalProfile:HighEcoAffinity.}"));
+        List<OWLIndividual> jams = factory.singleQuery("select ?jam WHERE { ?jam rdf:type OntologyPersonalProfile:StrawberryJam; rdf:type OntologyPersonalProfile:EcologicalFood.}", "jam");
+        assertEquals(2, jams.size());
+        assertTrue(contains("ICAEcologicalStrawberryJam", jams));
+        assertTrue(contains("HervikEcoStrawberryJam", jams));
+    }
+
+    @Test
+    public void askFairTradeAffinity() {
+        assertTrue(factory.ask("ask { OntologyPersonalProfile:Bill OntologyPersonalProfile:hasAffinity ?affinity. ?affinity rdf:type OntologyPersonalProfile:FairTradeAffinity.}"));
+        List<OWLIndividual> jams = factory.singleQuery("select ?jam WHERE { ?jam rdf:type OntologyPersonalProfile:StrawberryJam; rdf:type OntologyPersonalProfile:FairTradeAffinity.}", "jam");
+        assertEquals(0, jams.size());
     }
 }
