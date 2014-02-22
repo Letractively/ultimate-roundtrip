@@ -178,17 +178,24 @@ public class SPARQLTests {
 
 
     @Test
-    @Ignore
     public void findPreferencesOfPersonForPhd() {
         //Bills affinities
 //        List<OWLIndividual> result = factory.singleQuery("SELECT distinct ?typeOfAffinity WHERE " +
 //                "{ OntologyPersonalProfile:Bill OntologyPersonalProfile:hasAffinity ?affinity. ?affinity rdf:type ?typeOfAffinity.}", "typeOfAffinity");
-        List<OWLIndividual> result = factory.singleQuery("select ?strawberry where " +
+        /*List<OWLIndividual> result = factory.singleQuery("select ?strawberry where " +
                                 " { ?strawberry rdf:type OntologyPersonalProfile:StrawberryJam.}" +
                 " UNION {?strawberry rdf:type OntologyPersonalProfile:EcologicalFood} }", "strawberry");
+        */
         //"SELECT  ?x WHERE { ?x rdf:type OntologyPersonalProfile:Jam}"
-        assertEquals(2, result.size());
-        assertEquals("NoraHomeMadeStrawberryAndWildJam", result.get(0).toString());
+    }
 
+    @Test
+    public void matchRelevantService() {
+        List<OWLIndividual> result = factory.singleQuery("select ?person WHERE " +
+                " { ?person rdf:type OntologyPersonalProfile:Person; OntologyPersonalProfile:hasAge ?age; rdf:type OntologyPersonalProfile:EcoConcernedPerson." +
+                " FILTER (?age > 35) }", "person");
+
+        assertEquals(1, result.size());
+        assertTrue(contains("Bill", result));
     }
 }
